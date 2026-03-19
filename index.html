@@ -1,0 +1,2140 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MTWTUYouth — Молодіжна рада ПРМТУ</title>
+  <meta name="description" content="Молодіжна рада ПРМТУ — розвиток, лідерство, правозахист, партнерство та міжнародні можливості для молоді морської галузі." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#071a2c;
+      --bg-2:#0b2742;
+      --bg-3:#0f3558;
+      --card:rgba(255,255,255,0.08);
+      --card-2:rgba(255,255,255,0.05);
+      --line:rgba(255,255,255,0.12);
+      --text:#eef6ff;
+      --muted:#b7cadf;
+      --accent:#54d6d2;
+      --accent-2:#f0c86e;
+      --accent-3:#88e7ff;
+      --success:#8ee2a8;
+      --shadow:0 25px 60px rgba(0,0,0,0.28);
+      --radius:24px;
+      --radius-sm:18px;
+      --max:1280px;
+      --nav-h:80px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Montserrat',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(84,214,210,.16), transparent 0 26%),
+        radial-gradient(circle at 85% 12%, rgba(240,200,110,.12), transparent 0 22%),
+        radial-gradient(circle at 50% 70%, rgba(136,231,255,.08), transparent 0 26%),
+        linear-gradient(180deg, #06111d 0%, #081b2e 28%, #09243d 50%, #081a2c 100%);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,.8), transparent 80%);
+      opacity:.25;
+      z-index:0;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{
+      width:min(var(--max), calc(100% - 32px));
+      margin-inline:auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .section{
+      padding:96px 0;
+      position:relative;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 14px;
+      border:1px solid rgba(255,255,255,.13);
+      background:rgba(255,255,255,.05);
+      border-radius:999px;
+      color:var(--accent-3);
+      font-size:.82rem;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      backdrop-filter: blur(10px);
+    }
+
+    .eyebrow::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow:0 0 18px rgba(84,214,210,.65);
+    }
+
+    .title{
+      margin:18px 0 16px;
+      font-size:clamp(2rem, 4vw, 4rem);
+      line-height:1.04;
+      letter-spacing:-.03em;
+    }
+
+    .lead{
+      margin:0;
+      max-width:820px;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:1.04rem;
+    }
+
+    .muted{color:var(--muted)}
+    .center{text-align:center}
+    .hidden-mobile{display:block}
+    .show-mobile{display:none}
+
+    /* NAV */
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(16px);
+      background:linear-gradient(180deg, rgba(6,17,29,.86), rgba(6,17,29,.56));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .nav{
+      min-height:var(--nav-h);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
+
+    .brand-mark{
+      width:44px;
+      height:44px;
+      border-radius:16px;
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.16);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.25), transparent 0 28%),
+        linear-gradient(135deg, rgba(84,214,210,.35), rgba(84,214,210,.04)),
+        linear-gradient(135deg, rgba(240,200,110,.28), rgba(240,200,110,.04));
+      box-shadow: inset 0 0 24px rgba(255,255,255,.08), 0 10px 30px rgba(0,0,0,.28);
+    }
+
+    .brand-mark::before,
+    .brand-mark::after{
+      content:"";
+      position:absolute;
+      inset:9px;
+      border:1px solid rgba(255,255,255,.25);
+      border-radius:999px;
+    }
+
+    .brand-mark::after{
+      inset:16px;
+      border-color:rgba(255,255,255,.4);
+    }
+
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+      min-width:0;
+    }
+
+    .brand-text strong{
+      font-size:1rem;
+      letter-spacing:.02em;
+    }
+
+    .brand-text span{
+      color:var(--muted);
+      font-size:.8rem;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .nav-links a{
+      padding:10px 14px;
+      border-radius:999px;
+      color:var(--muted);
+      font-size:.93rem;
+      font-weight:600;
+      border:1px solid transparent;
+      transition:.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active{
+      color:var(--text);
+      background:rgba(255,255,255,.06);
+      border-color:rgba(255,255,255,.12);
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .btn,
+    .btn-ghost{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:52px;
+      padding:0 20px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:.95rem;
+      transition:transform .2s ease, box-shadow .2s ease, background .25s ease, border-color .25s ease;
+      will-change:transform;
+      cursor:pointer;
+    }
+
+    .btn{
+      color:#062235;
+      background:linear-gradient(135deg, var(--accent), #8ff3ef 55%, var(--accent-2));
+      box-shadow:0 14px 34px rgba(84,214,210,.32);
+    }
+
+    .btn:hover{transform:translateY(-2px)}
+    .btn-ghost{
+      color:var(--text);
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.05);
+      backdrop-filter:blur(10px);
+    }
+    .btn-ghost:hover{
+      transform:translateY(-2px);
+      background:rgba(255,255,255,.08);
+    }
+
+    .menu-btn{
+      display:none;
+      width:48px;
+      height:48px;
+      border:none;
+      border-radius:14px;
+      background:rgba(255,255,255,.08);
+      color:var(--text);
+      cursor:pointer;
+    }
+
+    /* HERO */
+    .hero{
+      min-height:calc(100svh - var(--nav-h));
+      display:flex;
+      align-items:center;
+      position:relative;
+      isolation:isolate;
+      overflow:hidden;
+      padding:44px 0 56px;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 20% 32%, rgba(84,214,210,.18), transparent 0 20%),
+        radial-gradient(circle at 78% 22%, rgba(240,200,110,.12), transparent 0 18%),
+        radial-gradient(circle at 64% 68%, rgba(136,231,255,.1), transparent 0 18%);
+      z-index:0;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap:38px;
+      align-items:center;
+      position:relative;
+      z-index:2;
+    }
+
+    .hero-copy p{
+      max-width:760px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:26px;
+    }
+
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:14px;
+      margin-top:26px;
+      max-width:760px;
+    }
+
+    .stat-chip{
+      padding:16px 16px 18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:22px;
+      backdrop-filter:blur(10px);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-chip strong{
+      display:block;
+      font-size:1.28rem;
+      margin-bottom:6px;
+    }
+
+    .stat-chip span{
+      color:var(--muted);
+      font-size:.92rem;
+      line-height:1.45;
+    }
+
+    .hero-visual{
+      position:relative;
+      min-height:620px;
+      display:grid;
+      place-items:center;
+    }
+
+    .orbital{
+      position:relative;
+      width:min(520px, 100%);
+      aspect-ratio:1/1;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(circle at center, rgba(84,214,210,.12), transparent 0 32%),
+        radial-gradient(circle at center, rgba(255,255,255,.05), transparent 0 60%);
+      isolation:isolate;
+    }
+
+    .orbital::before,
+    .orbital::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.14);
+      inset:6%;
+      animation: spin 20s linear infinite;
+    }
+
+    .orbital::after{
+      inset:18%;
+      border-style:dashed;
+      animation-duration:28s;
+      animation-direction:reverse;
+    }
+
+    .port-card{
+      position:relative;
+      width:84%;
+      max-width:430px;
+      padding:28px;
+      border-radius:32px;
+      overflow:hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05)),
+        linear-gradient(135deg, rgba(84,214,210,.12), rgba(240,200,110,.04));
+      border:1px solid rgba(255,255,255,.15);
+      box-shadow: 0 30px 70px rgba(0,0,0,.35);
+      backdrop-filter: blur(18px);
+    }
+
+    .port-card::before{
+      content:"";
+      position:absolute;
+      inset:auto -12% -22% auto;
+      width:160px;
+      height:160px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 0 0 24px rgba(255,255,255,.02), 0 0 0 48px rgba(255,255,255,.015);
+    }
+
+    .port-top{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+      margin-bottom:26px;
+    }
+
+    .mini-tag{
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:.78rem;
+      font-weight:700;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.07);
+      color:var(--accent-3);
+    }
+
+    .globe{
+      width:88px;
+      height:88px;
+      border-radius:50%;
+      position:relative;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,.22), transparent 0 22%),
+        linear-gradient(135deg, rgba(84,214,210,.5), rgba(84,214,210,.18));
+      border:1px solid rgba(255,255,255,.2);
+      box-shadow: inset 0 0 30px rgba(255,255,255,.08), 0 18px 40px rgba(0,0,0,.24);
+      overflow:hidden;
+    }
+
+    .globe::before,
+    .globe::after{
+      content:"";
+      position:absolute;
+      inset:10px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.26);
+    }
+
+    .globe::after{
+      inset:22px 8px;
+      border-left-color:transparent;
+      border-right-color:transparent;
+    }
+
+    .port-card h3{
+      margin:0 0 12px;
+      font-size:1.7rem;
+      line-height:1.08;
+    }
+
+    .port-card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .float-card{
+      position:absolute;
+      padding:16px 18px;
+      border-radius:20px;
+      background:rgba(8,22,38,.7);
+      border:1px solid rgba(255,255,255,.11);
+      backdrop-filter:blur(16px);
+      box-shadow:var(--shadow);
+      animation: bob 5.6s ease-in-out infinite;
+    }
+
+    .float-card strong{
+      display:block;
+      font-size:1rem;
+      margin-bottom:4px;
+    }
+
+    .float-card span{
+      color:var(--muted);
+      font-size:.88rem;
+    }
+
+    .float-1{left:0; top:10%; animation-delay:-.8s}
+    .float-2{right:2%; top:18%; animation-delay:-1.7s}
+    .float-3{left:4%; bottom:16%; animation-delay:-2.3s}
+    .float-4{right:-1%; bottom:12%; animation-delay:-1.2s}
+
+    .radar{
+      position:absolute;
+      inset:auto auto 8% 58%;
+      width:160px;
+      aspect-ratio:1/1;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:
+        0 0 0 20px rgba(255,255,255,.03),
+        0 0 0 40px rgba(255,255,255,.02),
+        0 0 0 60px rgba(255,255,255,.015);
+      overflow:hidden;
+    }
+
+    .radar::before{
+      content:"";
+      position:absolute;
+      inset:-10%;
+      background: conic-gradient(from 220deg, transparent 0deg, transparent 300deg, rgba(84,214,210,.48) 330deg, transparent 360deg);
+      animation: sweep 4s linear infinite;
+    }
+
+    .hero-scroll{
+      position:absolute;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%);
+      color:var(--muted);
+      font-size:.88rem;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:10px;
+      z-index:2;
+    }
+
+    .hero-scroll span{
+      width:26px;
+      height:42px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      position:relative;
+    }
+
+    .hero-scroll span::before{
+      content:"";
+      position:absolute;
+      top:7px;
+      left:50%;
+      transform:translateX(-50%);
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:var(--accent);
+      animation: scrollDot 1.7s infinite;
+    }
+
+    /* CARDS / GRIDS */
+    .grid-3,
+    .grid-4,
+    .grid-2{
+      display:grid;
+      gap:20px;
+    }
+
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+    .glass-card{
+      position:relative;
+      padding:24px;
+      border-radius:var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.1);
+      backdrop-filter: blur(14px);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      transition:transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+
+    .glass-card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(84,214,210,.3);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.05));
+    }
+
+    .glass-card::after{
+      content:"";
+      position:absolute;
+      width:140px;
+      height:140px;
+      right:-44px;
+      top:-44px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(84,214,210,.14), transparent 70%);
+      pointer-events:none;
+    }
+
+    .card-icon{
+      width:56px;
+      height:56px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      margin-bottom:18px;
+      font-size:1.2rem;
+      font-weight:800;
+      color:#072638;
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow:0 12px 30px rgba(84,214,210,.2);
+    }
+
+    .glass-card h3{
+      margin:0 0 12px;
+      font-size:1.18rem;
+      line-height:1.25;
+    }
+
+    .glass-card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:.96rem;
+    }
+
+    /* SPLIT */
+    .split{
+      display:grid;
+      grid-template-columns: .92fr 1.08fr;
+      gap:24px;
+      align-items:stretch;
+      margin-top:36px;
+    }
+
+    .split.reverse{
+      grid-template-columns:1.08fr .92fr;
+    }
+
+    .panel{
+      padding:30px;
+      border-radius:32px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.1);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(14px);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .panel strong.big{
+      display:block;
+      font-size:clamp(2rem, 5vw, 5rem);
+      line-height:1;
+      letter-spacing:-.05em;
+      margin-bottom:16px;
+      background:linear-gradient(135deg, #ffffff, #9feeed 42%, #ffe0a4);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .panel h3{
+      margin:0 0 12px;
+      font-size:1.45rem;
+    }
+
+    .panel p, .panel li{
+      color:var(--muted);
+      line-height:1.76;
+    }
+
+    .list{
+      list-style:none;
+      margin:18px 0 0;
+      padding:0;
+      display:grid;
+      gap:14px;
+    }
+
+    .list li{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:14px 0;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+
+    .list li:first-child{border-top:none;padding-top:0}
+
+    .bullet{
+      flex:0 0 auto;
+      width:28px;
+      height:28px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:rgba(84,214,210,.14);
+      border:1px solid rgba(84,214,210,.35);
+      color:var(--accent-3);
+      font-size:.85rem;
+      font-weight:700;
+      margin-top:2px;
+    }
+
+    /* TIMELINE */
+    .timeline{
+      position:relative;
+      display:grid;
+      gap:18px;
+      margin-top:34px;
+    }
+
+    .timeline::before{
+      content:"";
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:22px;
+      width:2px;
+      background:linear-gradient(180deg, rgba(84,214,210,.75), rgba(240,200,110,.28), transparent);
+    }
+
+    .timeline-item{
+      position:relative;
+      margin-left:62px;
+      padding:22px 22px 22px 24px;
+      border-radius:24px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.1);
+      box-shadow:var(--shadow);
+    }
+
+    .timeline-item::before{
+      content:"";
+      position:absolute;
+      left:-50px;
+      top:24px;
+      width:22px;
+      height:22px;
+      border-radius:50%;
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow:0 0 0 6px rgba(84,214,210,.1);
+    }
+
+    .timeline-item small{
+      display:block;
+      margin-bottom:8px;
+      font-weight:700;
+      color:var(--accent-3);
+      letter-spacing:.03em;
+      text-transform:uppercase;
+    }
+
+    .timeline-item h4{
+      margin:0 0 10px;
+      font-size:1.08rem;
+    }
+
+    .timeline-item p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    /* ACCORDION */
+    .accordion{
+      display:grid;
+      gap:14px;
+      margin-top:28px;
+    }
+
+    .acc-item{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .acc-btn{
+      width:100%;
+      border:none;
+      background:transparent;
+      color:var(--text);
+      padding:20px 22px;
+      text-align:left;
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:center;
+      font:inherit;
+      cursor:pointer;
+    }
+
+    .acc-btn strong{
+      font-size:1rem;
+      line-height:1.35;
+    }
+
+    .acc-btn span{
+      flex:0 0 auto;
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.1);
+      transition:transform .25s ease;
+    }
+
+    .acc-item.open .acc-btn span{transform:rotate(45deg)}
+
+    .acc-body{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .35s ease;
+    }
+
+    .acc-content{
+      padding:0 22px 22px;
+      color:var(--muted);
+      line-height:1.76;
+      font-size:.95rem;
+    }
+
+    /* COUNTERS */
+    .impact{
+      margin-top:34px;
+    }
+
+    .impact-card{
+      min-height:190px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .count{
+      font-size:clamp(2rem, 5vw, 4rem);
+      font-weight:800;
+      letter-spacing:-.05em;
+      line-height:1;
+      margin-bottom:12px;
+      background:linear-gradient(135deg, #fff, #9feeed 48%, #ffe0a4);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    /* MAP */
+    .map-wrap{
+      margin-top:38px;
+      padding:28px;
+      border-radius:32px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.1);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .map{
+      position:relative;
+      min-height:520px;
+      border-radius:28px;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 18% 36%, rgba(84,214,210,.11), transparent 0 24%),
+        radial-gradient(circle at 80% 22%, rgba(240,200,110,.08), transparent 0 18%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .map svg{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+    }
+
+    .map-overlay{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+      background-size:52px 52px;
+      opacity:.5;
+      pointer-events:none;
+    }
+
+    .map-point{
+      position:absolute;
+      transform:translate(-50%,-50%);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-start;
+    }
+
+    .point-dot{
+      width:16px;
+      height:16px;
+      border-radius:50%;
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow:
+        0 0 0 8px rgba(84,214,210,.09),
+        0 0 28px rgba(84,214,210,.42);
+      position:relative;
+    }
+
+    .point-dot::after{
+      content:"";
+      position:absolute;
+      inset:-10px;
+      border:1px solid rgba(84,214,210,.28);
+      border-radius:50%;
+      animation:pulse 2.2s infinite;
+    }
+
+    .point-card{
+      padding:12px 14px;
+      border-radius:18px;
+      background:rgba(8,22,38,.78);
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter:blur(12px);
+      max-width:220px;
+      box-shadow:var(--shadow);
+    }
+
+    .point-card strong{
+      display:block;
+      margin-bottom:4px;
+      font-size:.94rem;
+    }
+
+    .point-card span{
+      color:var(--muted);
+      font-size:.82rem;
+      line-height:1.45;
+    }
+
+    /* GALLERY */
+    .gallery{
+      margin-top:34px;
+      display:grid;
+      grid-template-columns:1.15fr .85fr .85fr;
+      grid-template-rows:220px 220px;
+      gap:18px;
+    }
+
+    .gallery-item{
+      position:relative;
+      border-radius:26px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.1);
+      background:
+        linear-gradient(180deg, rgba(84,214,210,.22), rgba(84,214,210,.04)),
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      min-height:220px;
+      padding:24px;
+      cursor:pointer;
+      transition:transform .25s ease, border-color .25s ease;
+    }
+
+    .gallery-item:hover{
+      transform:translateY(-6px);
+      border-color:rgba(84,214,210,.3);
+    }
+
+    .gallery-item::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,.14), transparent 30%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.22));
+      pointer-events:none;
+    }
+
+    .gallery-item.large{
+      grid-row:1 / span 2;
+    }
+
+    .gallery-item h4{
+      position:relative;
+      z-index:2;
+      margin:0 0 10px;
+      font-size:1.2rem;
+    }
+
+    .gallery-item p{
+      position:relative;
+      z-index:2;
+      margin:0;
+      color:#d7e7f7;
+      max-width:90%;
+      line-height:1.65;
+      font-size:.95rem;
+    }
+
+    .gallery-badge{
+      position:absolute;
+      right:16px;
+      top:16px;
+      z-index:2;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(8,22,38,.68);
+      border:1px solid rgba(255,255,255,.1);
+      font-size:.8rem;
+      font-weight:700;
+      color:var(--accent-3);
+    }
+
+    /* CTA */
+    .cta{
+      padding:34px;
+      border-radius:34px;
+      background:
+        radial-gradient(circle at 10% 15%, rgba(84,214,210,.18), transparent 0 26%),
+        radial-gradient(circle at 92% 18%, rgba(240,200,110,.12), transparent 0 18%),
+        linear-gradient(135deg, rgba(255,255,255,.1), rgba(255,255,255,.05));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .cta-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:24px;
+      align-items:center;
+    }
+
+    .cta-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:24px;
+    }
+
+    /* FOOTER */
+    footer{
+      padding:34px 0 42px;
+      color:var(--muted);
+      border-top:1px solid rgba(255,255,255,.08);
+      margin-top:40px;
+    }
+
+    .footer-row{
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    /* MODAL */
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      place-items:center;
+      background:rgba(3,9,16,.72);
+      backdrop-filter:blur(12px);
+      z-index:100;
+      padding:20px;
+    }
+
+    .modal.open{display:grid}
+
+    .modal-card{
+      width:min(760px, 100%);
+      border-radius:28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.05));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:0 30px 80px rgba(0,0,0,.45);
+      overflow:hidden;
+    }
+
+    .modal-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .modal-top h3{
+      margin:0;
+      font-size:1.15rem;
+    }
+
+    .modal-close{
+      width:42px;
+      height:42px;
+      border:none;
+      border-radius:14px;
+      background:rgba(255,255,255,.08);
+      color:var(--text);
+      cursor:pointer;
+      font-size:1.1rem;
+    }
+
+    .modal-body{
+      padding:24px 22px 28px;
+      color:var(--muted);
+      line-height:1.82;
+    }
+
+    /* REVEAL */
+    .reveal{
+      opacity:0;
+      transform:translateY(28px);
+      transition:opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible{
+      opacity:1;
+      transform:none;
+    }
+
+    /* ANIMATIONS */
+    @keyframes spin {
+      from{transform:rotate(0deg)}
+      to{transform:rotate(360deg)}
+    }
+    @keyframes bob {
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
+    }
+    @keyframes pulse{
+      0%{transform:scale(.75); opacity:.75}
+      100%{transform:scale(1.7); opacity:0}
+    }
+    @keyframes sweep{
+      from{transform:rotate(0deg)}
+      to{transform:rotate(360deg)}
+    }
+    @keyframes scrollDot{
+      0%{opacity:0; transform:translate(-50%,0)}
+      30%{opacity:1}
+      100%{opacity:0; transform:translate(-50%,18px)}
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1180px){
+      .hero-grid,
+      .split,
+      .split.reverse,
+      .cta-grid{
+        grid-template-columns:1fr;
+      }
+      .grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .hero-visual{min-height:540px}
+      .gallery{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        grid-template-rows:auto;
+      }
+      .gallery-item.large{grid-row:auto}
+    }
+
+    @media (max-width: 980px){
+      .nav-links,
+      .nav-actions .btn-ghost.hidden-mobile{
+        display:none;
+      }
+      .menu-btn{display:inline-grid; place-items:center}
+      .site-header.open .mobile-nav{
+        max-height:420px;
+        opacity:1;
+        padding-bottom:18px;
+      }
+      .mobile-nav{
+        max-height:0;
+        opacity:0;
+        overflow:hidden;
+        transition:max-height .35s ease, opacity .3s ease;
+      }
+      .mobile-nav a{
+        display:block;
+        padding:12px 0;
+        border-top:1px solid rgba(255,255,255,.07);
+        color:var(--muted);
+        font-weight:600;
+      }
+      .grid-3, .grid-2{grid-template-columns:1fr}
+      .hero-stats{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 760px){
+      :root{--nav-h:74px}
+      .section{padding:74px 0}
+      .hero{
+        min-height:auto;
+        padding:36px 0 60px;
+      }
+      .hero-visual{min-height:460px}
+      .orbital{width:100%}
+      .float-card{
+        position:static;
+        margin-top:10px;
+        animation:none;
+      }
+      .radar{display:none}
+      .gallery{
+        grid-template-columns:1fr;
+      }
+      .grid-4{grid-template-columns:1fr}
+      .cta{padding:24px}
+      .panel{padding:24px}
+      .map-wrap{padding:18px}
+      .map{min-height:620px}
+      .point-card{max-width:170px}
+      .hidden-mobile{display:none}
+      .show-mobile{display:block}
+      .title{font-size:clamp(2rem, 8vw, 3rem)}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header" id="header">
+    <div class="container nav">
+      <a href="#hero" class="brand" aria-label="MTWTUYouth">
+        <div class="brand-mark"></div>
+        <div class="brand-text">
+          <strong>MTWTUYouth</strong>
+          <span>Молодіжна рада ПРМТУ</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Основна навігація">
+        <a href="#about">Про нас</a>
+        <a href="#directions">Напрями</a>
+        <a href="#sailsmart">Sail Smart</a>
+        <a href="#leadership">Лідерство</a>
+        <a href="#international">Міжнародно</a>
+        <a href="#impact">Вплив</a>
+        <a href="#contact">Контакти</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn-ghost hidden-mobile" href="https://www.instagram.com/mtwtuyouth/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn" href="https://mtwtu.org.ua/youth" target="_blank" rel="noopener">Офіційний сайт</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Відкрити меню">☰</button>
+      </div>
+    </div>
+
+    <div class="container mobile-nav" id="mobileNav">
+      <a href="#about">Про нас</a>
+      <a href="#directions">Напрями</a>
+      <a href="#sailsmart">Sail Smart</a>
+      <a href="#leadership">Лідерські програми</a>
+      <a href="#international">Міжнародна співпраця</a>
+      <a href="#impact">Досягнення</a>
+      <a href="#contact">Контакти</a>
+      <a href="https://www.instagram.com/mtwtuyouth/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://mtwtu.org.ua/youth" target="_blank" rel="noopener">Сайт ПРМТУ</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">Сила молоді — сила майбутнього</span>
+          <h1 class="title">Молодіжна рада ПРМТУ — сучасна спільнота розвитку, дії та лідерства в морській галузі</h1>
+          <p class="lead">
+            Тут поєднуються професійне становлення, правозахист, партнерство, міжнародні можливості,
+            культурні та спортивні ініціативи. Це не просто молодіжний напрям — це жива екосистема,
+            де молодь навчається, впливає, об’єднується і формує майбутнє галузі.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#directions" class="btn">Дослідити діяльність</a>
+            <a href="#international" class="btn-ghost">Міжнародні можливості</a>
+            <a href="https://www.instagram.com/mtwtuyouth/" class="btn-ghost" target="_blank" rel="noopener">Перейти в Instagram</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-chip">
+              <strong>2002</strong>
+              <span>початок молодіжного руху ПРМТУ</span>
+            </div>
+            <div class="stat-chip">
+              <strong>ITF / ETF</strong>
+              <span>включеність у міжнародний молодіжний профспілковий рух</span>
+            </div>
+            <div class="stat-chip">
+              <strong>Career + Rights</strong>
+              <span>поєднання професійного розвитку, лідерства і захисту прав</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="orbital">
+            <div class="port-card">
+              <div class="port-top">
+                <div>
+                  <div class="mini-tag">MTWTUYouth</div>
+                </div>
+                <div class="globe"></div>
+              </div>
+
+              <h3>Молодь, яка не просто долучається — а впливає</h3>
+              <p>
+                Професійні інсайти, правова обізнаність, форуми, міжнародні поїздки, співпраця з
+                профспілками та інституціями, інтелектуальні й культурні ініціативи — все це формує
+                нове покоління активних морських лідерів.
+              </p>
+            </div>
+          </div>
+
+          <div class="float-card float-1">
+            <strong>Sail Smart</strong>
+            <span>практичні зустрічі з експертами галузі</span>
+          </div>
+
+          <div class="float-card float-2">
+            <strong>MTWTU LAW HUB</strong>
+            <span>правозахист і прикладні знання</span>
+          </div>
+
+          <div class="float-card float-3">
+            <strong>Forum & Camp</strong>
+            <span>лідерство, розвиток, ком’юніті</span>
+          </div>
+
+          <div class="float-card float-4">
+            <strong>Europe & Beyond</strong>
+            <span>NTF, ETF, ETUI, міжнародний діалог</span>
+          </div>
+
+          <div class="radar"></div>
+        </div>
+      </div>
+
+      <div class="hero-scroll">
+        <div>Скроль вниз</div>
+        <span></span>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="center reveal">
+          <span class="eyebrow">Хто ми</span>
+          <h2 class="title">Молодіжна рада ПРМТУ — це простір можливостей, розвитку та реальної участі</h2>
+          <p class="lead" style="margin-inline:auto;">
+            Молодіжна рада ПРМТУ об’єднує курсантів, студентів, молодих моряків і активних спілчан навколо
+            професійного росту, захисту прав, лідерства, взаємопідтримки та участі в формуванні майбутнього
+            морської галузі.
+          </p>
+        </div>
+
+        <div class="grid-4" style="margin-top:34px;">
+          <article class="glass-card reveal">
+            <div class="card-icon">01</div>
+            <h3>Розвиток потенціалу</h3>
+            <p>Освітні зустрічі, практичні інсайти, форуми, табори, кар’єрні розмови та простір для професійного зростання.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">02</div>
+            <h3>Активна позиція</h3>
+            <p>Молодь долучається до ухвалення рішень, бере участь у форумах, фокус-групах, стратегіях і профспілковому житті.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">03</div>
+            <h3>Компетентність</h3>
+            <p>Не лише натхнення, а й конкретні знання: права моряків, ринок праці, комунікація, лідерство, міжнародний контекст.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">04</div>
+            <h3>Спільнота однодумців</h3>
+            <p>Живі зв’язки, підтримка, партнерства, нові контакти, командні формати й відчуття приналежності до сильної молодіжної спільноти.</p>
+          </article>
+        </div>
+
+        <div class="split" style="margin-top:40px;">
+          <div class="panel reveal">
+            <strong class="big">2002</strong>
+            <h3>Початок молодіжного руху ПРМТУ</h3>
+            <p>
+              Молодіжний напрям ПРМТУ має глибоку основу. Його становлення почалося ще у 2002 році,
+              коли в галузі були зроблені перші кроки до системного залучення молоді в профспілкове життя.
+            </p>
+            <ul class="list">
+              <li><span class="bullet">•</span><span>До колективних договорів на окремих підприємствах включали розділ «Робота з молоддю».</span></li>
+              <li><span class="bullet">•</span><span>Формувалися додаткові права, гарантії, підтримка наставництва та умови для професійного зростання молоді.</span></li>
+              <li><span class="bullet">•</span><span>Сьогодні цей напрям перетворився на сучасне молодіжне ком’юніті в структурі ПРМТУ.</span></li>
+            </ul>
+          </div>
+
+          <div class="panel reveal">
+            <h3>Наша місія</h3>
+            <p>
+              Створювати середовище, у якому молодь морської галузі отримує не лише інформацію, а реальні
+              інструменти для розвитку, захисту, самореалізації, співпраці та впливу.
+            </p>
+            <ul class="list">
+              <li><span class="bullet">↗</span><span>Відкривати молоді професійні маршрути та кар’єрні перспективи.</span></li>
+              <li><span class="bullet">↗</span><span>Формувати правову культуру й розуміння механізмів захисту.</span></li>
+              <li><span class="bullet">↗</span><span>Розвивати лідерів, здатних мислити стратегічно і діяти відповідально.</span></li>
+              <li><span class="bullet">↗</span><span>Зміцнювати солідарність через міжгалузеву та міжнародну співпрацю.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="directions">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">Ключові напрями</span>
+          <h2 class="title">Не просто події — цілісна система молодіжного розвитку</h2>
+          <p class="lead">
+            Діяльність Молодіжної ради ПРМТУ охоплює професійне становлення, правозахист, лідерські формати,
+            участь молоді в ухваленні рішень, партнерства, міжнародну взаємодію та живу ком’юніті-культуру.
+          </p>
+        </div>
+
+        <div class="grid-4" style="margin-top:32px;">
+          <article class="glass-card reveal">
+            <div class="card-icon">⚓</div>
+            <h3>Професійний розвиток</h3>
+            <p>Кар’єрні зустрічі, практичні інсайти, розмови з капітанами, механіками, HR, юристами, менеджерами та експертами індустрії.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">⚖</div>
+            <h3>Правозахист</h3>
+            <p>MTWTU LAW HUB, теми контрактів, MLC 2006, електронного судочинства, кваліфікаційних документів, відвідування судових засідань.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">◎</div>
+            <h3>Лідерство</h3>
+            <p>Форуми, Summer Leadership Camp, тренінги, грантова школа, публічні виступи, стратегічні сесії та розвиток молодих лідерів.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">↔</div>
+            <h3>Партнерства</h3>
+            <p>Міжгалузева взаємодія з іншими профспілками, інституціями, громадами, молодіжними радами, стейкхолдерами та міжнародними партнерами.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">✦</div>
+            <h3>Міжнародний вимір</h3>
+            <p>NTF, ETF, ETUI, ITF Seafarers’ Trust, міжнародні конференції, навчальні курси, молодіжні школи та навчальні поїздки.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">⌁</div>
+            <h3>Участь у рішеннях</h3>
+            <p>Молодь долучається до виборних органів, форумів, стратегій, фокус-груп та дискусій про майбутнє молодіжної політики й галузі.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">◉</div>
+            <h3>Жива спільнота</h3>
+            <p>Union Quiz, Union Sport, зустрічі, культурні події, креативні формати й неформальні майданчики, що створюють відчуття команди.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">∞</div>
+            <h3>Цінності</h3>
+            <p>Солідарність, розвиток, підтримка, відповідальність, сміливість думати ширше і діяти не лише для себе, а й для спільноти.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sailsmart">
+      <div class="container">
+        <div class="split reverse">
+          <div class="panel reveal">
+            <span class="eyebrow">Sail Smart: Valuable Insights</span>
+            <h2 class="title" style="font-size:clamp(1.9rem, 3vw, 3.1rem); margin-top:16px;">Світ неймовірних можливостей та найактуальніших інсайтів</h2>
+            <p>
+              Це один із найсильніших форматів Молодіжної ради ПРМТУ — серія практичних зустрічей, де молодь
+              чує не абстрактні поради, а реальний досвід фахівців морської індустрії.
+            </p>
+            <ul class="list">
+              <li><span class="bullet">1</span><span><strong>Marine Experience</strong> — досвід першого рейсу, адаптація до життя на борту, перші труднощі і права моряків.</span></li>
+              <li><span class="bullet">2</span><span><strong>Offshore Industry Insights</strong> — офшор: переваги, складнощі, типи суден, кар’єрні можливості.</span></li>
+              <li><span class="bullet">3</span><span><strong>Maritime Interview Mastery</strong> — співбесіди, CV, крюінг, готовність до першого працевлаштування.</span></li>
+              <li><span class="bullet">4</span><span><strong>Career Beyond the Deck</strong> — кар’єрні шляхи після моря: менеджмент, безпека, бізнес, логістика, фінанси.</span></li>
+            </ul>
+          </div>
+
+          <div class="panel reveal">
+            <h3>Серія подій</h3>
+            <div class="accordion">
+              <div class="acc-item open">
+                <button class="acc-btn" type="button">
+                  <strong>Кар’єра, розвиток і морський ринок</strong>
+                  <span>+</span>
+                </button>
+                <div class="acc-body" style="max-height: 400px;">
+                  <div class="acc-content">
+                    Career Opportunities: At Sea and Onshore, вебзустріч «Кар’єра моряка очима капітана»,
+                    «Інсайт про перший промоушен», «Морська індустрія сьогодні: виклики, можливості, перспективи»,
+                    «Лідери логістики: виклики та перспективи».
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-btn" type="button">
+                  <strong>Технічні та спеціалізовані напрями</strong>
+                  <span>+</span>
+                </button>
+                <div class="acc-body">
+                  <div class="acc-content">
+                    Below Deck on a Bulk Carrier: Life and Work of an Engineer, «Кар’єра механіка: офшор, танкер чи контейнеровоз»,
+                    Life on Board: Passenger Ships, тренди в морських операціях і системному менеджменті.
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-btn" type="button">
+                  <strong>Юридичний і практичний вимір</strong>
+                  <span>+</span>
+                </button>
+                <div class="acc-body">
+                  <div class="acc-content">
+                    Legal Horizons, трудові права моряків, контрактна обізнаність, ризики працевлаштування,
+                    безпека, страхування, захист прав і професійна орієнтація молоді в реальних умовах ринку.
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-btn" type="button">
+                  <strong>Люди, які говорять з молоддю без дистанції</strong>
+                  <span>+</span>
+                </button>
+                <div class="acc-body">
+                  <div class="acc-content">
+                    Капітани, механіки, HR-фахівці, інспектори, юристи, менеджери та інші практики діляться не теорією,
+                    а власним шляхом, помилками, висновками й тим, що справді допомагає молоді стартувати сильніше.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="lawhub">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">MTWTU LAW HUB</span>
+          <h2 class="title">Правозахист, який дає молоді не теорію, а опору</h2>
+          <p class="lead">
+            Молодіжний напрям ПРМТУ посилюється прикладним правозахистом: консультаціями, правопросвітницькою
+            роботою, темами контрактів і документів, цифровими юридичними інструментами та знайомством із судовою практикою.
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top:32px;">
+          <article class="glass-card reveal">
+            <div class="card-icon">§</div>
+            <h3>Практичне розуміння прав</h3>
+            <p>MLC 2006, індивідуальні контракти, колективні договори, зарплата, гарантії, умови праці та типові ризики для молодих моряків.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">⌘</div>
+            <h3>Суд і реальний захист</h3>
+            <p>Відвідування судових засідань і знайомство з діяльністю судової влади дає молоді розуміння, як права захищаються на практиці.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">✍</div>
+            <h3>Документи та цифрові інструменти</h3>
+            <p>Електронний підпис, електронне судочинство, практичні питання щодо кваліфікаційних документів і правових процедур.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="leadership">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">Лідерство та розвиток</span>
+          <h2 class="title">Форуми, табори, тренінги та простір, де молодь вчиться впливати</h2>
+          <p class="lead">
+            Лідерський напрям Молодіжної ради ПРМТУ — це не формальність, а середовище, де ідеї перетворюються
+            на ініціативи, а молодь — на активних учасників змін.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <small>Forum</small>
+            <h4>Молодіжний форум MTWTU</h4>
+            <p>Майданчик міжгалузевого діалогу, обміну досвідом, розвитку публічних виступів і залучення молоді до профспілкового руху.</p>
+          </article>
+
+          <article class="timeline-item reveal">
+            <small>Forum 2.0</small>
+            <h4>Молодіжний форум MTWTU 2.0</h4>
+            <p>Розмова про роль молоді, виклики воєнного часу, транспортну та морську галузь, політики зайнятості й майбутнє профспілкової молоді.</p>
+          </article>
+
+          <article class="timeline-item reveal">
+            <small>Cadets</small>
+            <h4>«Курсант PRO: права, захист, Профспілка»</h4>
+            <p>Історія профспілкового руху, інспекторат ITF, контракти, дебати, командна робота й прикладне розуміння ролі Профспілки.</p>
+          </article>
+
+          <article class="timeline-item reveal">
+            <small>Camp</small>
+            <h4>MTWTU Summer Leadership Camp</h4>
+            <p>Один із найяскравіших форматів: молодь з України та з-за кордону, командність, мотиваційні вебінари, розвиток внутрішньої опори та лідерства.</p>
+          </article>
+
+          <article class="timeline-item reveal">
+            <small>Education</small>
+            <h4>ITF Summer School та освітні серії</h4>
+            <p>Трудові права, контракти, конвенції, цифрові ресурси, перевірка судна та усвідомлений старт кар’єри — все, що має знати молодий моряк.</p>
+          </article>
+
+          <article class="timeline-item reveal">
+            <small>Projects</small>
+            <h4>Грантова школа «МолодьДІЄ: G-lab»</h4>
+            <p>Практика підготовки молодіжних проєктів, менторські сесії, командна робота над ідеями та меморандум про співпрацю як результат реальної взаємодії.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="community">
+      <div class="container">
+        <div class="split">
+          <div class="panel reveal">
+            <span class="eyebrow">Молодь у дії</span>
+            <h2 class="title" style="font-size:clamp(1.9rem, 3vw, 3rem); margin-top:16px;">Не лише навчання. Не лише активізм. А жива спільнота.</h2>
+            <p>
+              Молодіжна рада ПРМТУ формує сучасне молодіжне середовище не лише через освітні та профспілкові формати,
+              а й через інтелектуальні, спортивні, культурні та креативні ініціативи.
+            </p>
+            <ul class="list">
+              <li><span class="bullet">Q</span><span><strong>Union Quiz</strong> — командні інтелектуальні змагання в Одесі, Ізмаїлі та Чорноморську.</span></li>
+              <li><span class="bullet">S</span><span><strong>Union Sport</strong> — спортивні активності, змагання, командний дух і неформальне зміцнення спільноти.</span></li>
+              <li><span class="bullet">M</span><span><strong>Мем Батл</strong> — сучасний креативний формат, де молодь говорить про морське та профспілкове легко, влучно й по-своєму.</span></li>
+              <li><span class="bullet">C</span><span><strong>Культурні ініціативи</strong> — вистави, події, простір для емоцій, рефлексії та спільних сенсів.</span></li>
+            </ul>
+          </div>
+
+          <div class="panel reveal">
+            <h3>Що це дає молоді</h3>
+            <div class="grid-2" style="margin-top:20px;">
+              <article class="glass-card">
+                <div class="card-icon">◎</div>
+                <h3>Командність</h3>
+                <p>Регулярні формати створюють живий контакт між людьми, підсилюють взаємну підтримку та відчуття спільноти.</p>
+              </article>
+              <article class="glass-card">
+                <div class="card-icon">↗</div>
+                <h3>Видимість</h3>
+                <p>Молодь не губиться в структурі, а відчуває, що її енергія, ідеї та участь справді мають значення.</p>
+              </article>
+              <article class="glass-card">
+                <div class="card-icon">✦</div>
+                <h3>Емоційний зв’язок</h3>
+                <p>Через спорт, гумор, культуру і спільні події профспілкове життя стає ближчим, сучаснішим і живішим.</p>
+              </article>
+              <article class="glass-card">
+                <div class="card-icon">∞</div>
+                <h3>Стійкість</h3>
+                <p>Спільнота, де є довіра, комунікація і спільні дії, значно сильніше проходить через виклики й зміни.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="voice">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">Участь молоді в рішеннях</span>
+          <h2 class="title">Молодь не просто присутня — молодь впливає</h2>
+          <p class="lead">
+            Представники Молодіжної ради ПРМТУ долучаються до виборних органів, форумів, стратегічних обговорень,
+            фокус-груп, міських та регіональних дискусій, де формується молодіжна політика і бачення розвитку.
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top:32px;">
+          <article class="glass-card reveal">
+            <div class="card-icon">01</div>
+            <h3>Виборні органи</h3>
+            <p>Молоді спілчани входять до складу виборних органів первинних профспілкових організацій і беруть відповідальність на себе.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">02</div>
+            <h3>Міські та регіональні стратегії</h3>
+            <p>Участь у форумах, рекомендаціях до стратегії громади, обговоренні Молодіжної стратегії Одеси 2030 та інших стратегічних процесах.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">03</div>
+            <h3>Голос молоді</h3>
+            <p>Фокус-групи, обговорення бар’єрів і потреб молоді, участь у виробленні підходів, що впливають на майбутні рішення й політики.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="partnerships">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">Міжгалузева співпраця</span>
+          <h2 class="title">Партнерства, що підсилюють молодіжний профспілковий рух</h2>
+          <p class="lead">
+            Через співпрацю з іншими профспілками, молодіжними радами, громадами й організаціями Молодіжна рада ПРМТУ
+            розширює горизонти, зміцнює солідарність і будує нові можливості для молоді.
+          </p>
+        </div>
+
+        <div class="grid-4" style="margin-top:32px;">
+          <article class="glass-card reveal">
+            <div class="card-icon">A</div>
+            <h3>Атомпрофспілка</h3>
+            <p>Молодіжна платформа, обмін досвідом, воркшопи, круглі столи та міжпрофспілкова взаємодія в умовах кризи.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">R</div>
+            <h3>Профспілка залізничників</h3>
+            <p>Спільні форуми, нетворкінг, меморандум про співпрацю та розвиток спільних молодіжних ініціатив.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">G</div>
+            <h3>Громади та молодіжні ради</h3>
+            <p>Форуми, регіональні молодіжні платформи, співпраця з молодіжними радами та локальними ініціативами.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">P</div>
+            <h3>Спільні цінності</h3>
+            <p>Солідарність, пам’ять, взаємопідтримка, вшанування героїв і відчуття великого спільного руху, а не ізольованої діяльності.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="international">
+      <div class="container">
+        <div class="reveal center">
+          <span class="eyebrow">Міжнародна співпраця</span>
+          <h2 class="title">Від України до європейського профспілкового простору</h2>
+          <p class="lead" style="margin-inline:auto;">
+            Міжнародний напрям дає молоді ПРМТУ не лише нові контакти, а й новий масштаб мислення:
+            солідарність, адвокація, європейський профспілковий досвід, історична пам’ять і бачення майбутнього.
+          </p>
+        </div>
+
+        <div class="map-wrap reveal">
+          <div class="map">
+            <div class="map-overlay"></div>
+
+            <svg viewBox="0 0 1000 520" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M170 310 C 300 270, 360 250, 470 210 S 660 150, 820 120"
+                    fill="none" stroke="rgba(84,214,210,.55)" stroke-width="2.5" stroke-dasharray="10 10"/>
+              <path d="M470 210 C 560 190, 650 180, 760 160"
+                    fill="none" stroke="rgba(240,200,110,.5)" stroke-width="2.5" stroke-dasharray="8 10"/>
+              <path d="M760 160 C 780 170, 805 188, 840 205"
+                    fill="none" stroke="rgba(136,231,255,.45)" stroke-width="2.5" stroke-dasharray="8 10"/>
+            </svg>
+
+            <div class="map-point" style="left:17%; top:60%;">
+              <div class="point-dot"></div>
+              <div class="point-card">
+                <strong>Одеса</strong>
+                <span>база молодіжної активності, форуми, Sail Smart, правопросвіта, зустрічі та ком’юніті-формати</span>
+              </div>
+            </div>
+
+            <div class="map-point" style="left:24%; top:53%;">
+              <div class="point-dot"></div>
+              <div class="point-card">
+                <strong>Ізмаїл</strong>
+                <span>Union Quiz, молодіжні активності, події Дунайського регіону, ITF та локальна взаємодія</span>
+              </div>
+            </div>
+
+            <div class="map-point" style="left:20%; top:66%;">
+              <div class="point-dot"></div>
+              <div class="point-card">
+                <strong>Чорноморськ</strong>
+                <span>спільнота, молодіжні події, quiz-формати та партнерства з громадами</span>
+              </div>
+            </div>
+
+            <div class="map-point" style="left:48%; top:40%;">
+              <div class="point-dot"></div>
+              <div class="point-card">
+                <strong>Прага</strong>
+                <span>навчальна мандрівка «Потяг пам’яті», осмислення історії, демократії та прав людини</span>
+              </div>
+            </div>
+
+            <div class="map-point" style="left:77%; top:23%;">
+              <div class="point-dot"></div>
+              <div class="point-card">
+                <strong>Копенгаген</strong>
+                <span>конференція молодих активістів NTF, міжнародний профспілковий діалог і солідарність</span>
+              </div>
+            </div>
+
+            <div class="map-point" style="left:84%; top:40%;">
+              <div class="point-dot"></div>
+              <div class="point-card">
+                <strong>Освенцим</strong>
+                <span>глибока рефлексія про ціну людської гідності, небезпеку ненависті та роль молоді у захисті демократії</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top:28px;">
+          <article class="glass-card reveal">
+            <div class="card-icon">ITF</div>
+            <h3>ITF та ITF Seafarers’ Trust</h3>
+            <p>Молодь отримує можливість бачити ширший контекст підтримки моряків, солідарності та міжнародних благодійних і освітніх програм.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">ETF</div>
+            <h3>ETF, ETUI, Youth Winter School</h3>
+            <p>Європейський рівень профспілкової дії, адвокації, представництва інтересів працівників і сучасних підходів до молодіжної роботи.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">NTF</div>
+            <h3>Nordic Transport Workers’ Federation</h3>
+            <p>Міжнародні зустрічі, конференції, живий обмін досвідом, історії лідерства й мотивуючий контакт із сильними профспілковими середовищами.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="impact">
+      <div class="container">
+        <div class="center reveal">
+          <span class="eyebrow">Досягнення та вплив</span>
+          <h2 class="title">Масштаб, який відчувається не цифрами заради цифр, а змістом</h2>
+          <p class="lead" style="margin-inline:auto;">
+            Освітні проєкти, форуми, правозахисні формати, партнерства, міжнародні програми,
+            спортивні та культурні ініціативи разом створюють цілісне молодіжне середовище ПРМТУ.
+          </p>
+        </div>
+
+        <div class="grid-4 impact">
+          <article class="glass-card impact-card reveal">
+            <div>
+              <div class="count" data-target="20">0</div>
+              <h3>ключових форматів і серій</h3>
+            </div>
+            <p>Від Sail Smart і LAW HUB до форумів, camp-програм, quiz, sport, креативних та культурних ініціатив.</p>
+          </article>
+
+          <article class="glass-card impact-card reveal">
+            <div>
+              <div class="count" data-target="8">0</div>
+              <h3>стратегічних напрямів діяльності</h3>
+            </div>
+            <p>Професійний розвиток, правозахист, лідерство, партнерства, міжнародка, участь у рішеннях і жива спільнота.</p>
+          </article>
+
+          <article class="glass-card impact-card reveal">
+            <div>
+              <div class="count" data-target="6">0</div>
+              <h3>географічних точок присутності</h3>
+            </div>
+            <p>Українські міста та міжнародні майданчики, де звучить голос молоді ПРМТУ.</p>
+          </article>
+
+          <article class="glass-card impact-card reveal">
+            <div>
+              <div class="count" data-target="100">0</div>
+              <h3>% фокусу на майбутнє</h3>
+            </div>
+            <p>Ключова ідея проста: підтримка молоді сьогодні формує сильну галузь, профспілку і спільноту завтра.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">Атмосфера і жива історія</span>
+          <h2 class="title">Сайт має не просто розповідати — а давати відчути енергію Молодіжної ради</h2>
+          <p class="lead">
+            Нижче — демонстраційні галерейні блоки. Пізніше ти зможеш замінити їх на реальні фото з форумів,
+            Sail Smart, Summer Camp, міжнародних поїздок, Union Quiz, Union Sport та інших подій.
+          </p>
+        </div>
+
+        <div class="gallery">
+          <article class="gallery-item large reveal" data-title="Форуми та молодіжні зустрічі" data-text="Тут варто поставити найсильніше горизонтальне фото або колаж із форумів, спікерів, командних моментів і залу. Це одразу покаже масштаб і живу енергію спільноти.">
+            <span class="gallery-badge">Hero gallery</span>
+            <h4>Форуми, зустрічі, спільні рішення</h4>
+            <p>Великий візуальний акцент для фото, яке передає масштаб, командність і динаміку молодіжного руху.</p>
+          </article>
+
+          <article class="gallery-item reveal" data-title="Sail Smart" data-text="Сюди добре стане фото спікера, онлайн/офлайн зустрічі або моменту живої дискусії з курсантами і молодими моряками.">
+            <span class="gallery-badge">Sail Smart</span>
+            <h4>Практичні інсайти від людей галузі</h4>
+            <p>Живі розмови про кар’єру, реальну роботу в морі, офшор, технічні спеціальності, ринок і професійний розвиток.</p>
+          </article>
+
+          <article class="gallery-item reveal" data-title="MTWTU LAW HUB" data-text="Тут чудово працює фото із суду, навчальної правопросвітницької зустрічі, консультацій або візуал правового блоку.">
+            <span class="gallery-badge">Rights</span>
+            <h4>Правозахист і реальні механізми підтримки</h4>
+            <p>Фото або графічний блок про консультації, документи, судові відвідування та правову обізнаність.</p>
+          </article>
+
+          <article class="gallery-item reveal" data-title="Міжнародний вимір" data-text="Сюди підійдуть кадри з Копенгагена, Праги, ETF/ETUI/NTF-майданчиків або фото з міжнародними партнерами.">
+            <span class="gallery-badge">Global</span>
+            <h4>Українська молодь у міжнародному діалозі</h4>
+            <p>Кадри, що підкреслюють солідарність, міжнародні контакти, європейське середовище і ширину горизонту.</p>
+          </article>
+
+          <article class="gallery-item reveal" data-title="Union Quiz / Union Sport / community" data-text="Цей блок ідеальний для емоційних, живих і веселих кадрів — командність, драйв, неформальне спілкування, sport і quiz-формати.">
+            <span class="gallery-badge">Community</span>
+            <h4>Ком’юніті, драйв і відчуття своєї команди</h4>
+            <p>Саме тут найкраще показати людяність, енергію, сміх, азарт і справжній внутрішній зв’язок молоді.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="cta reveal">
+          <div class="cta-grid">
+            <div>
+              <span class="eyebrow">Фінальний акцент</span>
+              <h2 class="title" style="font-size:clamp(2rem, 3.4vw, 3.2rem); margin-top:16px;">
+                Молодіжна рада ПРМТУ — це простір, де молодь не чекає майбутнього, а створює його вже зараз
+              </h2>
+              <p class="lead" style="max-width:700px;">
+                Якщо молодь має підтримку, довіру та простір для дії — вона стає справжньою рушійною силою змін.
+                Саме таким середовищем і є MTWTUYouth.
+              </p>
+
+              <div class="cta-links">
+                <a class="btn" href="https://www.instagram.com/mtwtuyouth/" target="_blank" rel="noopener">Instagram MTWTUYouth</a>
+                <a class="btn-ghost" href="https://mtwtu.org.ua/youth" target="_blank" rel="noopener">Офіційний youth-розділ</a>
+                <a class="btn-ghost" href="#hero">На початок</a>
+              </div>
+            </div>
+
+            <div class="panel" style="padding:26px;">
+              <h3 style="margin-top:0;">Що можна додати далі</h3>
+              <ul class="list">
+                <li><span class="bullet">1</span><span>Реальні фото і відео з Instagram / архіву подій.</span></li>
+                <li><span class="bullet">2</span><span>Окремий слайдер для спікерів і партнерів.</span></li>
+                <li><span class="bullet">3</span><span>Повноцінну таймлайн-стрічку по роках.</span></li>
+                <li><span class="bullet">4</span><span>Блок “Команда” з картками людей.</span></li>
+                <li><span class="bullet">5</span><span>Секцію з reels / відео / інтеграцією соцмереж.</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <div class="footer-row">
+            <div>
+              <strong style="display:block; margin-bottom:6px; color:var(--text);">MTWTUYouth — Молодіжна рада ПРМТУ</strong>
+              <span>Сайт-концепт для GitHub Pages • maritime / youth / union presentation</span>
+            </div>
+            <div style="display:flex; gap:18px; flex-wrap:wrap;">
+              <a href="https://www.instagram.com/mtwtuyouth/" target="_blank" rel="noopener">Instagram</a>
+              <a href="https://mtwtu.org.ua/youth" target="_blank" rel="noopener">Офіційний сайт</a>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="galleryModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-top">
+        <h3 id="modalTitle">Галерея</h3>
+        <button class="modal-close" id="modalClose" aria-label="Закрити">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    // mobile menu
+    const header = document.getElementById('header');
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+
+    menuBtn?.addEventListener('click', () => {
+      header.classList.toggle('open');
+    });
+
+    [...mobileNav.querySelectorAll('a')].forEach(link => {
+      link.addEventListener('click', () => header.classList.remove('open'));
+    });
+
+    // accordion
+    document.querySelectorAll('.acc-item').forEach(item => {
+      const btn = item.querySelector('.acc-btn');
+      const body = item.querySelector('.acc-body');
+
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+
+        document.querySelectorAll('.acc-item').forEach(other => {
+          other.classList.remove('open');
+          other.querySelector('.acc-body').style.maxHeight = null;
+        });
+
+        if (!isOpen) {
+          item.classList.add('open');
+          body.style.maxHeight = body.scrollHeight + 'px';
+        }
+      });
+    });
+
+    // reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // active nav links
+    const sections = document.querySelectorAll('main section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav a[href^="#"]');
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { threshold: 0.45 });
+
+    sections.forEach(section => sectionObserver.observe(section));
+
+    // counters
+    const counters = document.querySelectorAll('.count');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
+        const el = entry.target;
+        const target = +el.dataset.target;
+        let current = 0;
+        const duration = 1400;
+        const stepTime = Math.max(16, duration / target);
+
+        const timer = setInterval(() => {
+          current += Math.ceil(target / 40);
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          el.textContent = current;
+        }, stepTime);
+
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.7 });
+
+    counters.forEach(counter => counterObserver.observe(counter));
+
+    // modal
+    const galleryModal = document.getElementById('galleryModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    const modalClose = document.getElementById('modalClose');
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        modalTitle.textContent = item.dataset.title || 'Галерея';
+        modalBody.textContent = item.dataset.text || '';
+        galleryModal.classList.add('open');
+        galleryModal.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    const closeModal = () => {
+      galleryModal.classList.remove('open');
+      galleryModal.setAttribute('aria-hidden', 'true');
+    };
+
+    modalClose.addEventListener('click', closeModal);
+    galleryModal.addEventListener('click', (e) => {
+      if (e.target === galleryModal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // subtle magnetic effect on main buttons
+    document.querySelectorAll('.btn, .btn-ghost').forEach(button => {
+      button.addEventListener('mousemove', (e) => {
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        button.style.transform = `translate(${x * 0.04}px, ${y * 0.04}px)`;
+      });
+
+      button.addEventListener('mouseleave', () => {
+        button.style.transform = '';
+      });
+    });
+  </script>
+</body>
+</html>
