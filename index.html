@@ -346,7 +346,13 @@
         linear-gradient(135deg, #10314e 0%, #0d2740 45%, #0a1d30 100%);
       border:1px solid rgba(255,255,255,.08);
     }
-
+.cover-photo{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+}
     .cover-photo-placeholder::before{
       content:"";
       position:absolute;
@@ -1632,7 +1638,9 @@
     <section class="cover" id="cover">
       <div class="container cover-wrap">
         <div class="cover-card reveal">
-          <div class="cover-photo-placeholder"></div>
+          <div class="cover-photo-placeholder">
+  <img src="images/FIL_1376b.jpg" alt="Молодіжна рада ПРМТУ" class="cover-photo">
+</div>
           <div class="cover-overlay"></div>
 
           <div class="cover-content">
