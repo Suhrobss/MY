@@ -24,9 +24,9 @@
       --shadow:0 24px 60px rgba(0,0,0,.28);
       --radius:24px;
       --radius-sm:18px;
-      --max:1480px;
+      --max:1500px;
       --nav-h:78px;
-      --video-w:clamp(220px, 22vw, 340px);
+      --video-w:clamp(240px, 22vw, 350px);
     }
 
     *{box-sizing:border-box}
@@ -103,7 +103,7 @@
 
     .title{
       margin:16px 0 14px;
-      font-size:clamp(1.9rem, 3.6vw, 3.6rem);
+      font-size:clamp(1.95rem, 3.6vw, 3.65rem);
       line-height:1.05;
       letter-spacing:-.03em;
     }
@@ -315,13 +315,15 @@
     .video-rail{
       position:sticky;
       top:calc(var(--nav-h) + 14px);
-      height:calc(100svh - var(--nav-h) - 26px);
       align-self:start;
       z-index:3;
+      width:100%;
     }
 
     .video-card{
-      height:100%;
+      width:100%;
+      aspect-ratio:9 / 16;
+      max-height:calc(100svh - var(--nav-h) - 34px);
       border-radius:30px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.12);
@@ -332,86 +334,94 @@
         linear-gradient(180deg, #0a2138 0%, #091a2d 100%);
       box-shadow:var(--shadow);
       position:relative;
-      display:flex;
-      flex-direction:column;
     }
 
-    .video-card video{
+    .left-vimeo-video{
       position:absolute;
       inset:0;
       width:100%;
       height:100%;
-      object-fit:cover;
-      object-position:center;
+      border:0;
       display:block;
-      background:#06111d;
     }
 
-    .left-vimeo-video{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  border:0;
-  display:block;
-}
-
-    .video-overlay{
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(180deg, rgba(4,14,24,.28), rgba(4,14,24,.08) 28%, rgba(4,14,24,.24) 70%, rgba(4,14,24,.62) 100%);
-      pointer-events:none;
-    }
-
-    .video-label{
-      position:absolute;
-      left:14px;
-      right:14px;
-      bottom:14px;
-      z-index:2;
-      padding:14px 14px 16px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(7,24,38,.62);
-      backdrop-filter:blur(12px);
-      box-shadow:0 14px 34px rgba(0,0,0,.18);
-    }
-
-    .video-label strong{
-      display:block;
-      font-size:.96rem;
-      margin-bottom:5px;
-    }
-
-    .video-label span{
-      display:block;
-      color:var(--muted);
-      font-size:.82rem;
-      line-height:1.45;
-    }
-
-    .video-tag{
-      position:absolute;
-      left:14px;
-      top:14px;
-      z-index:2;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(7,24,38,.55);
-      color:var(--accent-3);
-      font-size:.75rem;
-      font-weight:700;
-      letter-spacing:.04em;
-      backdrop-filter:blur(10px);
-    }
-
-    /* RIGHT CONTENT */
     .content-col{
       min-width:0;
     }
 
+    /* COVER */
+    .cover{
+      min-height:calc(100svh - var(--nav-h) - 24px);
+      display:flex;
+      align-items:center;
+      padding:24px 0 40px;
+    }
+
+    .cover-card{
+      position:relative;
+      min-height:74svh;
+      border-radius:34px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.11);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),
+        radial-gradient(circle at 16% 16%, rgba(84,214,210,.18), transparent 0 28%),
+        radial-gradient(circle at 84% 18%, rgba(240,200,110,.12), transparent 0 22%),
+        linear-gradient(135deg, rgba(10,33,56,.95), rgba(7,24,38,.88));
+      box-shadow:var(--shadow);
+      isolation:isolate;
+    }
+
+    .cover-photo{
+      position:absolute;
+      inset:16px;
+      border-radius:26px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px),
+        radial-gradient(circle at 20% 24%, rgba(84,214,210,.18), transparent 0 26%),
+        radial-gradient(circle at 80% 18%, rgba(240,200,110,.12), transparent 0 18%),
+        linear-gradient(135deg, #10314e 0%, #0d2740 45%, #0a1d30 100%);
+      background-size:54px 54px, 54px 54px, auto, auto, auto;
+    }
+
+    .cover-overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(4,16,27,.08), rgba(4,16,27,.24) 40%, rgba(4,16,27,.74) 100%);
+      z-index:1;
+      pointer-events:none;
+    }
+
+    .cover-content{
+      position:absolute;
+      left:34px;
+      right:34px;
+      bottom:28px;
+      z-index:2;
+    }
+
+    .cover-content h1{
+      margin:0 0 10px;
+      font-size:clamp(2rem, 4vw, 4rem);
+      line-height:1.04;
+      letter-spacing:-.035em;
+      text-shadow:0 6px 30px rgba(0,0,0,.38);
+      max-width:880px;
+    }
+
+    .cover-content p{
+      margin:0;
+      color:#e3efff;
+      line-height:1.7;
+      font-size:1rem;
+      max-width:760px;
+      text-shadow:0 4px 18px rgba(0,0,0,.34);
+    }
+
+    /* HERO */
     .hero{
       min-height:calc(100svh - var(--nav-h) - 24px);
       display:flex;
@@ -475,6 +485,31 @@
       color:var(--muted);
       font-size:.86rem;
       line-height:1.42;
+    }
+
+    .hero-photos{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:14px;
+      margin-top:22px;
+      max-width:760px;
+    }
+
+    .photo-slot{
+      min-height:220px;
+      border-radius:24px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.11);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px),
+        radial-gradient(circle at 20% 18%, rgba(84,214,210,.14), transparent 0 26%),
+        radial-gradient(circle at 82% 14%, rgba(240,200,110,.12), transparent 0 18%),
+        linear-gradient(135deg, #10314e 0%, #0d2740 48%, #0a1d30 100%);
+      background-size:auto, 42px 42px, 42px 42px, auto, auto, auto;
+      box-shadow:var(--shadow);
+      position:relative;
     }
 
     .hero-visual{
@@ -705,59 +740,6 @@
     .float-2{right:18px; top:20px; animation-delay:-1.6s}
     .float-3{left:18px; bottom:20px; animation-delay:-2.1s}
     .float-4{right:18px; bottom:20px; animation-delay:-1.1s}
-
-    /* PHOTO SLOTS ONLY IN BLOCK 1 */
-    .hero-photos{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0,1fr));
-      gap:14px;
-      margin-top:22px;
-      max-width:760px;
-    }
-
-    .photo-slot{
-      min-height:210px;
-      border-radius:24px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.11);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),
-        radial-gradient(circle at 20% 18%, rgba(84,214,210,.14), transparent 0 26%),
-        radial-gradient(circle at 82% 14%, rgba(240,200,110,.12), transparent 0 18%),
-        linear-gradient(135deg, #10314e 0%, #0d2740 48%, #0a1d30 100%);
-      box-shadow:var(--shadow);
-      position:relative;
-    }
-
-    .photo-slot::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-      background-size:42px 42px;
-      opacity:.4;
-      pointer-events:none;
-    }
-
-    .photo-slot::after{
-      content:attr(data-label);
-      position:absolute;
-      left:14px;
-      right:14px;
-      bottom:14px;
-      padding:12px 14px;
-      border-radius:16px;
-      background:rgba(7,24,38,.62);
-      border:1px solid rgba(255,255,255,.1);
-      color:var(--text);
-      font-size:.9rem;
-      font-weight:700;
-      backdrop-filter:blur(10px);
-      text-align:center;
-      box-shadow:0 14px 28px rgba(0,0,0,.16);
-    }
 
     /* GENERAL CARDS */
     .grid-2,.grid-3,.grid-4{
@@ -1027,7 +1009,6 @@
       font-size:.92rem;
     }
 
-    /* INTERNATIONAL MAP */
     .map-wrap{
       margin-top:34px;
       padding:22px;
@@ -1138,7 +1119,7 @@
       line-height:1.42;
     }
 
-    /* IMPACT WITH SINGLE PHOTO SLOT */
+    /* IMPACT */
     .impact-wrap{
       margin-top:28px;
       display:grid;
@@ -1146,47 +1127,20 @@
     }
 
     .impact-photo{
-      min-height:360px;
+      min-height:380px;
       border-radius:30px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.11);
       background:
         linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px),
         radial-gradient(circle at 18% 16%, rgba(84,214,210,.14), transparent 0 26%),
         radial-gradient(circle at 82% 14%, rgba(240,200,110,.12), transparent 0 18%),
         linear-gradient(135deg, #10314e 0%, #0d2740 48%, #0a1d30 100%);
+      background-size:auto, 46px 46px, 46px 46px, auto, auto, auto;
       box-shadow:var(--shadow);
       position:relative;
-    }
-
-    .impact-photo::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-      background-size:46px 46px;
-      opacity:.38;
-      pointer-events:none;
-    }
-
-    .impact-photo::after{
-      content:"ВЕЛИКА ПРЯМОКУТНА ФОТОГРАФІЯ";
-      position:absolute;
-      left:20px;
-      right:20px;
-      bottom:18px;
-      padding:14px 16px;
-      border-radius:18px;
-      background:rgba(7,24,38,.60);
-      border:1px solid rgba(255,255,255,.1);
-      color:var(--text);
-      font-size:1rem;
-      font-weight:700;
-      backdrop-filter:blur(12px);
-      text-align:center;
-      box-shadow:0 14px 28px rgba(0,0,0,.16);
     }
 
     .impact-grid{
@@ -1306,7 +1260,6 @@
       100%{transform:translate(-50%,-50%) rotate(18deg)}
     }
 
-    /* RESPONSIVE */
     @media (max-width: 1220px){
       .hero-grid,
       .split,
@@ -1340,12 +1293,9 @@
       .video-rail{
         position:relative;
         top:auto;
-        height:auto;
       }
 
       .video-card{
-        height:auto;
-        aspect-ratio:9 / 16;
         max-width:420px;
       }
 
@@ -1384,9 +1334,20 @@
         display:none;
       }
 
+      .cover,
       .hero{
         min-height:auto;
-        padding:18px 0 34px;
+        padding:20px 0 34px;
+      }
+
+      .cover-card{
+        min-height:58svh;
+      }
+
+      .cover-content{
+        left:20px;
+        right:20px;
+        bottom:20px;
       }
 
       .hero-visual,
@@ -1449,7 +1410,7 @@
 
   <header class="site-header" id="header">
     <div class="container nav">
-      <a href="#hero" class="brand" aria-label="MTWTUYouth">
+      <a href="#cover" class="brand" aria-label="MTWTUYouth">
         <div class="brand-mark"></div>
         <div class="brand-text">
           <strong>MTWTUYouth</strong>
@@ -1458,7 +1419,8 @@
       </a>
 
       <nav class="dot-nav" aria-label="Навігація по секціях">
-        <a href="#hero" class="dot-link active" data-label="Блок 1"></a>
+        <a href="#cover" class="dot-link active" data-label="Cover"></a>
+        <a href="#hero" class="dot-link" data-label="Блок 1"></a>
         <a href="#about" class="dot-link" data-label="Про нас"></a>
         <a href="#directions" class="dot-link" data-label="Напрями"></a>
         <a href="#sailsmart" class="dot-link" data-label="Sail Smart"></a>
@@ -1482,31 +1444,33 @@
   </header>
 
   <div class="container app-shell">
-    <!-- LEFT PERSISTENT VIDEO -->
     <aside class="video-rail">
       <div class="video-card">
-        <div class="video-tag">9:16 відео</div>
-
-      <iframe
-  src="https://player.vimeo.com/video/1175179620?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1"
-  frameborder="0"
-  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-  referrerpolicy="strict-origin-when-cross-origin"
-  class="left-vimeo-video"
-  title="insta">
-</iframe>
-
-        <div class="video-overlay"></div>
-
-        <div class="video-label">
-          <strong>Постійне відео ліворуч</strong>
-          <span>Сюди завантажуєш свій вертикальний ролик 9:16 у папку <code>videos/</code> і він програється протягом усієї презентації.</span>
-        </div>
+        <iframe
+          src="https://player.vimeo.com/video/1175179620?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          class="left-vimeo-video"
+          title="insta">
+        </iframe>
       </div>
     </aside>
 
-    <!-- RIGHT CONTENT -->
     <main class="content-col">
+      <section class="cover section" id="cover">
+        <div class="cover-card reveal">
+          <div class="cover-photo"></div>
+          <div class="cover-overlay"></div>
+          <div class="cover-content">
+            <h1>Молодіжна рада ПРМТУ — сучасна спільнота розвитку, дії та лідерства в морській галузі</h1>
+            <p>
+              Простір, де молодь отримує знання, досвід, підтримку, нові контакти та реальні можливості для професійного, лідерського й особистого розвитку.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section class="hero section" id="hero">
         <div class="hero-grid">
           <div class="hero-copy reveal">
@@ -1532,8 +1496,8 @@
             </div>
 
             <div class="hero-photos">
-              <div class="photo-slot" data-label="ГРУПОВЕ ФОТО 1"></div>
-              <div class="photo-slot" data-label="ГРУПОВЕ ФОТО 2"></div>
+              <div class="photo-slot"></div>
+              <div class="photo-slot"></div>
             </div>
           </div>
 
@@ -2083,10 +2047,10 @@
             <div class="panel" style="padding:24px;">
               <h3 style="margin-top:0;">Що можна додати далі</h3>
               <ul class="list">
-                <li><span class="bullet">1</span><span>Заповнити 2 групові фото в блоці 1.</span></li>
-                <li><span class="bullet">2</span><span>Замінити ліве вертикальне відео на фінальний reels-ролик.</span></li>
-                <li><span class="bullet">3</span><span>Додати реальне велике фото в блок “Досягнення та вплив”.</span></li>
-                <li><span class="bullet">4</span><span>За потреби вставити окремий блок “Команда” або “Партнери”.</span></li>
+                <li><span class="bullet">1</span><span>Поставити реальну велику обкладинку в cover-блок.</span></li>
+                <li><span class="bullet">2</span><span>Вставити 2 групові фото в блок 1.</span></li>
+                <li><span class="bullet">3</span><span>Замінити велику фотографію у блоці “Досягнення та вплив”.</span></li>
+                <li><span class="bullet">4</span><span>За потреби додати окремий блок “Команда” або “Партнери”.</span></li>
               </ul>
             </div>
           </div>
@@ -2110,7 +2074,7 @@
   </div>
 
   <script>
-    // reveal on scroll
+    // reveal
     const reveals = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -2169,8 +2133,9 @@
 
     counters.forEach(counter => counterObserver.observe(counter));
 
-    // section navigation
+    // nav sections
     const sections = [
+      document.getElementById('cover'),
       document.getElementById('hero'),
       document.getElementById('about'),
       document.getElementById('directions'),
