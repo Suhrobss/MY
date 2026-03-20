@@ -768,6 +768,81 @@
       font-size:.92rem;
     }
 
+    .split{
+      display:grid;
+      grid-template-columns:.95fr 1.05fr;
+      gap:22px;
+      align-items:stretch;
+      margin-top:32px;
+    }
+
+    .panel{
+      padding:26px;
+      border-radius:30px;
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.1);
+      backdrop-filter:blur(14px);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .panel strong.big{
+      display:block;
+      font-size:clamp(1.95rem, 4.8vw, 4.4rem);
+      line-height:1;
+      letter-spacing:-.05em;
+      margin-bottom:14px;
+      background:linear-gradient(135deg, #ffffff, #9feeed 44%, #ffe0a4);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .panel h3{
+      margin:0 0 10px;
+      font-size:1.34rem;
+    }
+
+    .panel p,.panel li{
+      color:var(--muted);
+      line-height:1.72;
+      font-size:.95rem;
+    }
+
+    .list{
+      list-style:none;
+      margin:16px 0 0;
+      padding:0;
+      display:grid;
+      gap:12px;
+    }
+
+    .list li{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px 0;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+
+    .list li:first-child{border-top:none;padding-top:0}
+
+    .bullet{
+      flex:0 0 auto;
+      width:26px;
+      height:26px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:rgba(84,214,210,.14);
+      border:1px solid rgba(84,214,210,.35);
+      color:var(--accent-3);
+      font-size:.8rem;
+      font-weight:700;
+      margin-top:2px;
+    }
+
     .timeline{
       position:relative;
       display:grid;
@@ -829,6 +904,67 @@
       font-size:.92rem;
     }
 
+    .accordion{
+      display:grid;
+      gap:12px;
+      margin-top:24px;
+    }
+
+    .acc-item{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .acc-btn{
+      width:100%;
+      border:none;
+      background:transparent;
+      color:var(--text);
+      padding:18px 20px;
+      text-align:left;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+      font:inherit;
+      cursor:pointer;
+    }
+
+    .acc-btn strong{
+      font-size:.96rem;
+      line-height:1.35;
+    }
+
+    .acc-btn span{
+      flex:0 0 auto;
+      width:32px;
+      height:32px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.1);
+      transition:transform .24s ease;
+    }
+
+    .acc-item.open .acc-btn span{transform:rotate(45deg)}
+
+    .acc-body{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .35s ease;
+    }
+
+    .acc-content{
+      padding:0 20px 20px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:.92rem;
+    }
+
     /* INTERNATIONAL */
     .intl-wrap{
       margin-top:34px;
@@ -843,7 +979,7 @@
 
     .intl-grid{
       display:grid;
-      grid-template-columns:minmax(200px, .8fr) minmax(620px, 1.7fr) minmax(200px, .8fr);
+      grid-template-columns:minmax(200px, .78fr) minmax(660px, 1.9fr) minmax(200px, .78fr);
       gap:14px;
       align-items:center;
     }
@@ -913,7 +1049,7 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(180deg, rgba(4,16,27,.08), rgba(4,16,27,.28) 60%, rgba(4,16,27,.46) 100%);
+        linear-gradient(180deg, rgba(4,16,27,.08), rgba(4,16,27,.18) 50%, rgba(4,16,27,.28) 100%);
       pointer-events:none;
     }
 
@@ -1080,6 +1216,7 @@
 
     @media (max-width: 1360px){
       .hero-grid,
+      .split,
       .cta-grid{
         grid-template-columns:1fr;
       }
@@ -1237,9 +1374,13 @@
 
       <nav class="dot-nav" aria-label="Навігація по секціях">
         <a href="#cover" class="dot-link active" data-label="Cover"></a>
-        <a href="#hero" class="dot-link" data-label="Блок 1"></a>
+        <a href="#hero" class="dot-link" data-label="Сила молоді"></a>
         <a href="#about" class="dot-link" data-label="Про нас"></a>
         <a href="#directions" class="dot-link" data-label="Напрями"></a>
+        <a href="#sailsmart" class="dot-link" data-label="Sail Smart"></a>
+        <a href="#lawhub" class="dot-link" data-label="LAW HUB"></a>
+        <a href="#leadership" class="dot-link" data-label="Лідерство"></a>
+        <a href="#community" class="dot-link" data-label="Молодь у дії"></a>
         <a href="#international" class="dot-link" data-label="Міжнародно"></a>
         <a href="#impact" class="dot-link" data-label="Вплив"></a>
         <a href="#contact" class="dot-link" data-label="Контакти"></a>
@@ -1273,6 +1414,7 @@
     </aside>
 
     <main class="content-col">
+
       <section class="cover section" id="cover">
         <div class="cover-card reveal">
           <div class="cover-photo-frame">
@@ -1391,6 +1533,34 @@
             <p>Живі зв’язки, підтримка, партнерства, нові контакти та відчуття приналежності до сильної молодіжної спільноти.</p>
           </article>
         </div>
+
+        <div class="split" style="margin-top:36px;">
+          <div class="panel reveal">
+            <strong class="big">2002</strong>
+            <h3>Початок молодіжного руху ПРМТУ</h3>
+            <p>
+              Молодіжний напрям ПРМТУ має глибоку основу. Саме тоді були зроблені перші кроки до системного залучення молоді у профспілкове життя галузі.
+            </p>
+            <ul class="list">
+              <li><span class="bullet">•</span><span>У колективних договорах з’явився напрям «Робота з молоддю».</span></li>
+              <li><span class="bullet">•</span><span>Почали формуватися додаткові гарантії, підтримка наставництва і можливості для розвитку молоді.</span></li>
+              <li><span class="bullet">•</span><span>Сьогодні це вже сучасне ком’юніті активної морської молоді в структурі ПРМТУ.</span></li>
+            </ul>
+          </div>
+
+          <div class="panel reveal">
+            <h3>Наша місія</h3>
+            <p>
+              Створювати середовище, у якому молодь морської галузі отримує не лише інформацію, а реальні інструменти для розвитку, захисту, самореалізації, співпраці та впливу.
+            </p>
+            <ul class="list">
+              <li><span class="bullet">↗</span><span>Відкривати молоді професійні маршрути та кар’єрні перспективи.</span></li>
+              <li><span class="bullet">↗</span><span>Формувати правову культуру та розуміння механізмів захисту.</span></li>
+              <li><span class="bullet">↗</span><span>Розвивати лідерів, здатних мислити стратегічно і діяти відповідально.</span></li>
+              <li><span class="bullet">↗</span><span>Зміцнювати солідарність через міжгалузеву та міжнародну співпрацю.</span></li>
+            </ul>
+          </div>
+        </div>
       </section>
 
       <section class="section" id="directions">
@@ -1453,6 +1623,199 @@
         </div>
       </section>
 
+      <section class="section" id="sailsmart">
+        <div class="split">
+          <div class="panel reveal">
+            <span class="eyebrow">Sail Smart: Valuable Insights</span>
+            <h2 class="title" style="font-size:clamp(1.7rem, 3vw, 2.9rem); margin-top:14px;">Світ неймовірних можливостей та найактуальніших інсайтів</h2>
+            <p>
+              Це один із найсильніших форматів Молодіжної ради ПРМТУ — серія практичних зустрічей, де молодь чує не абстрактні поради, а реальний досвід фахівців морської індустрії.
+            </p>
+            <ul class="list">
+              <li><span class="bullet">1</span><span><strong>Marine Experience</strong> — досвід першого рейсу, адаптація до життя на борту, перші труднощі і права моряків.</span></li>
+              <li><span class="bullet">2</span><span><strong>Offshore Industry Insights</strong> — офшор: переваги, складнощі, типи суден і кар’єрні можливості.</span></li>
+              <li><span class="bullet">3</span><span><strong>Maritime Interview Mastery</strong> — співбесіди, CV, крюінг і готовність до першого працевлаштування.</span></li>
+              <li><span class="bullet">4</span><span><strong>Career Beyond the Deck</strong> — кар’єрні шляхи після моря: менеджмент, безпека, логістика, бізнес.</span></li>
+            </ul>
+          </div>
+
+          <div class="panel reveal">
+            <h3>Серія подій</h3>
+            <div class="accordion">
+              <div class="acc-item open">
+                <button class="acc-btn" type="button">
+                  <strong>Кар’єра, розвиток і морський ринок</strong>
+                  <span>+</span>
+                </button>
+                <div class="acc-body" style="max-height:420px;">
+                  <div class="acc-content">
+                    Career Opportunities: At Sea and Onshore, «Кар’єра моряка очима капітана», «Інсайт про перший промоушен», «Морська індустрія сьогодні», «Лідери логістики».
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-btn" type="button">
+                  <strong>Технічні та спеціалізовані напрями</strong>
+                  <span>+</span>
+                </button>
+                <div class="acc-body">
+                  <div class="acc-content">
+                    Below Deck on a Bulk Carrier, «Кар’єра механіка», Life on Board: Passenger Ships, тренди в морських операціях і системному менеджменті.
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-btn" type="button">
+                  <strong>Юридичний і практичний вимір</strong>
+                  <span>+</span>
+                </button>
+                <div class="acc-body">
+                  <div class="acc-content">
+                    Legal Horizons, трудові права моряків, контрактна обізнаність, ризики працевлаштування, безпека, страхування та реальні механізми захисту.
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <button class="acc-btn" type="button">
+                  <strong>Живі історії, що відгукуються молоді</strong>
+                  <span>+</span>
+                </button>
+                <div class="acc-body">
+                  <div class="acc-content">
+                    Капітани, механіки, HR-фахівці, інспектори, юристи та менеджери діляться не теорією, а власним шляхом, помилками, висновками й тим, що реально допомагає стартувати сильніше.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="lawhub">
+        <div class="reveal">
+          <span class="eyebrow">MTWTU LAW HUB</span>
+          <h2 class="title">Правозахист, який дає молоді не теорію, а опору</h2>
+          <p class="lead">
+            Молодіжний напрям ПРМТУ посилюється прикладним правозахистом: консультаціями, правопросвітницькою роботою, темами контрактів і документів, цифровими юридичними інструментами та знайомством із судовою практикою.
+          </p>
+        </div>
+
+        <div class="grid-3" style="margin-top:30px;">
+          <article class="glass-card reveal">
+            <div class="card-icon">§</div>
+            <h3>Практичне розуміння прав</h3>
+            <p>MLC 2006, індивідуальні контракти, колективні договори, зарплата, гарантії, умови праці та типові ризики для молодих моряків.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">⌘</div>
+            <h3>Суд і реальний захист</h3>
+            <p>Відвідування судових засідань і знайомство з діяльністю судової влади дає молоді розуміння, як права захищаються на практиці.</p>
+          </article>
+
+          <article class="glass-card reveal">
+            <div class="card-icon">✍</div>
+            <h3>Документи та цифрові інструменти</h3>
+            <p>Електронний підпис, електронне судочинство, практичні питання щодо кваліфікаційних документів і правових процедур.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="leadership">
+        <div class="reveal">
+          <span class="eyebrow">Лідерство та розвиток</span>
+          <h2 class="title">Форуми, табори, тренінги і простір, де молодь вчиться впливати</h2>
+          <p class="lead">
+            Лідерський напрям Молодіжної ради ПРМТУ — це середовище, де ідеї перетворюються на ініціативи, а молодь — на активних учасників змін.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <small>Forum</small>
+            <h4>Молодіжний форум MTWTU</h4>
+            <p>Майданчик міжгалузевого діалогу, обміну досвідом, розвитку публічних виступів і залучення молоді до профспілкового руху.</p>
+          </article>
+
+          <article class="timeline-item reveal">
+            <small>Forum 2.0</small>
+            <h4>Молодіжний форум MTWTU 2.0</h4>
+            <p>Розмова про роль молоді, виклики воєнного часу, транспортну та морську галузь, політики зайнятості й майбутнє профспілкової молоді.</p>
+          </article>
+
+          <article class="timeline-item reveal">
+            <small>Cadets</small>
+            <h4>«Курсант PRO: права, захист, Профспілка»</h4>
+            <p>Історія профспілкового руху, інспекторат ITF, контракти, дебати, командна робота й прикладне розуміння ролі Профспілки.</p>
+          </article>
+
+          <article class="timeline-item reveal">
+            <small>Camp</small>
+            <h4>MTWTU Summer Leadership Camp</h4>
+            <p>Молодь з України та з-за кордону, командність, мотиваційні вебінари, розвиток внутрішньої опори та лідерства.</p>
+          </article>
+
+          <article class="timeline-item reveal">
+            <small>Education</small>
+            <h4>ITF Summer School та освітні серії</h4>
+            <p>Трудові права, контракти, конвенції, цифрові ресурси, перевірка судна та усвідомлений старт кар’єри — все, що має знати молодий моряк.</p>
+          </article>
+
+          <article class="timeline-item reveal">
+            <small>Projects</small>
+            <h4>Грантова школа «МолодьДІЄ: G-lab»</h4>
+            <p>Практика підготовки молодіжних проєктів, менторські сесії, командна робота над ідеями та меморандум про співпрацю як результат реальної взаємодії.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="community">
+        <div class="split">
+          <div class="panel reveal">
+            <span class="eyebrow">Молодь у дії</span>
+            <h2 class="title" style="font-size:clamp(1.8rem, 3vw, 2.8rem); margin-top:14px;">Не лише навчання. Не лише активізм. А жива спільнота.</h2>
+            <p>
+              Молодіжна рада ПРМТУ формує сучасне молодіжне середовище не лише через освітні та профспілкові формати, а й через інтелектуальні, спортивні, культурні та креативні ініціативи.
+            </p>
+            <ul class="list">
+              <li><span class="bullet">Q</span><span><strong>Union Quiz</strong> — командні інтелектуальні змагання в Одесі, Ізмаїлі та Чорноморську.</span></li>
+              <li><span class="bullet">S</span><span><strong>Union Sport</strong> — спортивні активності, змагання, командний дух і неформальне зміцнення спільноти.</span></li>
+              <li><span class="bullet">M</span><span><strong>Мем Батл</strong> — сучасний креативний формат, де молодь говорить про морське та профспілкове легко, влучно й по-своєму.</span></li>
+              <li><span class="bullet">C</span><span><strong>Культурні ініціативи</strong> — вистави, події, простір для емоцій, рефлексії та спільних сенсів.</span></li>
+            </ul>
+          </div>
+
+          <div class="panel reveal">
+            <h3>Що це дає молоді</h3>
+            <div class="grid-2" style="margin-top:18px;">
+              <article class="glass-card">
+                <div class="card-icon">◎</div>
+                <h3>Командність</h3>
+                <p>Регулярні формати створюють живий контакт між людьми, підсилюють взаємну підтримку та відчуття спільноти.</p>
+              </article>
+              <article class="glass-card">
+                <div class="card-icon">↗</div>
+                <h3>Видимість</h3>
+                <p>Молодь не губиться в структурі, а відчуває, що її енергія, ідеї та участь справді мають значення.</p>
+              </article>
+              <article class="glass-card">
+                <div class="card-icon">✦</div>
+                <h3>Емоційний зв’язок</h3>
+                <p>Через спорт, гумор, культуру і спільні події профспілкове життя стає ближчим, сучаснішим і живішим.</p>
+              </article>
+              <article class="glass-card">
+                <div class="card-icon">∞</div>
+                <h3>Стійкість</h3>
+                <p>Спільнота, де є довіра, комунікація і спільні дії, значно сильніше проходить через виклики й зміни.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="international">
         <div class="center reveal">
           <span class="eyebrow">Міжнародна співпраця</span>
@@ -1485,7 +1848,7 @@
 
             <div class="intl-video-frame">
               <div class="intl-video-badge">Міжнародне відео 4:3</div>
-              <video autoplay muted loop playsinline controls preload="metadata">
+              <video autoplay muted loop playsinline preload="metadata">
                 <source src="videos/IMG_7735.MP4" type="video/mp4">
               </video>
               <div class="intl-video-overlay"></div>
@@ -1625,6 +1988,7 @@
           </div>
         </footer>
       </section>
+
     </main>
   </div>
 
@@ -1639,6 +2003,25 @@
       });
     }, { threshold: 0.14 });
     reveals.forEach(el => revealObserver.observe(el));
+
+    document.querySelectorAll('.acc-item').forEach(item => {
+      const btn = item.querySelector('.acc-btn');
+      const body = item.querySelector('.acc-body');
+
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+
+        document.querySelectorAll('.acc-item').forEach(other => {
+          other.classList.remove('open');
+          other.querySelector('.acc-body').style.maxHeight = null;
+        });
+
+        if(!isOpen){
+          item.classList.add('open');
+          body.style.maxHeight = body.scrollHeight + 'px';
+        }
+      });
+    });
 
     const counters = document.querySelectorAll('.count');
     const counterObserver = new IntersectionObserver((entries) => {
@@ -1670,6 +2053,10 @@
       document.getElementById('hero'),
       document.getElementById('about'),
       document.getElementById('directions'),
+      document.getElementById('sailsmart'),
+      document.getElementById('lawhub'),
+      document.getElementById('leadership'),
+      document.getElementById('community'),
       document.getElementById('international'),
       document.getElementById('impact'),
       document.getElementById('contact')
