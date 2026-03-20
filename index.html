@@ -146,29 +146,19 @@
     .brand-mark{
       width:44px;
       height:44px;
-      border-radius:16px;
-      position:relative;
+      border-radius:14px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.15);
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255,255,255,.22), transparent 0 28%),
-        linear-gradient(135deg, rgba(84,214,210,.35), rgba(84,214,210,.04)),
-        linear-gradient(135deg, rgba(240,200,110,.28), rgba(240,200,110,.04));
-      box-shadow: inset 0 0 20px rgba(255,255,255,.08), 0 10px 28px rgba(0,0,0,.25);
+      box-shadow:0 10px 28px rgba(0,0,0,.25);
+      background:rgba(255,255,255,.06);
+      flex:0 0 auto;
     }
 
-    .brand-mark::before,
-    .brand-mark::after{
-      content:"";
-      position:absolute;
-      inset:9px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.24);
-    }
-
-    .brand-mark::after{
-      inset:16px;
-      border-color:rgba(255,255,255,.36);
+    .brand-mark img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
 
     .brand-text{
@@ -379,18 +369,17 @@
       overflow:hidden;
       border:1px solid rgba(255,255,255,.08);
       background:
-        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px),
-        radial-gradient(circle at 20% 24%, rgba(84,214,210,.18), transparent 0 26%),
-        radial-gradient(circle at 80% 18%, rgba(240,200,110,.12), transparent 0 18%),
-        linear-gradient(135deg, #10314e 0%, #0d2740 45%, #0a1d30 100%);
-      background-size:54px 54px, 54px 54px, auto, auto, auto;
+        linear-gradient(180deg, rgba(4,16,27,.08), rgba(4,16,27,.08)),
+        url("images/sea.jpg");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
     }
 
     .cover-overlay{
       position:absolute;
       inset:0;
-      background:linear-gradient(180deg, rgba(4,16,27,.08), rgba(4,16,27,.24) 40%, rgba(4,16,27,.74) 100%);
+      background:linear-gradient(180deg, rgba(4,16,27,.05), rgba(4,16,27,.18) 40%, rgba(4,16,27,.74) 100%);
       z-index:1;
       pointer-events:none;
     }
@@ -485,31 +474,6 @@
       color:var(--muted);
       font-size:.86rem;
       line-height:1.42;
-    }
-
-    .hero-photos{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0,1fr));
-      gap:14px;
-      margin-top:22px;
-      max-width:760px;
-    }
-
-    .photo-slot{
-      min-height:220px;
-      border-radius:24px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.11);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),
-        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px),
-        radial-gradient(circle at 20% 18%, rgba(84,214,210,.14), transparent 0 26%),
-        radial-gradient(circle at 82% 14%, rgba(240,200,110,.12), transparent 0 18%),
-        linear-gradient(135deg, #10314e 0%, #0d2740 48%, #0a1d30 100%);
-      background-size:auto, 42px 42px, 42px 42px, auto, auto, auto;
-      box-shadow:var(--shadow);
-      position:relative;
     }
 
     .hero-visual{
@@ -1132,13 +1096,11 @@
       overflow:hidden;
       border:1px solid rgba(255,255,255,.11);
       background:
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),
-        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px),
-        radial-gradient(circle at 18% 16%, rgba(84,214,210,.14), transparent 0 26%),
-        radial-gradient(circle at 82% 14%, rgba(240,200,110,.12), transparent 0 18%),
-        linear-gradient(135deg, #10314e 0%, #0d2740 48%, #0a1d30 100%);
-      background-size:auto, 46px 46px, 46px 46px, auto, auto, auto;
+        linear-gradient(180deg, rgba(4,16,27,.10), rgba(4,16,27,.10)),
+        url("images/FIL_1376b.jpg");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
       box-shadow:var(--shadow);
       position:relative;
     }
@@ -1299,8 +1261,7 @@
         max-width:420px;
       }
 
-      .hero-stats,
-      .hero-photos{
+      .hero-stats{
         grid-template-columns:1fr;
       }
 
@@ -1411,7 +1372,9 @@
   <header class="site-header" id="header">
     <div class="container nav">
       <a href="#cover" class="brand" aria-label="MTWTUYouth">
-        <div class="brand-mark"></div>
+        <div class="brand-mark">
+          <img src="images/logo%201.png" alt="MTWTUYouth logo">
+        </div>
         <div class="brand-text">
           <strong>MTWTUYouth</strong>
           <span>Молодіжна рада ПРМТУ</span>
@@ -1477,7 +1440,7 @@
             <span class="eyebrow">Сила молоді — сила майбутнього</span>
 
             <div class="hero-main-text">
-              Тут поєднуються професійне становлення, правозахист, партнерство, міжнародні можливості, культурні, спортивні та інтелектуальні ініціативи. Це не просто молодіжний напрям — це жива екосистема, де молодь навчається, впливає, об’єднується і формує майбутнє галузі.
+              Тут поєднуються професійне становлення, правозахист, партнерство, міжнародні можливості, культурні, спортивні та інтелектуальні ініціативи.
             </div>
 
             <div class="hero-stats">
@@ -1493,11 +1456,6 @@
                 <strong>Career + Rights</strong>
                 <span>поєднання розвитку, захисту прав і реальної участі молоді</span>
               </div>
-            </div>
-
-            <div class="hero-photos">
-              <div class="photo-slot"></div>
-              <div class="photo-slot"></div>
             </div>
           </div>
 
@@ -1980,7 +1938,7 @@
       <section class="section" id="impact">
         <div class="reveal">
           <span class="eyebrow">Досягнення та вплив</span>
-          <h2 class="title">Масштаб, який відчувається не цифрами заради цифр, а змістом</h2>
+          <h2 class="title">Це не просто молодіжний напрям — це жива екосистема, де молодь навчається, впливає, об’єднується і формує майбутнє галузі.</h2>
           <p class="lead">
             Освітні проєкти, форуми, правозахисні формати, партнерства, міжнародні програми, спортивні та культурні ініціативи разом створюють цілісне молодіжне середовище ПРМТУ.
           </p>
@@ -2047,10 +2005,10 @@
             <div class="panel" style="padding:24px;">
               <h3 style="margin-top:0;">Що можна додати далі</h3>
               <ul class="list">
-                <li><span class="bullet">1</span><span>Поставити реальну велику обкладинку в cover-блок.</span></li>
-                <li><span class="bullet">2</span><span>Вставити 2 групові фото в блок 1.</span></li>
-                <li><span class="bullet">3</span><span>Замінити велику фотографію у блоці “Досягнення та вплив”.</span></li>
-                <li><span class="bullet">4</span><span>За потреби додати окремий блок “Команда” або “Партнери”.</span></li>
+                <li><span class="bullet">1</span><span>За потреби додати окремий блок “Команда”.</span></li>
+                <li><span class="bullet">2</span><span>За потреби додати блок “Партнери”.</span></li>
+                <li><span class="bullet">3</span><span>Можна посилити секцію з міжнародними активностями окремими кейсами.</span></li>
+                <li><span class="bullet">4</span><span>Можна додати галерею фото або блок з reels.</span></li>
               </ul>
             </div>
           </div>
@@ -2074,7 +2032,6 @@
   </div>
 
   <script>
-    // reveal
     const reveals = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -2086,7 +2043,6 @@
     }, { threshold: 0.14 });
     reveals.forEach(el => revealObserver.observe(el));
 
-    // accordion
     document.querySelectorAll('.acc-item').forEach(item => {
       const btn = item.querySelector('.acc-btn');
       const body = item.querySelector('.acc-body');
@@ -2106,7 +2062,6 @@
       });
     });
 
-    // count-up
     const counters = document.querySelectorAll('.count');
     const counterObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -2133,7 +2088,6 @@
 
     counters.forEach(counter => counterObserver.observe(counter));
 
-    // nav sections
     const sections = [
       document.getElementById('cover'),
       document.getElementById('hero'),
