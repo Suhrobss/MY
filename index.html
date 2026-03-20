@@ -11,11 +11,6 @@
 
   <style>
     :root{
-      --bg:#071a2c;
-      --bg-2:#0b2742;
-      --bg-3:#0f3558;
-      --card:rgba(255,255,255,0.08);
-      --line:rgba(255,255,255,0.11);
       --text:#eef6ff;
       --muted:#b7cadf;
       --accent:#54d6d2;
@@ -23,7 +18,6 @@
       --accent-3:#88e7ff;
       --shadow:0 24px 60px rgba(0,0,0,.28);
       --radius:24px;
-      --radius-sm:18px;
       --max:1500px;
       --nav-h:78px;
       --video-w:clamp(240px, 22vw, 350px);
@@ -62,7 +56,7 @@
     }
 
     a{color:inherit;text-decoration:none}
-    img{display:block;max-width:100%}
+    img, video{display:block;max-width:100%}
 
     .container{
       width:min(var(--max), calc(100% - 30px));
@@ -157,7 +151,6 @@
       width:100%;
       height:100%;
       object-fit:cover;
-      display:block;
     }
 
     .brand-text{
@@ -337,7 +330,7 @@
       min-width:0;
     }
 
-    /* COVER */
+    /* FIRST SLIDE */
     .cover{
       min-height:calc(100svh - var(--nav-h) - 24px);
       display:flex;
@@ -347,6 +340,7 @@
 
     .cover-card{
       position:relative;
+      width:100%;
       min-height:76svh;
       border-radius:34px;
       overflow:hidden;
@@ -357,10 +351,7 @@
         radial-gradient(circle at 84% 18%, rgba(240,200,110,.12), transparent 0 22%),
         linear-gradient(135deg, rgba(10,33,56,.95), rgba(7,24,38,.88));
       box-shadow:var(--shadow);
-      isolation:isolate;
       padding:18px;
-      display:flex;
-      align-items:stretch;
     }
 
     .cover-photo-frame{
@@ -417,7 +408,6 @@
       text-shadow:0 4px 18px rgba(0,0,0,.34);
     }
 
-    /* HERO */
     .hero{
       min-height:calc(100svh - var(--nav-h) - 24px);
       display:flex;
@@ -778,85 +768,6 @@
       font-size:.92rem;
     }
 
-    .split{
-      display:grid;
-      grid-template-columns:.95fr 1.05fr;
-      gap:22px;
-      align-items:stretch;
-      margin-top:32px;
-    }
-
-    .split.reverse{
-      grid-template-columns:1.05fr .95fr;
-    }
-
-    .panel{
-      padding:26px;
-      border-radius:30px;
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      border:1px solid rgba(255,255,255,.1);
-      backdrop-filter:blur(14px);
-      box-shadow:var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .panel strong.big{
-      display:block;
-      font-size:clamp(1.95rem, 4.8vw, 4.4rem);
-      line-height:1;
-      letter-spacing:-.05em;
-      margin-bottom:14px;
-      background:linear-gradient(135deg, #ffffff, #9feeed 44%, #ffe0a4);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .panel h3{
-      margin:0 0 10px;
-      font-size:1.34rem;
-    }
-
-    .panel p,.panel li{
-      color:var(--muted);
-      line-height:1.72;
-      font-size:.95rem;
-    }
-
-    .list{
-      list-style:none;
-      margin:16px 0 0;
-      padding:0;
-      display:grid;
-      gap:12px;
-    }
-
-    .list li{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding:12px 0;
-      border-top:1px solid rgba(255,255,255,.08);
-    }
-
-    .list li:first-child{border-top:none;padding-top:0}
-
-    .bullet{
-      flex:0 0 auto;
-      width:26px;
-      height:26px;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      background:rgba(84,214,210,.14);
-      border:1px solid rgba(84,214,210,.35);
-      color:var(--accent-3);
-      font-size:.8rem;
-      font-weight:700;
-      margin-top:2px;
-    }
-
     .timeline{
       position:relative;
       display:grid;
@@ -918,71 +829,10 @@
       font-size:.92rem;
     }
 
-    .accordion{
-      display:grid;
-      gap:12px;
-      margin-top:24px;
-    }
-
-    .acc-item{
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.1);
-      border-radius:20px;
-      overflow:hidden;
-      box-shadow:var(--shadow);
-    }
-
-    .acc-btn{
-      width:100%;
-      border:none;
-      background:transparent;
-      color:var(--text);
-      padding:18px 20px;
-      text-align:left;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:14px;
-      font:inherit;
-      cursor:pointer;
-    }
-
-    .acc-btn strong{
-      font-size:.96rem;
-      line-height:1.35;
-    }
-
-    .acc-btn span{
-      flex:0 0 auto;
-      width:32px;
-      height:32px;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.1);
-      transition:transform .24s ease;
-    }
-
-    .acc-item.open .acc-btn span{transform:rotate(45deg)}
-
-    .acc-body{
-      max-height:0;
-      overflow:hidden;
-      transition:max-height .35s ease;
-    }
-
-    .acc-content{
-      padding:0 20px 20px;
-      color:var(--muted);
-      line-height:1.7;
-      font-size:.92rem;
-    }
-
-    /* INTERNATIONAL VIDEO LAYOUT */
+    /* INTERNATIONAL */
     .intl-wrap{
       margin-top:34px;
-      padding:22px;
+      padding:18px;
       border-radius:30px;
       background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
       border:1px solid rgba(255,255,255,.1);
@@ -993,19 +843,19 @@
 
     .intl-grid{
       display:grid;
-      grid-template-columns:minmax(240px, 1fr) minmax(420px, 1.2fr) minmax(240px, 1fr);
-      gap:18px;
+      grid-template-columns:minmax(200px, .8fr) minmax(620px, 1.7fr) minmax(200px, .8fr);
+      gap:14px;
       align-items:center;
     }
 
     .intl-column{
       display:grid;
-      gap:14px;
+      gap:10px;
     }
 
     .intl-card{
-      padding:14px 16px 16px;
-      border-radius:20px;
+      padding:11px 12px 12px;
+      border-radius:18px;
       background:rgba(8,22,38,.74);
       border:1px solid rgba(255,255,255,.11);
       backdrop-filter:blur(14px);
@@ -1017,107 +867,70 @@
     .intl-card::after{
       content:"";
       position:absolute;
-      width:90px;
-      height:90px;
-      right:-20px;
-      top:-20px;
+      width:74px;
+      height:74px;
+      right:-18px;
+      top:-18px;
       border-radius:50%;
-      background:radial-gradient(circle, rgba(84,214,210,.12), transparent 72%);
+      background:radial-gradient(circle, rgba(84,214,210,.10), transparent 72%);
       pointer-events:none;
     }
 
     .intl-card strong{
       display:block;
-      margin-bottom:6px;
-      font-size:.95rem;
+      margin-bottom:5px;
+      font-size:.88rem;
       color:var(--text);
     }
 
     .intl-card span{
       color:var(--muted);
-      font-size:.84rem;
-      line-height:1.48;
+      font-size:.78rem;
+      line-height:1.42;
       display:block;
     }
 
-    .intl-video{
+    .intl-video-frame{
       position:relative;
       aspect-ratio:4 / 3;
       border-radius:28px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.12);
       box-shadow:var(--shadow);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02)),
-        radial-gradient(circle at 20% 18%, rgba(84,214,210,.14), transparent 0 26%),
-        radial-gradient(circle at 82% 14%, rgba(240,200,110,.12), transparent 0 18%),
-        linear-gradient(135deg, #10314e 0%, #0d2740 48%, #0a1d30 100%);
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      background:#081a2c;
     }
 
-    .intl-video::before{
-      content:"";
+    .intl-video-frame video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      background:#081a2c;
+    }
+
+    .intl-video-overlay{
       position:absolute;
       inset:0;
       background:
-        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-      background-size:40px 40px;
-      opacity:.35;
+        linear-gradient(180deg, rgba(4,16,27,.08), rgba(4,16,27,.28) 60%, rgba(4,16,27,.46) 100%);
       pointer-events:none;
     }
 
     .intl-video-badge{
       position:absolute;
-      left:18px;
-      top:18px;
+      left:16px;
+      top:16px;
       z-index:2;
-      padding:8px 12px;
+      padding:7px 11px;
       border-radius:999px;
-      background:rgba(7,24,38,.72);
+      background:rgba(7,24,38,.74);
       border:1px solid rgba(255,255,255,.11);
       color:var(--accent-3);
-      font-size:.75rem;
+      font-size:.73rem;
       font-weight:700;
       letter-spacing:.04em;
       backdrop-filter:blur(10px);
-    }
-
-    .intl-video-inner{
-      position:relative;
-      z-index:2;
-      text-align:center;
-      padding:24px;
-      max-width:72%;
-    }
-
-    .intl-play{
-      width:88px;
-      height:88px;
-      margin:0 auto 18px;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(135deg, rgba(84,214,210,.22), rgba(240,200,110,.18));
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow:0 16px 36px rgba(0,0,0,.24);
-      font-size:2rem;
-      color:#fff;
-    }
-
-    .intl-video-inner strong{
-      display:block;
-      font-size:1.1rem;
-      margin-bottom:8px;
-    }
-
-    .intl-video-inner span{
-      color:var(--muted);
-      line-height:1.55;
-      font-size:.92rem;
-      display:block;
     }
 
     .impact-wrap{
@@ -1131,14 +944,26 @@
       border-radius:30px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.11);
-      background:
-        linear-gradient(180deg, rgba(4,16,27,.10), rgba(4,16,27,.10)),
-        url("images/FIL_1376b.jpg");
-      background-size:cover;
-      background-position:center;
-      background-repeat:no-repeat;
       box-shadow:var(--shadow);
       position:relative;
+      background:#0c2237;
+    }
+
+    .impact-photo img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+    }
+
+    .impact-photo::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(4,16,27,.08), rgba(4,16,27,.18));
+      pointer-events:none;
     }
 
     .impact-grid{
@@ -1253,10 +1078,8 @@
       100%{transform:translate(-50%,-50%) rotate(18deg)}
     }
 
-    @media (max-width: 1280px){
+    @media (max-width: 1360px){
       .hero-grid,
-      .split,
-      .split.reverse,
       .cta-grid{
         grid-template-columns:1fr;
       }
@@ -1280,10 +1103,6 @@
     @media (max-width: 980px){
       .nav{
         grid-template-columns:auto 1fr auto;
-      }
-
-      .nav-actions{
-        grid-column:auto;
       }
 
       .app-shell{
@@ -1353,17 +1172,13 @@
         bottom:20px;
       }
 
-      .hero-visual,
-      .hero-stage{
-        min-height:auto;
-      }
-
       .hero-stage{
         padding:18px;
         display:flex;
         flex-direction:column;
         gap:14px;
         align-items:center;
+        min-height:auto;
       }
 
       .compass{
@@ -1403,7 +1218,6 @@
 
       .impact-photo{min-height:280px}
       .video-card{max-width:none}
-      .intl-video-inner{max-width:88%}
     }
   </style>
 </head>
@@ -1413,7 +1227,7 @@
     <div class="container nav">
       <a href="#cover" class="brand" aria-label="MTWTUYouth">
         <div class="brand-mark">
-          <img src="images/logo 1.png" alt="MTWTUYouth logo">
+          <img src="images/logo%201.png" alt="MTWTUYouth logo">
         </div>
         <div class="brand-text">
           <strong>MTWTUYouth</strong>
@@ -1426,8 +1240,6 @@
         <a href="#hero" class="dot-link" data-label="Блок 1"></a>
         <a href="#about" class="dot-link" data-label="Про нас"></a>
         <a href="#directions" class="dot-link" data-label="Напрями"></a>
-        <a href="#sailsmart" class="dot-link" data-label="Sail Smart"></a>
-        <a href="#leadership" class="dot-link" data-label="Лідерство"></a>
         <a href="#international" class="dot-link" data-label="Міжнародно"></a>
         <a href="#impact" class="dot-link" data-label="Вплив"></a>
         <a href="#contact" class="dot-link" data-label="Контакти"></a>
@@ -1671,13 +1483,12 @@
               </div>
             </div>
 
-            <div class="intl-video">
-              <div class="intl-video-badge">4:3 відео</div>
-              <div class="intl-video-inner">
-                <div class="intl-play">▶</div>
-                <strong>Місце для міжнародного відео</strong>
-                <span>Тут можна вставити відео формату 4:3 про міжнародні поїздки, конференції, виступи, форуми та участь молоді ПРМТУ у світовому профспілковому середовищі.</span>
-              </div>
+            <div class="intl-video-frame">
+              <div class="intl-video-badge">Міжнародне відео 4:3</div>
+              <video autoplay muted loop playsinline controls preload="metadata">
+                <source src="videos/IMG_7735.MP4" type="video/mp4">
+              </video>
+              <div class="intl-video-overlay"></div>
             </div>
 
             <div class="intl-column">
@@ -1732,7 +1543,9 @@
         </div>
 
         <div class="impact-wrap">
-          <div class="impact-photo reveal"></div>
+          <div class="impact-photo reveal">
+            <img src="images/FIL_1376b.jpg" alt="Досягнення та вплив">
+          </div>
 
           <div class="impact-grid">
             <article class="glass-card impact-card reveal">
@@ -1789,14 +1602,11 @@
               </div>
             </div>
 
-            <div class="panel" style="padding:24px;">
+            <div class="glass-card">
               <h3 style="margin-top:0;">Що можна додати далі</h3>
-              <ul class="list">
-                <li><span class="bullet">1</span><span>Вставити реальне міжнародне відео 4:3 у центральний блок.</span></li>
-                <li><span class="bullet">2</span><span>За потреби додати окремий блок “Команда”.</span></li>
-                <li><span class="bullet">3</span><span>За потреби додати блок “Партнери”.</span></li>
-                <li><span class="bullet">4</span><span>Можна додати галерею фото або блок з reels.</span></li>
-              </ul>
+              <p style="margin:0;color:var(--muted);line-height:1.7;">
+                За потреби можна окремо додати блоки з командою, партнерами, фотогалереєю або міжнародними reels.
+              </p>
             </div>
           </div>
         </div>
@@ -1830,30 +1640,10 @@
     }, { threshold: 0.14 });
     reveals.forEach(el => revealObserver.observe(el));
 
-    document.querySelectorAll('.acc-item').forEach(item => {
-      const btn = item.querySelector('.acc-btn');
-      const body = item.querySelector('.acc-body');
-
-      btn.addEventListener('click', () => {
-        const isOpen = item.classList.contains('open');
-
-        document.querySelectorAll('.acc-item').forEach(other => {
-          other.classList.remove('open');
-          other.querySelector('.acc-body').style.maxHeight = null;
-        });
-
-        if(!isOpen){
-          item.classList.add('open');
-          body.style.maxHeight = body.scrollHeight + 'px';
-        }
-      });
-    });
-
     const counters = document.querySelectorAll('.count');
     const counterObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if(!entry.isIntersecting) return;
-
         const el = entry.target;
         const target = +el.dataset.target;
         let current = 0;
@@ -1880,8 +1670,6 @@
       document.getElementById('hero'),
       document.getElementById('about'),
       document.getElementById('directions'),
-      document.getElementById('sailsmart'),
-      document.getElementById('leadership'),
       document.getElementById('international'),
       document.getElementById('impact'),
       document.getElementById('contact')
@@ -1900,13 +1688,11 @@
     function getCurrentSectionIndex(){
       const scrollPosition = window.scrollY + window.innerHeight * 0.38;
       let currentIndex = 0;
-
       sections.forEach((section, index) => {
         if(scrollPosition >= section.offsetTop){
           currentIndex = index;
         }
       });
-
       return currentIndex;
     }
 
