@@ -1157,6 +1157,223 @@
       color:transparent;
     }
 
+    /* VOICES */
+    .voices-stage{
+      margin-top:34px;
+      padding:18px;
+      border-radius:34px;
+      background:
+        radial-gradient(circle at 14% 16%, rgba(84,214,210,.12), transparent 0 22%),
+        radial-gradient(circle at 86% 12%, rgba(240,200,110,.08), transparent 0 18%),
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .voices-stage::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+      background-size:58px 58px;
+      mask-image:radial-gradient(circle at center, rgba(0,0,0,.85), transparent 88%);
+      pointer-events:none;
+    }
+
+    .voices-stage::after{
+      content:"";
+      position:absolute;
+      inset:auto -10% -18% auto;
+      width:380px;
+      height:380px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(84,214,210,.12), transparent 68%);
+      pointer-events:none;
+    }
+
+    .voices-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .voices-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 13px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.05);
+      color:var(--muted);
+      font-size:.8rem;
+      font-weight:700;
+      backdrop-filter:blur(10px);
+    }
+
+    .voices-chip::before{
+      content:"";
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow:0 0 12px rgba(84,214,210,.45);
+    }
+
+    .voices-grid{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:repeat(7, minmax(0,1fr));
+      gap:14px;
+    }
+
+    .speaker-card{
+      position:relative;
+      aspect-ratio:4 / 3;
+      perspective:1400px;
+    }
+
+    .speaker-card-inner{
+      position:relative;
+      width:100%;
+      height:100%;
+      transform-style:preserve-3d;
+      transition:transform 1s cubic-bezier(.22,.8,.2,1);
+    }
+
+    .speaker-card.is-flipped .speaker-card-inner{
+      transform:rotateY(180deg);
+    }
+
+    .speaker-face{
+      position:absolute;
+      inset:0;
+      border-radius:24px;
+      overflow:hidden;
+      backface-visibility:hidden;
+      -webkit-backface-visibility:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:
+        0 18px 34px rgba(0,0,0,.22),
+        inset 0 1px 0 rgba(255,255,255,.08);
+    }
+
+    .speaker-back{
+      background:
+        radial-gradient(circle at 82% 20%, rgba(84,214,210,.14), transparent 0 24%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)),
+        linear-gradient(135deg, rgba(19,46,73,.98), rgba(10,31,52,.96));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .speaker-back::before{
+      content:"";
+      position:absolute;
+      inset:8px;
+      border-radius:18px;
+      border:1px solid rgba(84,214,210,.16);
+      pointer-events:none;
+    }
+
+    .speaker-back::after{
+      content:"";
+      position:absolute;
+      width:54px;
+      height:54px;
+      right:-10px;
+      top:-10px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,.24), transparent 72%);
+      pointer-events:none;
+    }
+
+    .speaker-back-logo{
+      width:min(72%, 120px);
+      aspect-ratio:1 / 1;
+      object-fit:contain;
+      opacity:.92;
+      filter:drop-shadow(0 12px 20px rgba(0,0,0,.18));
+    }
+
+    .speaker-front{
+      transform:rotateY(180deg);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)),
+        linear-gradient(180deg, #0b2238 0%, #0a1d31 100%);
+      display:grid;
+      grid-template-rows:1fr auto;
+    }
+
+    .speaker-photo-wrap{
+      position:relative;
+      min-height:0;
+      overflow:hidden;
+    }
+
+    .speaker-photo-wrap img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center top;
+      transition:transform .45s ease;
+    }
+
+    .speaker-card:hover .speaker-photo-wrap img{
+      transform:scale(1.04);
+    }
+
+    .speaker-photo-wrap::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(4,16,27,.04), rgba(4,16,27,.28) 100%);
+      pointer-events:none;
+    }
+
+    .speaker-info{
+      position:relative;
+      padding:12px 12px 13px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),
+        linear-gradient(180deg, rgba(7,24,38,.94), rgba(7,24,38,.98));
+      border-top:1px solid rgba(255,255,255,.08);
+      min-height:88px;
+    }
+
+    .speaker-name{
+      display:block;
+      margin-bottom:6px;
+      font-size:.83rem;
+      line-height:1.2;
+      font-weight:800;
+      letter-spacing:.01em;
+      color:var(--text);
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+
+    .speaker-role{
+      display:block;
+      color:var(--muted);
+      font-size:.73rem;
+      line-height:1.34;
+      display:-webkit-box;
+      -webkit-line-clamp:3;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+      min-height:2.95em;
+    }
+
     .cta{
       padding:30px;
       border-radius:32px;
@@ -1381,6 +1598,10 @@
       100%{transform:translate(-50%,-50%) rotate(18deg)}
     }
 
+    @media (max-width: 1460px){
+      .voices-grid{grid-template-columns:repeat(6, minmax(0,1fr));}
+    }
+
     @media (max-width: 1360px){
       .hero-grid,
       .split,
@@ -1402,6 +1623,14 @@
       }
 
       .dot-nav{display:none}
+    }
+
+    @media (max-width: 1280px){
+      .voices-grid{grid-template-columns:repeat(5, minmax(0,1fr));}
+    }
+
+    @media (max-width: 1080px){
+      .voices-grid{grid-template-columns:repeat(4, minmax(0,1fr));}
     }
 
     @media (max-width: 980px){
@@ -1434,6 +1663,10 @@
       .qr-grid{
         grid-template-columns:1fr;
       }
+    }
+
+    @media (max-width: 860px){
+      .voices-grid{grid-template-columns:repeat(3, minmax(0,1fr));}
     }
 
     @media (max-width: 760px){
@@ -1551,6 +1784,15 @@
         align-self:flex-end;
       }
     }
+
+    @media (max-width: 620px){
+      .voices-grid{grid-template-columns:repeat(2, minmax(0,1fr));}
+      .speaker-card{aspect-ratio:4 / 5;}
+    }
+
+    @media (max-width: 460px){
+      .voices-grid{grid-template-columns:1fr;}
+    }
   </style>
 </head>
 <body>
@@ -1578,6 +1820,7 @@
         <a href="#community" class="dot-link" data-label="Молодь у дії"></a>
         <a href="#international" class="dot-link" data-label="Міжнародно"></a>
         <a href="#impact" class="dot-link" data-label="Вплив"></a>
+        <a href="#voices" class="dot-link" data-label="Люди"></a>
         <a href="#contact" class="dot-link" data-label="Контакти"></a>
       </nav>
 
@@ -2138,6 +2381,68 @@
         </div>
       </section>
 
+      <section class="section" id="voices">
+        <div class="reveal">
+          <span class="eyebrow">Екосистема досвіду</span>
+          <h2 class="title">Люди, які надихають і навчають</h2>
+          <p class="lead">
+            Молодь ПРМТУ зростає через прямий діалог із капітанами, юристами, HR-фахівцями, профспілковими лідерами, міжнародними партнерами та практиками галузі.
+          </p>
+
+          <div class="voices-meta">
+            <div class="voices-chip">20+ сильних голосів</div>
+            <div class="voices-chip">Maritime / Law / Leadership / International</div>
+            <div class="voices-chip">Живий досвід для молоді</div>
+          </div>
+        </div>
+
+        <div class="voices-stage reveal">
+          <div class="voices-grid">
+
+            <article class="speaker-card">
+              <div class="speaker-card-inner">
+                <div class="speaker-face speaker-back">
+                  <img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth">
+                </div>
+                <div class="speaker-face speaker-front">
+                  <div class="speaker-photo-wrap">
+                    <img src="images/OI.jpeg" alt="Олег ГРИГОРЮК">
+                  </div>
+                  <div class="speaker-info">
+                    <strong class="speaker-name">Олег ГРИГОРЮК</strong>
+                    <span class="speaker-role">Голова ПРМТУ</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+            <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="contact">
         <div class="cta reveal">
           <div class="cta-grid">
@@ -2237,12 +2542,17 @@
         document.getElementById('community'),
         document.getElementById('international'),
         document.getElementById('impact'),
+        document.getElementById('voices'),
         document.getElementById('contact')
       ].filter(Boolean);
 
       const qrModal = document.getElementById('qrModal');
       const openQrModal = document.getElementById('openQrModal');
       const closeQrModal = document.getElementById('closeQrModal');
+
+      const voicesSection = document.getElementById('voices');
+      const speakerCards = Array.from(document.querySelectorAll('.speaker-card'));
+      let speakerFlipTimers = [];
 
       function getHeaderOffset() {
         return (header ? header.offsetHeight : 0) + 8;
@@ -2295,6 +2605,31 @@
         });
       }
 
+      function resetSpeakerCards() {
+        speakerFlipTimers.forEach(function (timer) {
+          clearTimeout(timer);
+        });
+        speakerFlipTimers = [];
+
+        speakerCards.forEach(function (card) {
+          card.classList.remove('is-flipped');
+        });
+      }
+
+      function playSpeakerCards() {
+        if (!voicesSection || !speakerCards.length) return;
+
+        resetSpeakerCards();
+
+        speakerCards.forEach(function (card, index) {
+          const timer = setTimeout(function () {
+            card.classList.add('is-flipped');
+          }, 180 * index + 260);
+
+          speakerFlipTimers.push(timer);
+        });
+      }
+
       function scrollToSection(index) {
         if (!sections.length) return;
 
@@ -2314,7 +2649,11 @@
         setTimeout(function () {
           triggerRevealForSection(target);
           updateDots(safeIndex);
-        }, 450);
+
+          if (target.id === 'voices') {
+            playSpeakerCards();
+          }
+        }, 520);
       }
 
       dotLinks.forEach(function (link, index) {
@@ -2354,6 +2693,20 @@
           el.style.setProperty('--reveal-delay', ((index % 6) * 60) + 'ms');
           revealObserver.observe(el);
         });
+
+        if (voicesSection) {
+          const voicesObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                playSpeakerCards();
+              }
+            });
+          }, {
+            threshold: 0.35
+          });
+
+          voicesObserver.observe(voicesSection);
+        }
       } else {
         revealElements.forEach(function (el) {
           el.classList.add('visible');
