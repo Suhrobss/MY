@@ -431,11 +431,11 @@
 
     .hero-main-text{
       margin-top:16px;
-      font-size:clamp(1.5rem, 2.18vw, 2.34rem);
+      font-size:clamp(1.48rem, 2.16vw, 2.32rem);
       font-weight:800;
       line-height:1.24;
       letter-spacing:-.02em;
-      max-width:820px;
+      max-width:780px;
     }
 
     .hero-stats{
@@ -874,6 +874,67 @@
       margin-top:2px;
     }
 
+    .timeline{
+      position:relative;
+      display:grid;
+      gap:16px;
+      margin-top:20px;
+    }
+
+    .timeline::before{
+      content:"";
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:20px;
+      width:2px;
+      background:linear-gradient(180deg, rgba(84,214,210,.75), rgba(240,200,110,.28), transparent);
+    }
+
+    .timeline-item{
+      position:relative;
+      margin-left:56px;
+      padding:20px 20px 20px 22px;
+      border-radius:22px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.1);
+      box-shadow:var(--shadow);
+    }
+
+    .timeline-item::before{
+      content:"";
+      position:absolute;
+      left:-46px;
+      top:22px;
+      width:20px;
+      height:20px;
+      border-radius:50%;
+      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow:0 0 0 6px rgba(84,214,210,.1);
+    }
+
+    .timeline-item small{
+      display:block;
+      margin-bottom:8px;
+      font-weight:700;
+      color:var(--accent-3);
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      font-size:.74rem;
+    }
+
+    .timeline-item h4{
+      margin:0 0 8px;
+      font-size:1.02rem;
+    }
+
+    .timeline-item p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.66;
+      font-size:.92rem;
+    }
+
     .accordion{
       display:grid;
       gap:12px;
@@ -935,10 +996,10 @@
       font-size:.92rem;
     }
 
-    /* tighter section positions */
+    /* section lift */
     #about{
-      padding-top:50px;
-      padding-bottom:58px;
+      padding-top:52px;
+      padding-bottom:60px;
     }
 
     #directions,
@@ -955,20 +1016,17 @@
     #about .grid-4{margin-top:22px !important;}
     #about .split{margin-top:22px !important;}
     #directions .grid-4{margin-top:22px !important;}
-    #lawhub .grid-3{margin-top:22px !important;}
-    #leadership .leadership-wrap{margin-top:18px;}
-    #international .intl-wrap{margin-top:18px;}
+    #lawhub .grid-3{margin-top:24px !important;}
+    #international .intl-wrap{margin-top:18px !important;}
     #international .grid-3{margin-top:18px !important;}
-    #impact .impact-wrap{margin-top:18px;}
-    #voices > .reveal:first-child{margin-bottom:14px;}
+    #impact .impact-wrap{margin-top:18px !important;}
 
-    /* ABOUT adjustments */
     #about .panel{
       padding:22px;
     }
 
     #about .panel strong.big{
-      font-size:clamp(1.7rem, 4.2vw, 3.7rem);
+      font-size:clamp(1.72rem, 4vw, 3.65rem);
       margin-bottom:10px;
     }
 
@@ -983,221 +1041,9 @@
     }
 
     #about .list li{
-      padding:9px 0;
+      padding:10px 0;
     }
 
-    /* LEADERSHIP DRUM */
-    .leadership-wrap{
-      display:grid;
-      grid-template-columns:92px minmax(0,1fr);
-      gap:24px;
-      align-items:center;
-      min-height:540px;
-    }
-
-    .leadership-rail{
-      position:relative;
-      height:100%;
-      min-height:500px;
-      display:flex;
-      align-items:stretch;
-      justify-content:center;
-    }
-
-    .leadership-rail::before{
-      content:"";
-      position:absolute;
-      top:0;
-      bottom:0;
-      left:50%;
-      width:2px;
-      transform:translateX(-50%);
-      background:linear-gradient(180deg, rgba(84,214,210,.12), rgba(84,214,210,.92), rgba(240,200,110,.55), rgba(84,214,210,.12));
-      box-shadow:0 0 22px rgba(84,214,210,.16);
-    }
-
-    .leadership-rail-inner{
-      position:relative;
-      z-index:1;
-      width:100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      align-items:center;
-      padding:18px 0;
-    }
-
-    .leadership-dot{
-      position:relative;
-      width:24px;
-      height:24px;
-      border:none;
-      border-radius:50%;
-      cursor:pointer;
-      background:linear-gradient(135deg, rgba(84,214,210,.95), rgba(240,200,110,.92));
-      box-shadow:
-        0 0 0 10px rgba(84,214,210,.10),
-        0 0 24px rgba(84,214,210,.18);
-      transition:.35s ease;
-      flex:0 0 auto;
-    }
-
-    .leadership-dot::after{
-      content:"";
-      position:absolute;
-      inset:5px;
-      border-radius:50%;
-      background:rgba(255,255,255,.22);
-    }
-
-    .leadership-dot.active{
-      transform:scale(1.14);
-      box-shadow:
-        0 0 0 13px rgba(84,214,210,.16),
-        0 0 28px rgba(84,214,210,.28);
-    }
-
-    .leadership-drum{
-      position:relative;
-      min-height:530px;
-      display:flex;
-      align-items:center;
-      perspective:1800px;
-      overflow:hidden;
-    }
-
-    .leadership-stack{
-      position:relative;
-      width:100%;
-      height:500px;
-    }
-
-    .leadership-card{
-      position:absolute;
-      left:0;
-      right:0;
-      top:50%;
-      width:min(900px, 100%);
-      margin:auto;
-      padding:26px 28px;
-      border-radius:30px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05)),
-        linear-gradient(135deg, rgba(10,33,56,.96), rgba(7,24,38,.96));
-      border:1px solid rgba(255,255,255,.14);
-      box-shadow:0 26px 70px rgba(0,0,0,.30);
-      transform-origin:center center;
-      transition:
-        transform .95s cubic-bezier(.22,.8,.2,1),
-        opacity .95s ease,
-        filter .95s ease,
-        box-shadow .95s ease;
-      will-change:transform, opacity;
-      backface-visibility:hidden;
-      overflow:hidden;
-    }
-
-    .leadership-card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at 82% 18%, rgba(84,214,210,.13), transparent 0 24%),
-        radial-gradient(circle at 14% 84%, rgba(240,200,110,.09), transparent 0 22%);
-      pointer-events:none;
-    }
-
-    .leadership-card.is-hidden{
-      opacity:0;
-      pointer-events:none;
-      transform:translateY(-50%) scale(.56);
-      filter:blur(4px);
-      z-index:1;
-    }
-
-    .leadership-card.is-prev-2{
-      opacity:.14;
-      transform:translateY(calc(-50% - 212px)) scale(.68) rotateX(34deg);
-      filter:blur(1.6px);
-      z-index:2;
-    }
-
-    .leadership-card.is-prev{
-      opacity:.42;
-      transform:translateY(calc(-50% - 116px)) scale(.86) rotateX(18deg);
-      filter:blur(.4px);
-      z-index:3;
-    }
-
-    .leadership-card.is-active{
-      opacity:1;
-      transform:translateY(-50%) scale(1);
-      filter:none;
-      z-index:6;
-      box-shadow:0 30px 84px rgba(0,0,0,.36);
-    }
-
-    .leadership-card.is-next{
-      opacity:.42;
-      transform:translateY(calc(-50% + 116px)) scale(.86) rotateX(-18deg);
-      filter:blur(.4px);
-      z-index:3;
-    }
-
-    .leadership-card.is-next-2{
-      opacity:.14;
-      transform:translateY(calc(-50% + 212px)) scale(.68) rotateX(-34deg);
-      filter:blur(1.6px);
-      z-index:2;
-    }
-
-    .leadership-mini{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:14px;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.06);
-      color:var(--accent-3);
-      font-size:.74rem;
-      font-weight:700;
-      letter-spacing:.05em;
-      text-transform:uppercase;
-      position:relative;
-      z-index:1;
-    }
-
-    .leadership-mini::before{
-      content:"";
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow:0 0 12px rgba(84,214,210,.42);
-    }
-
-    .leadership-card h3{
-      position:relative;
-      z-index:1;
-      margin:0 0 10px;
-      font-size:clamp(1.3rem, 2.2vw, 2rem);
-      line-height:1.08;
-      letter-spacing:-.02em;
-    }
-
-    .leadership-card p{
-      position:relative;
-      z-index:1;
-      margin:0;
-      color:var(--muted);
-      font-size:.96rem;
-      line-height:1.72;
-      max-width:760px;
-    }
-
-    /* INTERNATIONAL */
     .intl-wrap{
       padding:18px;
       border-radius:30px;
@@ -1279,27 +1125,26 @@
     .intl-video-overlay{
       position:absolute;
       inset:0;
-      background:
-        linear-gradient(180deg, rgba(4,16,27,.12), rgba(4,16,27,.20) 46%, rgba(4,16,27,.72) 100%);
+      background:linear-gradient(180deg, rgba(4,16,27,.10), rgba(4,16,27,.18) 50%, rgba(4,16,27,.70) 100%);
       pointer-events:none;
     }
 
     .intl-summary-card{
       position:absolute;
-      left:50%;
       top:16px;
+      left:50%;
       transform:translateX(-50%);
-      z-index:3;
       width:calc(100% - 64px);
       max-width:560px;
+      z-index:3;
       padding:12px 16px;
       border-radius:18px;
-      background:rgba(7,24,38,.72);
+      background:rgba(7,24,38,.78);
       border:1px solid rgba(255,255,255,.12);
       backdrop-filter:blur(12px);
       box-shadow:var(--shadow);
-      color:#e6f1ff;
-      font-size:.86rem;
+      color:#e4f0ff;
+      font-size:.85rem;
       line-height:1.56;
       text-align:center;
     }
@@ -1308,30 +1153,30 @@
       position:absolute;
       left:20px;
       right:20px;
-      bottom:18px;
+      bottom:16px;
       z-index:3;
       text-align:center;
-      font-size:clamp(1.12rem, 2.3vw, 1.9rem);
+      font-size:clamp(1.12rem, 2.4vw, 1.92rem);
       font-weight:800;
       line-height:1.12;
       letter-spacing:-.02em;
-      text-shadow:0 8px 26px rgba(0,0,0,.42);
+      text-shadow:0 8px 26px rgba(0,0,0,.44);
     }
 
-    /* IMPACT */
     #impact .title{
       font-size:clamp(1.72rem, 3vw, 3rem);
+      max-width:1100px;
     }
 
     .impact-wrap{
       display:grid;
-      grid-template-columns:minmax(0, 1.06fr) minmax(0, .94fr);
+      grid-template-columns:minmax(0, 1.03fr) minmax(0, .97fr);
       gap:18px;
       align-items:stretch;
     }
 
     .impact-photo{
-      min-height:320px;
+      min-height:318px;
       border-radius:30px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.11);
@@ -1353,7 +1198,7 @@
       content:"";
       position:absolute;
       inset:0;
-      background:linear-gradient(180deg, rgba(4,16,27,.08), rgba(4,16,27,.16));
+      background:linear-gradient(180deg, rgba(4,16,27,.08), rgba(4,16,27,.18));
       pointer-events:none;
     }
 
@@ -1365,7 +1210,7 @@
     }
 
     .impact-card{
-      min-height:154px;
+      min-height:150px;
       display:flex;
       flex-direction:column;
       justify-content:space-between;
@@ -1373,7 +1218,7 @@
     }
 
     .count{
-      font-size:clamp(1.8rem, 4.2vw, 3.3rem);
+      font-size:clamp(1.85rem, 4.2vw, 3.4rem);
       font-weight:800;
       letter-spacing:-.05em;
       line-height:1;
@@ -1384,15 +1229,15 @@
       color:transparent;
     }
 
-    /* VOICES */
     #voices{
-      min-height:calc(100svh - var(--nav-h) - 10px);
       display:flex;
       flex-direction:column;
       justify-content:center;
+      min-height:calc(100svh - var(--nav-h) - 12px);
     }
 
     .voices-stage{
+      margin-top:14px;
       padding:14px;
       border-radius:34px;
       background:
@@ -1489,14 +1334,14 @@
       right:-10px;
       top:-10px;
       border-radius:50%;
-      background:radial-gradient(circle, rgba(255,255,255,.22), transparent 72%);
+      background:radial-gradient(circle, rgba(255,255,255,.24), transparent 72%);
       pointer-events:none;
       z-index:2;
     }
 
     .speaker-back{
       background:
-        radial-gradient(circle at 82% 18%, rgba(84,214,210,.16), transparent 0 26%),
+        radial-gradient(circle at 82% 20%, rgba(84,214,210,.14), transparent 0 24%),
         linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)),
         linear-gradient(135deg, rgba(19,46,73,.98), rgba(10,31,52,.96));
       display:flex;
@@ -1505,13 +1350,13 @@
     }
 
     .speaker-back-logo{
-      position:relative;
-      z-index:1;
-      width:min(72%, 108px);
+      width:min(72%, 120px);
       aspect-ratio:1 / 1;
       object-fit:contain;
-      opacity:.94;
+      opacity:.92;
       filter:drop-shadow(0 12px 20px rgba(0,0,0,.18));
+      position:relative;
+      z-index:1;
     }
 
     .speaker-front{
@@ -1522,6 +1367,7 @@
     .speaker-photo-wrap{
       position:absolute;
       inset:0;
+      overflow:hidden;
     }
 
     .speaker-photo-wrap img{
@@ -1540,7 +1386,7 @@
       content:"";
       position:absolute;
       inset:0;
-      background:linear-gradient(180deg, rgba(4,16,27,.05), rgba(4,16,27,.12) 42%, rgba(4,16,27,.92) 100%);
+      background:linear-gradient(180deg, rgba(4,16,27,.04), rgba(4,16,27,.12) 42%, rgba(4,16,27,.90) 100%);
       pointer-events:none;
     }
 
@@ -1555,9 +1401,9 @@
 
     .speaker-name{
       display:block;
-      margin-bottom:7px;
-      font-size:.88rem;
-      line-height:1.18;
+      margin-bottom:6px;
+      font-size:.86rem;
+      line-height:1.2;
       font-weight:800;
       letter-spacing:.01em;
       color:var(--text);
@@ -1570,14 +1416,14 @@
 
     .speaker-role{
       display:block;
-      color:#d8e6f7;
+      color:#dbe8f7;
       font-size:.73rem;
       line-height:1.34;
       display:-webkit-box;
       -webkit-line-clamp:4;
       -webkit-box-orient:vertical;
       overflow:hidden;
-      min-height:3.9em;
+      min-height:3.95em;
       text-shadow:0 4px 18px rgba(0,0,0,.34);
     }
 
@@ -1806,9 +1652,7 @@
     }
 
     @media (max-width: 1460px){
-      .voices-grid{
-        grid-template-columns:repeat(6, minmax(0,1fr));
-      }
+      .voices-grid{grid-template-columns:repeat(6, minmax(0,1fr));}
     }
 
     @media (max-width: 1360px){
@@ -1826,7 +1670,8 @@
         grid-template-columns:repeat(2, minmax(0,1fr));
       }
 
-      .grid-4{
+      .grid-4,
+      .impact-grid{
         grid-template-columns:repeat(2, minmax(0,1fr));
       }
 
@@ -1834,23 +1679,11 @@
     }
 
     @media (max-width: 1280px){
-      .voices-grid{
-        grid-template-columns:repeat(5, minmax(0,1fr));
-      }
+      .voices-grid{grid-template-columns:repeat(5, minmax(0,1fr));}
     }
 
     @media (max-width: 1080px){
-      .voices-grid{
-        grid-template-columns:repeat(4, minmax(0,1fr));
-      }
-
-      .leadership-wrap{
-        grid-template-columns:72px minmax(0,1fr);
-      }
-
-      .leadership-card{
-        width:100%;
-      }
+      .voices-grid{grid-template-columns:repeat(4, minmax(0,1fr));}
     }
 
     @media (max-width: 980px){
@@ -1876,8 +1709,7 @@
 
       .hero-stats,
       .intl-column,
-      .grid-3,.grid-2,
-      .impact-grid{
+      .grid-3,.grid-2{
         grid-template-columns:1fr;
       }
 
@@ -1885,31 +1717,30 @@
         grid-template-columns:1fr;
       }
 
+      .impact-grid{
+        grid-template-columns:1fr;
+      }
+
       .qr-grid{
         grid-template-columns:1fr;
       }
 
-      .leadership-wrap{
-        min-height:520px;
+      .intl-summary-card{
+        width:calc(100% - 34px);
+        top:14px;
+        padding:10px 12px;
+        font-size:.8rem;
       }
 
-      .leadership-drum{
-        min-height:520px;
-      }
-
-      .leadership-stack{
-        height:480px;
+      .intl-video-bottom-title{
+        left:14px;
+        right:14px;
+        bottom:14px;
       }
     }
 
     @media (max-width: 860px){
-      .voices-grid{
-        grid-template-columns:repeat(3, minmax(0,1fr));
-      }
-
-      .voices-stage{
-        min-height:auto;
-      }
+      .voices-grid{grid-template-columns:repeat(3, minmax(0,1fr));}
     }
 
     @media (max-width: 760px){
@@ -2001,7 +1832,8 @@
         animation:none;
       }
 
-      .grid-4{
+      .grid-4,
+      .impact-grid{
         grid-template-columns:1fr;
       }
 
@@ -2026,56 +1858,30 @@
         align-self:flex-end;
       }
 
-      .leadership-wrap{
-        grid-template-columns:1fr;
-        gap:16px;
+      #about,
+      #directions,
+      #sailsmart,
+      #leadership,
+      #community,
+      #international,
+      #impact,
+      #voices{
+        padding-top:64px;
+        padding-bottom:64px;
+      }
+
+      .voices-stage{
         min-height:auto;
-      }
-
-      .leadership-rail{
-        display:none;
-      }
-
-      .leadership-drum{
-        min-height:470px;
-      }
-
-      .leadership-stack{
-        height:430px;
-      }
-
-      .leadership-card{
-        padding:22px 20px;
-      }
-
-      .intl-summary-card{
-        width:calc(100% - 34px);
-        top:14px;
-        padding:10px 12px;
-        font-size:.8rem;
-      }
-
-      .intl-video-bottom-title{
-        left:14px;
-        right:14px;
-        bottom:14px;
       }
     }
 
     @media (max-width: 620px){
-      .voices-grid{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-      }
+      .voices-grid{grid-template-columns:repeat(2, minmax(0,1fr));}
+      .speaker-card{aspect-ratio:9 / 13;}
     }
 
     @media (max-width: 460px){
-      .voices-grid{
-        grid-template-columns:1fr;
-      }
-
-      .hero-main-text{
-        font-size:1.42rem;
-      }
+      .voices-grid{grid-template-columns:1fr;}
     }
   </style>
 </head>
@@ -2443,57 +2249,42 @@
           <h2 class="title">Форуми, табори, тренінги і простір, де молодь вчиться впливати</h2>
         </div>
 
-        <div class="leadership-wrap reveal">
-          <div class="leadership-rail" aria-hidden="true">
-            <div class="leadership-rail-inner">
-              <button class="leadership-dot" type="button" data-leadership-go="0" aria-label="Forum"></button>
-              <button class="leadership-dot active" type="button" data-leadership-go="1" aria-label="Forum 2.0"></button>
-              <button class="leadership-dot" type="button" data-leadership-go="2" aria-label="Cadets"></button>
-              <button class="leadership-dot" type="button" data-leadership-go="3" aria-label="Camp"></button>
-              <button class="leadership-dot" type="button" data-leadership-go="4" aria-label="Education"></button>
-              <button class="leadership-dot" type="button" data-leadership-go="5" aria-label="Projects"></button>
-            </div>
-          </div>
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <small>Forum</small>
+            <h4>Молодіжний форум MTWTU</h4>
+            <p>Майданчик міжгалузевого діалогу, обміну досвідом, розвитку публічних виступів і залучення молоді до профспілкового руху.</p>
+          </article>
 
-          <div class="leadership-drum" id="leadershipDrum">
-            <div class="leadership-stack">
-              <article class="leadership-card" data-index="0">
-                <div class="leadership-mini">Forum</div>
-                <h3>Молодіжний форум MTWTU</h3>
-                <p>Майданчик міжгалузевого діалогу, обміну досвідом, розвитку публічних виступів і залучення молоді до профспілкового руху.</p>
-              </article>
+          <article class="timeline-item reveal">
+            <small>Forum 2.0</small>
+            <h4>Молодіжний форум MTWTU 2.0</h4>
+            <p>Розмова про роль молоді, виклики воєнного часу, транспортну та морську галузь, політики зайнятості й майбутнє профспілкової молоді.</p>
+          </article>
 
-              <article class="leadership-card" data-index="1">
-                <div class="leadership-mini">Forum 2.0</div>
-                <h3>Молодіжний форум MTWTU 2.0</h3>
-                <p>Розмова про роль молоді, виклики воєнного часу, транспортну та морську галузь, політики зайнятості й майбутнє профспілкової молоді.</p>
-              </article>
+          <article class="timeline-item reveal">
+            <small>Cadets</small>
+            <h4>«Курсант PRO: права, захист, Профспілка»</h4>
+            <p>Історія профспілкового руху, інспекторат ITF, контракти, дебати, командна робота й прикладне розуміння ролі Профспілки.</p>
+          </article>
 
-              <article class="leadership-card" data-index="2">
-                <div class="leadership-mini">Cadets</div>
-                <h3>«Курсант PRO: права, захист, Профспілка»</h3>
-                <p>Історія профспілкового руху, інспекторат ITF, контракти, дебати, командна робота й прикладне розуміння ролі Профспілки.</p>
-              </article>
+          <article class="timeline-item reveal">
+            <small>Camp</small>
+            <h4>MTWTU Summer Leadership Camp</h4>
+            <p>Молодь з України та з-за кордону, командність, мотиваційні вебінари, розвиток внутрішньої опори та лідерства.</p>
+          </article>
 
-              <article class="leadership-card" data-index="3">
-                <div class="leadership-mini">Camp</div>
-                <h3>MTWTU Summer Leadership Camp</h3>
-                <p>Молодь з України та з-за кордону, командність, мотиваційні вебінари, розвиток внутрішньої опори та лідерства.</p>
-              </article>
+          <article class="timeline-item reveal">
+            <small>Education</small>
+            <h4>ITF Summer School та освітні серії</h4>
+            <p>Трудові права, контракти, конвенції, цифрові ресурси, перевірка судна та усвідомлений старт кар’єри — все, що має знати молодий моряк.</p>
+          </article>
 
-              <article class="leadership-card" data-index="4">
-                <div class="leadership-mini">Education</div>
-                <h3>ITF Summer School та освітні серії</h3>
-                <p>Трудові права, контракти, конвенції, цифрові ресурси, перевірка судна та усвідомлений старт кар’єри — все, що має знати молодий моряк.</p>
-              </article>
-
-              <article class="leadership-card" data-index="5">
-                <div class="leadership-mini">Projects</div>
-                <h3>Грантова школа «МолодьДІЄ: G-lab»</h3>
-                <p>Практика підготовки молодіжних проєктів, менторські сесії, командна робота над ідеями та меморандум про співпрацю як результат реальної взаємодії.</p>
-              </article>
-            </div>
-          </div>
+          <article class="timeline-item reveal">
+            <small>Projects</small>
+            <h4>Грантова школа «МолодьДІЄ: G-lab»</h4>
+            <p>Практика підготовки молодіжних проєктів, менторські сесії, командна робота над ідеями та меморандум про співпрацю як результат реальної взаємодії.</p>
+          </article>
         </div>
       </section>
 
@@ -2679,6 +2470,7 @@
 
         <div class="voices-stage reveal">
           <div class="voices-grid">
+
             <article class="speaker-card">
               <div class="speaker-card-inner">
                 <div class="speaker-face speaker-back">
@@ -2718,6 +2510,7 @@
             <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
             <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
             <article class="speaker-card"><div class="speaker-card-inner"><div class="speaker-face speaker-back"><img class="speaker-back-logo" src="images/logo%201.png" alt="MTWTUYouth"></div><div class="speaker-face speaker-front"><div class="speaker-photo-wrap"><img src="images/logo%201.png" alt="Новий спікер"></div><div class="speaker-info"><strong class="speaker-name">Новий спікер</strong><span class="speaker-role">Посада / роль спікера</span></div></div></div></article>
+
           </div>
         </div>
       </section>
@@ -2834,12 +2627,6 @@
       let speakerFlipTimers = [];
       let lastVoicesPlay = 0;
 
-      const leadershipCards = Array.from(document.querySelectorAll('.leadership-card'));
-      const leadershipDots = Array.from(document.querySelectorAll('.leadership-dot'));
-      const leadershipDrum = document.getElementById('leadershipDrum');
-      let leadershipIndex = 1;
-      let leadershipTimer = null;
-
       function getHeaderOffset() {
         return (header ? header.offsetHeight : 0) + 8;
       }
@@ -2918,44 +2705,6 @@
 
           speakerFlipTimers.push(timer);
         });
-      }
-
-      function normalizeDelta(index, current, total) {
-        let delta = index - current;
-        if (delta > total / 2) delta -= total;
-        if (delta < -total / 2) delta += total;
-        return delta;
-      }
-
-      function updateLeadershipDrum() {
-        if (!leadershipCards.length) return;
-
-        leadershipCards.forEach(function (card, index) {
-          card.classList.remove('is-hidden', 'is-prev-2', 'is-prev', 'is-active', 'is-next', 'is-next-2');
-
-          const delta = normalizeDelta(index, leadershipIndex, leadershipCards.length);
-
-          if (delta === 0) card.classList.add('is-active');
-          else if (delta === -1) card.classList.add('is-prev');
-          else if (delta === 1) card.classList.add('is-next');
-          else if (delta === -2) card.classList.add('is-prev-2');
-          else if (delta === 2) card.classList.add('is-next-2');
-          else card.classList.add('is-hidden');
-        });
-
-        leadershipDots.forEach(function (dot, index) {
-          dot.classList.toggle('active', index === leadershipIndex);
-        });
-      }
-
-      function startLeadershipDrum() {
-        clearInterval(leadershipTimer);
-        if (leadershipCards.length <= 1) return;
-
-        leadershipTimer = setInterval(function () {
-          leadershipIndex = (leadershipIndex + 1) % leadershipCards.length;
-          updateLeadershipDrum();
-        }, 2800);
       }
 
       function scrollToSection(index) {
@@ -3150,27 +2899,6 @@
         });
       }
 
-      leadershipDots.forEach(function (dot, index) {
-        dot.addEventListener('click', function () {
-          leadershipIndex = index;
-          updateLeadershipDrum();
-          startLeadershipDrum();
-        });
-      });
-
-      if (leadershipDrum) {
-        leadershipDrum.addEventListener('mouseenter', function () {
-          clearInterval(leadershipTimer);
-        });
-
-        leadershipDrum.addEventListener('mouseleave', function () {
-          startLeadershipDrum();
-        });
-      }
-
-      updateLeadershipDrum();
-      startLeadershipDrum();
-
       function showQrModal() {
         if (!qrModal) return;
         qrModal.classList.add('open');
@@ -3234,7 +2962,6 @@
       window.addEventListener('resize', function () {
         updateDots();
         startAccordionAutoRotate();
-        startLeadershipDrum();
       });
 
       updateDots(0);
