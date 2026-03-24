@@ -431,11 +431,11 @@
 
     .hero-main-text{
       margin-top:16px;
-      font-size:clamp(1.36rem, 2vw, 2.16rem);
+      font-size:clamp(1.54rem, 2.22vw, 2.44rem);
       font-weight:800;
       line-height:1.24;
       letter-spacing:-.02em;
-      max-width:780px;
+      max-width:820px;
     }
 
     .hero-stats{
@@ -936,14 +936,33 @@
     }
 
     .intl-wrap{
-      margin-top:34px;
-      padding:18px;
+      margin-top:18px;
+      padding:78px 18px 18px;
       border-radius:30px;
       background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
       border:1px solid rgba(255,255,255,.1);
       box-shadow:var(--shadow);
       overflow:hidden;
       position:relative;
+    }
+
+    .intl-intro-pill{
+      position:absolute;
+      top:18px;
+      left:50%;
+      transform:translateX(-50%);
+      width:min(620px, 48%);
+      padding:14px 18px;
+      border-radius:22px;
+      background:rgba(8,22,38,.78);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(14px);
+      color:var(--muted);
+      line-height:1.62;
+      font-size:.92rem;
+      z-index:2;
+      text-align:left;
     }
 
     .intl-grid{
@@ -1018,34 +1037,37 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(180deg, rgba(4,16,27,.08), rgba(4,16,27,.18) 50%, rgba(4,16,27,.28) 100%);
+        linear-gradient(180deg, rgba(4,16,27,.06), rgba(4,16,27,.16) 50%, rgba(4,16,27,.62) 100%);
       pointer-events:none;
     }
 
-    .intl-video-badge{
+    .intl-video-title{
       position:absolute;
       left:16px;
-      top:16px;
+      right:16px;
+      bottom:16px;
       z-index:2;
-      padding:7px 11px;
-      border-radius:999px;
-      background:rgba(7,24,38,.74);
-      border:1px solid rgba(255,255,255,.11);
-      color:var(--accent-3);
-      font-size:.73rem;
-      font-weight:700;
-      letter-spacing:.04em;
-      backdrop-filter:blur(10px);
+      padding:14px 16px;
+      border-radius:20px;
+      background:rgba(7,24,38,.76);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
+      font-size:clamp(1.1rem, 2.05vw, 1.78rem);
+      line-height:1.14;
+      letter-spacing:-.02em;
+      font-weight:800;
+      color:var(--text);
     }
 
     .impact-wrap{
-      margin-top:28px;
+      margin-top:18px;
       display:grid;
-      gap:20px;
+      gap:14px;
     }
 
     .impact-photo{
-      min-height:380px;
+      min-height:300px;
       border-radius:30px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.11);
@@ -1074,18 +1096,18 @@
     .impact-grid{
       display:grid;
       grid-template-columns:repeat(4, minmax(0,1fr));
-      gap:18px;
+      gap:14px;
     }
 
     .impact-card{
-      min-height:176px;
+      min-height:154px;
       display:flex;
       flex-direction:column;
       justify-content:space-between;
     }
 
     .count{
-      font-size:clamp(1.9rem, 4.6vw, 3.6rem);
+      font-size:clamp(1.72rem, 4vw, 3rem);
       font-weight:800;
       letter-spacing:-.05em;
       line-height:1;
@@ -1094,6 +1116,79 @@
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
+    }
+
+    /* ПІДНЯТТЯ СЕКЦІЙ */
+    #about,
+    #directions,
+    #sailsmart,
+    #leadership,
+    #community,
+    #international,
+    #impact,
+    #voices{
+      padding-top:56px;
+    }
+
+    #about .grid-4{
+      margin-top:22px !important;
+    }
+
+    #about .split{
+      margin-top:24px !important;
+      gap:18px;
+    }
+
+    #about .panel{
+      padding:22px 22px 24px;
+    }
+
+    #about .panel strong.big{
+      font-size:clamp(1.72rem, 4vw, 3.7rem);
+      margin-bottom:10px;
+    }
+
+    #about .panel h3{
+      font-size:1.22rem;
+    }
+
+    #about .panel p,
+    #about .panel li{
+      font-size:.91rem;
+      line-height:1.64;
+    }
+
+    #about .list{
+      margin-top:12px;
+      gap:10px;
+    }
+
+    #about .list li{
+      padding:10px 0;
+    }
+
+    #directions .grid-4,
+    #lawhub .grid-3,
+    #international .grid-3{
+      margin-top:22px !important;
+    }
+
+    #sailsmart .split,
+    #community .split{
+      margin-top:22px;
+    }
+
+    #leadership .leadership-wrap{
+      margin-top:22px;
+    }
+
+    #impact .title{
+      font-size:clamp(1.58rem, 2.7vw, 2.82rem);
+      max-width:1120px;
+    }
+
+    #voices .voices-stage{
+      min-height:calc(100svh - var(--nav-h) - 154px);
     }
 
     /* LEADERSHIP DRUM */
@@ -1334,7 +1429,6 @@
       box-shadow:var(--shadow);
       position:relative;
       overflow:hidden;
-      min-height:calc(100svh - var(--nav-h) - 128px);
       display:flex;
     }
 
@@ -1763,6 +1857,19 @@
       }
 
       .dot-nav{display:none}
+
+      .intl-wrap{
+        padding-top:18px;
+      }
+
+      .intl-intro-pill{
+        position:relative;
+        top:auto;
+        left:auto;
+        transform:none;
+        width:100%;
+        margin:0 0 14px;
+      }
     }
 
     @media (max-width: 1280px){
@@ -1847,6 +1954,17 @@
       }
 
       .section{padding:72px 0}
+
+      #about,
+      #directions,
+      #sailsmart,
+      #leadership,
+      #community,
+      #international,
+      #impact,
+      #voices{
+        padding-top:46px;
+      }
 
       .nav{
         grid-template-columns:auto 1fr auto;
@@ -1933,7 +2051,7 @@
         grid-template-columns:1fr;
       }
 
-      .impact-photo{min-height:280px}
+      .impact-photo{min-height:250px}
       .video-card{max-width:none}
 
       .qr-modal{
@@ -2133,9 +2251,6 @@
         <div class="reveal">
           <span class="eyebrow">Про нас</span>
           <h2 class="title">Молодіжна рада ПРМТУ — це простір можливостей, розвитку та реальної участі</h2>
-          <p class="lead">
-            Молодіжна рада ПРМТУ об’єднує курсантів, студентів, молодих моряків і активних спілчан навколо професійного росту, захисту прав, лідерства, взаємопідтримки та участі у формуванні майбутнього морської галузі.
-          </p>
         </div>
 
         <div class="grid-4" style="margin-top:30px;">
@@ -2461,13 +2576,13 @@
       <section class="section" id="international">
         <div class="center reveal">
           <span class="eyebrow">Міжнародна співпраця</span>
-          <h2 class="title">Від України до європейського профспілкового простору</h2>
-          <p class="lead" style="margin-inline:auto;">
-            Міжнародний напрям дає молоді ПРМТУ не лише нові контакти, а й новий масштаб мислення: солідарність, адвокація, європейський профспілковий досвід, історична пам’ять і бачення майбутнього.
-          </p>
         </div>
 
         <div class="intl-wrap reveal">
+          <div class="intl-intro-pill">
+            Міжнародний напрям дає молоді ПРМТУ не лише нові контакти, а й новий масштаб мислення: солідарність, адвокація, європейський профспілковий досвід, історична пам’ять і бачення майбутнього.
+          </div>
+
           <div class="intl-grid">
             <div class="intl-column">
               <div class="intl-card">
@@ -2489,11 +2604,11 @@
             </div>
 
             <div class="intl-video-frame">
-              <div class="intl-video-badge">Міжнародне відео 4:3</div>
               <video autoplay muted loop playsinline preload="metadata">
                 <source src="videos/IMG_7735.MP4" type="video/mp4">
               </video>
               <div class="intl-video-overlay"></div>
+              <div class="intl-video-title">Від України до європейського профспілкового простору</div>
             </div>
 
             <div class="intl-column">
@@ -2542,9 +2657,6 @@
         <div class="reveal">
           <span class="eyebrow">Досягнення та вплив</span>
           <h2 class="title">Це не просто молодіжний напрям — це жива екосистема, де молодь навчається, впливає, об’єднується і формує майбутнє галузі.</h2>
-          <p class="lead">
-            Освітні проєкти, форуми, правозахисні формати, партнерства, міжнародні програми, спортивні та культурні ініціативи разом створюють цілісне молодіжне середовище ПРМТУ.
-          </p>
         </div>
 
         <div class="impact-wrap">
