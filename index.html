@@ -1118,78 +1118,86 @@
       color:transparent;
     }
 
-    /* ПІДНЯТТЯ СЕКЦІЙ */
-    #about,
-    #directions,
-    #sailsmart,
-    #leadership,
-    #community,
-    #international,
-    #impact,
-    #voices{
-      padding-top:56px;
-    }
+   /* ПІДНЯТТЯ ТІЛЬКИ ПОТРІБНИХ СЛАЙДІВ */
+#about,
+#directions,
+#sailsmart,
+#leadership,
+#community,
+#international,
+#impact,
+#voices{
+  padding-top:22px;
+}
 
-    #about .grid-4{
-      margin-top:22px !important;
-    }
+#about .grid-4{
+  margin-top:18px !important;
+}
 
-    #about .split{
-      margin-top:24px !important;
-      gap:18px;
-    }
+#about .split{
+  margin-top:18px !important;
+  gap:18px;
+}
 
-    #about .panel{
-      padding:22px 22px 24px;
-    }
+#about .panel{
+  padding:22px 22px 24px;
+}
 
-    #about .panel strong.big{
-      font-size:clamp(1.72rem, 4vw, 3.7rem);
-      margin-bottom:10px;
-    }
+#about .panel strong.big{
+  font-size:clamp(1.72rem, 4vw, 3.7rem);
+  margin-bottom:10px;
+}
 
-    #about .panel h3{
-      font-size:1.22rem;
-    }
+#about .panel h3{
+  font-size:1.22rem;
+}
 
-    #about .panel p,
-    #about .panel li{
-      font-size:.91rem;
-      line-height:1.64;
-    }
+#about .panel p,
+#about .panel li{
+  font-size:.91rem;
+  line-height:1.64;
+}
 
-    #about .list{
-      margin-top:12px;
-      gap:10px;
-    }
+#about .list{
+  margin-top:12px;
+  gap:10px;
+}
 
-    #about .list li{
-      padding:10px 0;
-    }
+#about .list li{
+  padding:10px 0;
+}
 
-    #directions .grid-4,
-    #lawhub .grid-3,
-    #international .grid-3{
-      margin-top:22px !important;
-    }
+#directions .grid-4,
+#lawhub .grid-3,
+#international .grid-3{
+  margin-top:18px !important;
+}
 
-    #sailsmart .split,
-    #community .split{
-      margin-top:22px;
-    }
+#sailsmart .split,
+#community .split{
+  margin-top:18px !important;
+}
 
-    #leadership .leadership-wrap{
-      margin-top:22px;
-    }
+#leadership .leadership-wrap{
+  margin-top:12px;
+}
 
-    #impact .title{
-      font-size:clamp(1.58rem, 2.7vw, 2.82rem);
-      max-width:1120px;
-    }
+#international .intl-wrap{
+  margin-top:8px;
+}
 
-    #voices .voices-stage{
-      min-height:calc(100svh - var(--nav-h) - 154px);
-    }
+#impact .impact-wrap{
+  margin-top:8px;
+}
+
+#voices > .reveal:first-child{
+  margin-bottom:10px;
+}
+
+#voices .voices-stage{
+  margin-top:0;
+  min-height:calc(100svh - var(--nav-h) - 90px);
+}
 
     /* LEADERSHIP DRUM */
     .leadership-wrap{
@@ -1955,16 +1963,55 @@
 
       .section{padding:72px 0}
 
-      #about,
-      #directions,
-      #sailsmart,
-      #leadership,
-      #community,
-      #international,
-      #impact,
-      #voices{
-        padding-top:46px;
-      }
+     #about,
+#directions,
+#sailsmart,
+#leadership,
+#community,
+#international,
+#impact,
+#voices{
+  padding-top:18px;
+}
+
+#about .grid-4{
+  margin-top:14px !important;
+}
+
+#about .split{
+  margin-top:14px !important;
+}
+
+#directions .grid-4,
+#lawhub .grid-3,
+#international .grid-3{
+  margin-top:14px !important;
+}
+
+#sailsmart .split,
+#community .split{
+  margin-top:14px !important;
+}
+
+#leadership .leadership-wrap{
+  margin-top:10px;
+}
+
+#international .intl-wrap{
+  margin-top:8px;
+}
+
+#impact .impact-wrap{
+  margin-top:8px;
+}
+
+#voices > .reveal:first-child{
+  margin-bottom:8px;
+}
+
+#voices .voices-stage{
+  min-height:auto;
+}
 
       .nav{
         grid-template-columns:auto 1fr auto;
