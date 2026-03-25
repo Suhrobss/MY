@@ -3198,477 +3198,505 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const header = document.getElementById('header');
-      const prevBtn = document.getElementById('prevSection');
-      const nextBtn = document.getElementById('nextSection');
-      const dotLinks = Array.from(document.querySelectorAll('.dot-link'));
+document.addEventListener('DOMContentLoaded', function () {
+  const header = document.getElementById('header');
+  const prevBtn = document.getElementById('prevSection');
+  const nextBtn = document.getElementById('nextSection');
+  const dotLinks = Array.from(document.querySelectorAll('.dot-link'));
 
-      const sections = [
-        document.getElementById('cover'),
-        document.getElementById('hero'),
-        document.getElementById('about'),
-        document.getElementById('directions'),
-        document.getElementById('sailsmart'),
-        document.getElementById('lawhub'),
-        document.getElementById('leadership'),
-        document.getElementById('community'),
-        document.getElementById('international'),
-        document.getElementById('impact'),
-        document.getElementById('voices'),
-        document.getElementById('contact')
-      ].filter(Boolean);
+  const sections = [
+    document.getElementById('cover'),
+    document.getElementById('hero'),
+    document.getElementById('about'),
+    document.getElementById('directions'),
+    document.getElementById('sailsmart'),
+    document.getElementById('lawhub'),
+    document.getElementById('leadership'),
+    document.getElementById('community'),
+    document.getElementById('international'),
+    document.getElementById('impact'),
+    document.getElementById('voices'),
+    document.getElementById('contact')
+  ].filter(Boolean);
 
-      const qrModal = document.getElementById('qrModal');
-      const openQrModal = document.getElementById('openQrModal');
-      const closeQrModal = document.getElementById('closeQrModal');
+  const qrModal = document.getElementById('qrModal');
+  const openQrModal = document.getElementById('openQrModal');
+  const closeQrModal = document.getElementById('closeQrModal');
 
-      const voicesSection = document.getElementById('voices');
-      const speakerCards = Array.from(document.querySelectorAll('.speaker-card'));
-      let speakerFlipTimers = [];
-      let lastVoicesPlay = 0;
+  const voicesSection = document.getElementById('voices');
+  const speakerCards = Array.from(document.querySelectorAll('.speaker-card'));
+  let speakerFlipTimers = [];
+  let lastVoicesPlay = 0;
 
-      const leadershipCards = Array.from(document.querySelectorAll('.leadership-card'));
-      const leadershipDots = Array.from(document.querySelectorAll('.leadership-dot'));
-      const leadershipDrum = document.getElementById('leadershipDrum');
-      let leadershipIndex = 1;
-      let leadershipTimer = null;
+  const leadershipCards = Array.from(document.querySelectorAll('.leadership-card'));
+  const leadershipDots = Array.from(document.querySelectorAll('.leadership-dot'));
+  const leadershipDrum = document.getElementById('leadershipDrum');
+  let leadershipIndex = 1;
+  let leadershipTimer = null;
 
-      function getHeaderOffset() {
-  return (header ? header.offsetHeight : 0) + 8;
-}
-
-function getSectionScrollOffset(section) {
-  if (!section) return 0;
-
-  const desktopOffsets = {
-    about: 64,
-    directions: 64,
-    sailsmart: 64,
-    leadership: 64,
-    community: 64,
-    international: 64,
-    impact: 64,
-    voices: 64
-  };
-
-  const tabletOffsets = {
-    about: 40,
-    directions: 40,
-    sailsmart: 40,
-    leadership: 40,
-    community: 40,
-    international: 40,
-    impact: 40,
-    voices: 40
-  };
-
-  const mobileOffsets = {
-    about: 22,
-    directions: 22,
-    sailsmart: 22,
-    leadership: 22,
-    community: 22,
-    international: 22,
-    impact: 22,
-    voices: 22
-  };
-
-  if (window.innerWidth <= 760) {
-    return mobileOffsets[section.id] || 0;
+  function getHeaderOffset() {
+    return (header ? header.offsetHeight : 0) + 8;
   }
 
-  if (window.innerWidth <= 980) {
-    return tabletOffsets[section.id] || 0;
+  function getSectionScrollOffset(section) {
+    if (!section) return 0;
+
+    const desktopOffsets = {
+      about: 64,
+      directions: 64,
+      sailsmart: 64,
+      leadership: 64,
+      community: 64,
+      international: 64,
+      impact: 64,
+      voices: 64
+    };
+
+    const tabletOffsets = {
+      about: 40,
+      directions: 40,
+      sailsmart: 40,
+      leadership: 40,
+      community: 40,
+      international: 40,
+      impact: 40,
+      voices: 40
+    };
+
+    const mobileOffsets = {
+      about: 22,
+      directions: 22,
+      sailsmart: 22,
+      leadership: 22,
+      community: 22,
+      international: 22,
+      impact: 22,
+      voices: 22
+    };
+
+    if (window.innerWidth <= 760) return mobileOffsets[section.id] || 0;
+    if (window.innerWidth <= 980) return tabletOffsets[section.id] || 0;
+    return desktopOffsets[section.id] || 0;
   }
 
-  return desktopOffsets[section.id] || 0;
-}
+  function clampIndex(index) {
+    return Math.max(0, Math.min(index, sections.length - 1));
+  }
 
-function clampIndex(index) {
-  return Math.max(0, Math.min(index, sections.length - 1));
-}
+  function getCurrentSectionIndex() {
+    const marker = window.scrollY + getHeaderOffset() + window.innerHeight * 0.25;
+    let currentIndex = 0;
 
-function getCurrentSectionIndex() {
-  const marker = window.scrollY + getHeaderOffset() + window.innerHeight * 0.25;
-  let currentIndex = 0;
+    sections.forEach(function (section, index) {
+      if (marker >= section.offsetTop) {
+        currentIndex = index;
+      }
+    });
 
-  sections.forEach(function (section, index) {
-    if (marker >= section.offsetTop) {
-      currentIndex = index;
-    }
-  });
+    return currentIndex;
+  }
 
-  return currentIndex;
-}
+  function updateDots(forcedIndex) {
+    const activeIndex = typeof forcedIndex === 'number'
+      ? forcedIndex
+      : getCurrentSectionIndex();
 
-function updateDots(forcedIndex) {
-  const activeIndex = typeof forcedIndex === 'number'
-    ? forcedIndex
-    : getCurrentSectionIndex();
+    dotLinks.forEach(function (link, index) {
+      link.classList.toggle('active', index === activeIndex);
+    });
+  }
 
-  dotLinks.forEach(function (link, index) {
-    link.classList.toggle('active', index === activeIndex);
-  });
-}
+  function triggerRevealForSection(section) {
+    if (!section) return;
 
-function triggerRevealForSection(section) {
-  if (!section) return;
+    const revealItems = section.querySelectorAll('.reveal');
+    if (!revealItems.length) return;
 
-  const revealItems = section.querySelectorAll('.reveal');
-  if (!revealItems.length) return;
+    revealItems.forEach(function (item, index) {
+      item.classList.remove('visible');
+      item.style.setProperty('--reveal-delay', (index * 80) + 'ms');
+    });
 
-  revealItems.forEach(function (item, index) {
-    item.classList.remove('visible');
-    item.style.setProperty('--reveal-delay', (index * 80) + 'ms');
-  });
-
-  requestAnimationFrame(function () {
     requestAnimationFrame(function () {
-      revealItems.forEach(function (item) {
-        item.classList.add('visible');
+      requestAnimationFrame(function () {
+        revealItems.forEach(function (item) {
+          item.classList.add('visible');
+        });
       });
     });
-  });
-}
+  }
 
-function resetSpeakerCards() {
-  speakerFlipTimers.forEach(function (timer) {
-    clearTimeout(timer);
-  });
-  speakerFlipTimers = [];
+  function resetSpeakerCards() {
+    speakerFlipTimers.forEach(function (timer) {
+      clearTimeout(timer);
+    });
+    speakerFlipTimers = [];
 
-  speakerCards.forEach(function (card) {
-    card.classList.remove('is-flipped');
-  });
-}
+    speakerCards.forEach(function (card) {
+      card.classList.remove('is-flipped');
+    });
+  }
 
-function playSpeakerCards() {
-  if (!voicesSection || !speakerCards.length) return;
+  function playSpeakerCards() {
+    if (!voicesSection || !speakerCards.length) return;
 
-  resetSpeakerCards();
+    const now = Date.now();
+    if (now - lastVoicesPlay < 1200) return;
+    lastVoicesPlay = now;
 
-  speakerCards.forEach(function (card, index) {
-    const timer = setTimeout(function () {
-      card.classList.add('is-flipped');
-    }, 180 * index + 260);
+    resetSpeakerCards();
 
-    speakerFlipTimers.push(timer);
-  });
-}
+    speakerCards.forEach(function (card, index) {
+      const timer = setTimeout(function () {
+        card.classList.add('is-flipped');
+      }, 180 * index + 260);
 
-function scrollToSection(index) {
-  if (!sections.length) return;
+      speakerFlipTimers.push(timer);
+    });
+  }
 
-  const safeIndex = clampIndex(index);
-  const target = sections[safeIndex];
-  if (!target) return;
+  function scrollToSection(index) {
+    if (!sections.length) return;
 
-  const extraOffset = getSectionScrollOffset(target);
-  const top = target.offsetTop - getHeaderOffset() + extraOffset;
+    const safeIndex = clampIndex(index);
+    const target = sections[safeIndex];
+    if (!target) return;
 
-  window.scrollTo({
-    top: Math.max(0, top),
-    behavior: 'smooth'
-  });
+    const extraOffset = getSectionScrollOffset(target);
+    const top = target.offsetTop - getHeaderOffset() + extraOffset;
 
-  updateDots(safeIndex);
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: 'smooth'
+    });
 
-  setTimeout(function () {
-    triggerRevealForSection(target);
     updateDots(safeIndex);
 
-    if (target.id === 'voices') {
-      playSpeakerCards();
-    }
-  }, 520);
-}
-     
-      function scrollToSection(index) {
-        if (!sections.length) return;
+    setTimeout(function () {
+      triggerRevealForSection(target);
+      updateDots(safeIndex);
 
-        const safeIndex = clampIndex(index);
-        const target = sections[safeIndex];
-        if (!target) return;
-
-        const top = target.offsetTop - getHeaderOffset();
-
-        window.scrollTo({
-          top: Math.max(0, top),
-          behavior: 'smooth'
-        });
-
-        updateDots(safeIndex);
-
-        setTimeout(function () {
-          triggerRevealForSection(target);
-          updateDots(safeIndex);
-
-          if (target.id === 'voices') {
-            playSpeakerCards();
-          }
-        }, 520);
+      if (target.id === 'voices') {
+        playSpeakerCards();
       }
+    }, 520);
+  }
 
-      dotLinks.forEach(function (link, index) {
-        link.addEventListener('click', function (e) {
-          e.preventDefault();
-          scrollToSection(index);
-        });
-      });
+  function getWrappedDifference(index, activeIndex, total) {
+    let diff = index - activeIndex;
+    if (diff > total / 2) diff -= total;
+    if (diff < -total / 2) diff += total;
+    return diff;
+  }
 
-      if (prevBtn) {
-        prevBtn.addEventListener('click', function () {
-          scrollToSection(getCurrentSectionIndex() - 1);
-        });
-      }
+  function updateLeadershipDrum() {
+    if (!leadershipCards.length) return;
 
-      if (nextBtn) {
-        nextBtn.addEventListener('click', function () {
-          scrollToSection(getCurrentSectionIndex() + 1);
-        });
-      }
+    const total = leadershipCards.length;
 
-      const revealElements = document.querySelectorAll('.reveal');
+    leadershipCards.forEach(function (card, index) {
+      card.classList.remove(
+        'is-hidden',
+        'is-prev-2',
+        'is-prev',
+        'is-active',
+        'is-next',
+        'is-next-2'
+      );
 
-      if ('IntersectionObserver' in window) {
-        const revealObserver = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-            }
-          });
-        }, {
-          threshold: 0.12,
-          rootMargin: '0px 0px -8% 0px'
-        });
+      const diff = getWrappedDifference(index, leadershipIndex, total);
 
-        revealElements.forEach(function (el, index) {
-          el.style.setProperty('--reveal-delay', ((index % 6) * 60) + 'ms');
-          revealObserver.observe(el);
-        });
-
-        if (voicesSection) {
-          const voicesObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-              if (entry.isIntersecting) {
-                playSpeakerCards();
-              }
-            });
-          }, {
-            threshold: 0.35
-          });
-
-          voicesObserver.observe(voicesSection);
-        }
+      if (diff === 0) {
+        card.classList.add('is-active');
+      } else if (diff === -1) {
+        card.classList.add('is-prev');
+      } else if (diff === -2) {
+        card.classList.add('is-prev-2');
+      } else if (diff === 1) {
+        card.classList.add('is-next');
+      } else if (diff === 2) {
+        card.classList.add('is-next-2');
       } else {
-        revealElements.forEach(function (el) {
-          el.classList.add('visible');
-        });
-      }
-
-      const accordionItems = Array.from(document.querySelectorAll('.acc-item'));
-      let accordionAutoIndex = 0;
-      let accordionAutoTimer = null;
-      let accordionAutoPaused = false;
-
-      function openAccordionItem(item) {
-        if (!item) return;
-
-        accordionItems.forEach(function (other) {
-          const body = other.querySelector('.acc-body');
-          other.classList.remove('open');
-          if (body) body.style.maxHeight = null;
-        });
-
-        item.classList.add('open');
-        const body = item.querySelector('.acc-body');
-        if (body) {
-          body.style.maxHeight = body.scrollHeight + 'px';
-        }
-      }
-
-      function startAccordionAutoRotate() {
-        clearInterval(accordionAutoTimer);
-
-        if (window.innerWidth <= 760 || accordionItems.length <= 1) return;
-
-        accordionAutoTimer = setInterval(function () {
-          if (accordionAutoPaused) return;
-          accordionAutoIndex = (accordionAutoIndex + 1) % accordionItems.length;
-          openAccordionItem(accordionItems[accordionAutoIndex]);
-        }, 3200);
-      }
-
-      accordionItems.forEach(function (item, index) {
-        const btn = item.querySelector('.acc-btn');
-
-        if (btn) {
-          btn.addEventListener('click', function () {
-            const isOpen = item.classList.contains('open');
-
-            accordionAutoPaused = true;
-            clearInterval(accordionAutoTimer);
-
-            if (isOpen) {
-              item.classList.remove('open');
-              const body = item.querySelector('.acc-body');
-              if (body) body.style.maxHeight = null;
-            } else {
-              accordionAutoIndex = index;
-              openAccordionItem(item);
-            }
-
-            setTimeout(function () {
-              accordionAutoPaused = false;
-              startAccordionAutoRotate();
-            }, 7000);
-          });
-        }
-
-        item.addEventListener('mouseenter', function () {
-          accordionAutoPaused = true;
-        });
-
-        item.addEventListener('mouseleave', function () {
-          accordionAutoPaused = false;
-        });
-      });
-
-      if (accordionItems.length) {
-        openAccordionItem(accordionItems[0]);
-        startAccordionAutoRotate();
-      }
-
-      const counters = document.querySelectorAll('.count');
-
-      if ('IntersectionObserver' in window) {
-        const counterObserver = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (!entry.isIntersecting) return;
-
-            const el = entry.target;
-            if (el.dataset.animated === 'true') return;
-
-            const target = parseInt(el.dataset.target || '0', 10);
-            let current = 0;
-            const duration = 1400;
-            const increment = Math.max(1, Math.ceil(target / 40));
-            const stepTime = Math.max(16, Math.floor(duration / Math.max(target / increment, 1)));
-
-            const timer = setInterval(function () {
-              current += increment;
-
-              if (current >= target) {
-                current = target;
-                clearInterval(timer);
-              }
-
-              el.textContent = current;
-            }, stepTime);
-
-            el.dataset.animated = 'true';
-          });
-        }, { threshold: 0.6 });
-
-        counters.forEach(function (counter) {
-          counterObserver.observe(counter);
-        });
-      }
-
-      leadershipDots.forEach(function (dot, index) {
-        dot.addEventListener('click', function () {
-          leadershipIndex = index;
-          updateLeadershipDrum();
-          startLeadershipDrum();
-        });
-      });
-
-      if (leadershipDrum) {
-        leadershipDrum.addEventListener('mouseenter', function () {
-          clearInterval(leadershipTimer);
-        });
-
-        leadershipDrum.addEventListener('mouseleave', function () {
-          startLeadershipDrum();
-        });
-      }
-
-      updateLeadershipDrum();
-      startLeadershipDrum();
-
-      function showQrModal() {
-        if (!qrModal) return;
-        qrModal.classList.add('open');
-        qrModal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function hideQrModal() {
-        if (!qrModal) return;
-        qrModal.classList.remove('open');
-        qrModal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      }
-
-      if (openQrModal) {
-        openQrModal.addEventListener('click', showQrModal);
-      }
-
-      if (closeQrModal) {
-        closeQrModal.addEventListener('click', hideQrModal);
-      }
-
-      if (qrModal) {
-        qrModal.addEventListener('click', function (e) {
-          if (e.target === qrModal) {
-            hideQrModal();
-          }
-        });
-      }
-
-      document.addEventListener('keydown', function (e) {
-        const activeTag = document.activeElement ? document.activeElement.tagName : '';
-        const isEditable = document.activeElement && document.activeElement.isContentEditable;
-
-        if (qrModal && qrModal.classList.contains('open')) {
-          if (e.key === 'Escape') {
-            hideQrModal();
-          }
-          return;
-        }
-
-        if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT' || isEditable) {
-          return;
-        }
-
-        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-          e.preventDefault();
-          scrollToSection(getCurrentSectionIndex() - 1);
-        }
-
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-          e.preventDefault();
-          scrollToSection(getCurrentSectionIndex() + 1);
-        }
-      });
-
-      window.addEventListener('scroll', function () {
-        updateDots();
-      }, { passive: true });
-
-      window.addEventListener('resize', function () {
-        updateDots();
-        startAccordionAutoRotate();
-        startLeadershipDrum();
-      });
-
-      updateDots(0);
-
-      if (sections.length) {
-        triggerRevealForSection(sections[0]);
+        card.classList.add('is-hidden');
       }
     });
-  </script>
+
+    leadershipDots.forEach(function (dot, index) {
+      dot.classList.toggle('active', index === leadershipIndex);
+    });
+  }
+
+  function startLeadershipDrum() {
+    clearInterval(leadershipTimer);
+
+    if (leadershipCards.length <= 1) return;
+
+    leadershipTimer = setInterval(function () {
+      leadershipIndex = (leadershipIndex + 1) % leadershipCards.length;
+      updateLeadershipDrum();
+    }, 3200);
+  }
+
+  dotLinks.forEach(function (link, index) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      scrollToSection(index);
+    });
+  });
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', function () {
+      scrollToSection(getCurrentSectionIndex() - 1);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function () {
+      scrollToSection(getCurrentSectionIndex() + 1);
+    });
+  }
+
+  const revealElements = document.querySelectorAll('.reveal');
+
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -8% 0px'
+    });
+
+    revealElements.forEach(function (el, index) {
+      el.style.setProperty('--reveal-delay', ((index % 6) * 60) + 'ms');
+      revealObserver.observe(el);
+    });
+
+    if (voicesSection) {
+      const voicesObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            playSpeakerCards();
+          }
+        });
+      }, {
+        threshold: 0.35
+      });
+
+      voicesObserver.observe(voicesSection);
+    }
+  } else {
+    revealElements.forEach(function (el) {
+      el.classList.add('visible');
+    });
+  }
+
+  const accordionItems = Array.from(document.querySelectorAll('.acc-item'));
+  let accordionAutoIndex = 0;
+  let accordionAutoTimer = null;
+  let accordionAutoPaused = false;
+
+  function openAccordionItem(item) {
+    if (!item) return;
+
+    accordionItems.forEach(function (other) {
+      const body = other.querySelector('.acc-body');
+      other.classList.remove('open');
+      if (body) body.style.maxHeight = null;
+    });
+
+    item.classList.add('open');
+    const body = item.querySelector('.acc-body');
+    if (body) {
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  }
+
+  function startAccordionAutoRotate() {
+    clearInterval(accordionAutoTimer);
+
+    if (window.innerWidth <= 760 || accordionItems.length <= 1) return;
+
+    accordionAutoTimer = setInterval(function () {
+      if (accordionAutoPaused) return;
+      accordionAutoIndex = (accordionAutoIndex + 1) % accordionItems.length;
+      openAccordionItem(accordionItems[accordionAutoIndex]);
+    }, 3200);
+  }
+
+  accordionItems.forEach(function (item, index) {
+    const btn = item.querySelector('.acc-btn');
+
+    if (btn) {
+      btn.addEventListener('click', function () {
+        const isOpen = item.classList.contains('open');
+
+        accordionAutoPaused = true;
+        clearInterval(accordionAutoTimer);
+
+        if (isOpen) {
+          item.classList.remove('open');
+          const body = item.querySelector('.acc-body');
+          if (body) body.style.maxHeight = null;
+        } else {
+          accordionAutoIndex = index;
+          openAccordionItem(item);
+        }
+
+        setTimeout(function () {
+          accordionAutoPaused = false;
+          startAccordionAutoRotate();
+        }, 7000);
+      });
+    }
+
+    item.addEventListener('mouseenter', function () {
+      accordionAutoPaused = true;
+    });
+
+    item.addEventListener('mouseleave', function () {
+      accordionAutoPaused = false;
+    });
+  });
+
+  if (accordionItems.length) {
+    openAccordionItem(accordionItems[0]);
+    startAccordionAutoRotate();
+  }
+
+  const counters = document.querySelectorAll('.count');
+
+  if ('IntersectionObserver' in window) {
+    const counterObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+
+        const el = entry.target;
+        if (el.dataset.animated === 'true') return;
+
+        const target = parseInt(el.dataset.target || '0', 10);
+        let current = 0;
+        const duration = 1400;
+        const increment = Math.max(1, Math.ceil(target / 40));
+        const stepTime = Math.max(16, Math.floor(duration / Math.max(target / increment, 1)));
+
+        const timer = setInterval(function () {
+          current += increment;
+
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+
+          el.textContent = current;
+        }, stepTime);
+
+        el.dataset.animated = 'true';
+      });
+    }, { threshold: 0.6 });
+
+    counters.forEach(function (counter) {
+      counterObserver.observe(counter);
+    });
+  }
+
+  leadershipDots.forEach(function (dot, index) {
+    dot.addEventListener('click', function () {
+      leadershipIndex = index;
+      updateLeadershipDrum();
+      startLeadershipDrum();
+    });
+  });
+
+  if (leadershipDrum) {
+    leadershipDrum.addEventListener('mouseenter', function () {
+      clearInterval(leadershipTimer);
+    });
+
+    leadershipDrum.addEventListener('mouseleave', function () {
+      startLeadershipDrum();
+    });
+  }
+
+  updateLeadershipDrum();
+  startLeadershipDrum();
+
+  function showQrModal() {
+    if (!qrModal) return;
+    qrModal.classList.add('open');
+    qrModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function hideQrModal() {
+    if (!qrModal) return;
+    qrModal.classList.remove('open');
+    qrModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (openQrModal) {
+    openQrModal.addEventListener('click', showQrModal);
+  }
+
+  if (closeQrModal) {
+    closeQrModal.addEventListener('click', hideQrModal);
+  }
+
+  if (qrModal) {
+    qrModal.addEventListener('click', function (e) {
+      if (e.target === qrModal) {
+        hideQrModal();
+      }
+    });
+  }
+
+  document.addEventListener('keydown', function (e) {
+    const activeTag = document.activeElement ? document.activeElement.tagName : '';
+    const isEditable = document.activeElement && document.activeElement.isContentEditable;
+
+    if (qrModal && qrModal.classList.contains('open')) {
+      if (e.key === 'Escape') {
+        hideQrModal();
+      }
+      return;
+    }
+
+    if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT' || isEditable) {
+      return;
+    }
+
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      scrollToSection(getCurrentSectionIndex() - 1);
+    }
+
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      scrollToSection(getCurrentSectionIndex() + 1);
+    }
+  });
+
+  window.addEventListener('scroll', function () {
+    updateDots();
+  }, { passive: true });
+
+  window.addEventListener('resize', function () {
+    updateDots();
+    startAccordionAutoRotate();
+    updateLeadershipDrum();
+    startLeadershipDrum();
+  });
+
+  updateDots(0);
+
+  if (sections.length) {
+    triggerRevealForSection(sections[0]);
+  }
+});
+</script>
 </body>
 </html>
