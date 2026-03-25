@@ -3235,123 +3235,155 @@
       let leadershipTimer = null;
 
       function getHeaderOffset() {
-        return (header ? header.offsetHeight : 0) + 8;
-      }
+  return (header ? header.offsetHeight : 0) + 8;
+}
 
-      function clampIndex(index) {
-        return Math.max(0, Math.min(index, sections.length - 1));
-      }
+function getSectionScrollOffset(section) {
+  if (!section) return 0;
 
-      function getCurrentSectionIndex() {
-        const marker = window.scrollY + getHeaderOffset() + window.innerHeight * 0.25;
-        let currentIndex = 0;
+  const desktopOffsets = {
+    about: 64,
+    directions: 64,
+    sailsmart: 64,
+    leadership: 64,
+    community: 64,
+    international: 64,
+    impact: 64,
+    voices: 64
+  };
 
-        sections.forEach(function (section, index) {
-          if (marker >= section.offsetTop) {
-            currentIndex = index;
-          }
-        });
+  const tabletOffsets = {
+    about: 40,
+    directions: 40,
+    sailsmart: 40,
+    leadership: 40,
+    community: 40,
+    international: 40,
+    impact: 40,
+    voices: 40
+  };
 
-        return currentIndex;
-      }
+  const mobileOffsets = {
+    about: 22,
+    directions: 22,
+    sailsmart: 22,
+    leadership: 22,
+    community: 22,
+    international: 22,
+    impact: 22,
+    voices: 22
+  };
 
-      function updateDots(forcedIndex) {
-        const activeIndex = typeof forcedIndex === 'number'
-          ? forcedIndex
-          : getCurrentSectionIndex();
+  if (window.innerWidth <= 760) {
+    return mobileOffsets[section.id] || 0;
+  }
 
-        dotLinks.forEach(function (link, index) {
-          link.classList.toggle('active', index === activeIndex);
-        });
-      }
+  if (window.innerWidth <= 980) {
+    return tabletOffsets[section.id] || 0;
+  }
 
-      function triggerRevealForSection(section) {
-        if (!section) return;
+  return desktopOffsets[section.id] || 0;
+}
 
-        const revealItems = section.querySelectorAll('.reveal');
-        if (!revealItems.length) return;
+function clampIndex(index) {
+  return Math.max(0, Math.min(index, sections.length - 1));
+}
 
-        revealItems.forEach(function (item, index) {
-          item.classList.remove('visible');
-          item.style.setProperty('--reveal-delay', (index * 80) + 'ms');
-        });
+function getCurrentSectionIndex() {
+  const marker = window.scrollY + getHeaderOffset() + window.innerHeight * 0.25;
+  let currentIndex = 0;
 
-        requestAnimationFrame(function () {
-          requestAnimationFrame(function () {
-            revealItems.forEach(function (item) {
-              item.classList.add('visible');
-            });
-          });
-        });
-      }
+  sections.forEach(function (section, index) {
+    if (marker >= section.offsetTop) {
+      currentIndex = index;
+    }
+  });
 
-      function resetSpeakerCards() {
-        speakerFlipTimers.forEach(function (timer) {
-          clearTimeout(timer);
-        });
-        speakerFlipTimers = [];
+  return currentIndex;
+}
 
-        speakerCards.forEach(function (card) {
-          card.classList.remove('is-flipped');
-        });
-      }
+function updateDots(forcedIndex) {
+  const activeIndex = typeof forcedIndex === 'number'
+    ? forcedIndex
+    : getCurrentSectionIndex();
 
-      function playSpeakerCards() {
-        if (!voicesSection || !speakerCards.length) return;
+  dotLinks.forEach(function (link, index) {
+    link.classList.toggle('active', index === activeIndex);
+  });
+}
 
-        const now = Date.now();
-        if (now - lastVoicesPlay < 1200) return;
-        lastVoicesPlay = now;
+function triggerRevealForSection(section) {
+  if (!section) return;
 
-        resetSpeakerCards();
+  const revealItems = section.querySelectorAll('.reveal');
+  if (!revealItems.length) return;
 
-        speakerCards.forEach(function (card, index) {
-          const timer = setTimeout(function () {
-            card.classList.add('is-flipped');
-          }, 170 * index + 220);
+  revealItems.forEach(function (item, index) {
+    item.classList.remove('visible');
+    item.style.setProperty('--reveal-delay', (index * 80) + 'ms');
+  });
 
-          speakerFlipTimers.push(timer);
-        });
-      }
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      revealItems.forEach(function (item) {
+        item.classList.add('visible');
+      });
+    });
+  });
+}
 
-      function normalizeDelta(index, current, total) {
-        let delta = index - current;
-        if (delta > total / 2) delta -= total;
-        if (delta < -total / 2) delta += total;
-        return delta;
-      }
+function resetSpeakerCards() {
+  speakerFlipTimers.forEach(function (timer) {
+    clearTimeout(timer);
+  });
+  speakerFlipTimers = [];
 
-      function updateLeadershipDrum() {
-        if (!leadershipCards.length) return;
+  speakerCards.forEach(function (card) {
+    card.classList.remove('is-flipped');
+  });
+}
 
-        leadershipCards.forEach(function (card, index) {
-          card.classList.remove('is-hidden', 'is-prev-2', 'is-prev', 'is-active', 'is-next', 'is-next-2');
+function playSpeakerCards() {
+  if (!voicesSection || !speakerCards.length) return;
 
-          const delta = normalizeDelta(index, leadershipIndex, leadershipCards.length);
+  resetSpeakerCards();
 
-          if (delta === 0) card.classList.add('is-active');
-          else if (delta === -1) card.classList.add('is-prev');
-          else if (delta === 1) card.classList.add('is-next');
-          else if (delta === -2) card.classList.add('is-prev-2');
-          else if (delta === 2) card.classList.add('is-next-2');
-          else card.classList.add('is-hidden');
-        });
+  speakerCards.forEach(function (card, index) {
+    const timer = setTimeout(function () {
+      card.classList.add('is-flipped');
+    }, 180 * index + 260);
 
-        leadershipDots.forEach(function (dot, index) {
-          dot.classList.toggle('active', index === leadershipIndex);
-        });
-      }
+    speakerFlipTimers.push(timer);
+  });
+}
 
-      function startLeadershipDrum() {
-        clearInterval(leadershipTimer);
-        if (leadershipCards.length <= 1) return;
+function scrollToSection(index) {
+  if (!sections.length) return;
 
-        leadershipTimer = setInterval(function () {
-          leadershipIndex = (leadershipIndex + 1) % leadershipCards.length;
-          updateLeadershipDrum();
-        }, 2800);
-      }
+  const safeIndex = clampIndex(index);
+  const target = sections[safeIndex];
+  if (!target) return;
 
+  const extraOffset = getSectionScrollOffset(target);
+  const top = target.offsetTop - getHeaderOffset() + extraOffset;
+
+  window.scrollTo({
+    top: Math.max(0, top),
+    behavior: 'smooth'
+  });
+
+  updateDots(safeIndex);
+
+  setTimeout(function () {
+    triggerRevealForSection(target);
+    updateDots(safeIndex);
+
+    if (target.id === 'voices') {
+      playSpeakerCards();
+    }
+  }, 520);
+}
+     
       function scrollToSection(index) {
         if (!sections.length) return;
 
