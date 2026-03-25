@@ -3654,31 +3654,36 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  document.addEventListener('keydown', function (e) {
-    const activeTag = document.activeElement ? document.activeElement.tagName : '';
-    const isEditable = document.activeElement && document.activeElement.isContentEditable;
+document.addEventListener('keydown', function (e) {
+  const activeTag = document.activeElement ? document.activeElement.tagName : '';
+  const isEditable = document.activeElement && document.activeElement.isContentEditable;
 
-    if (qrModal && qrModal.classList.contains('open')) {
-      if (e.key === 'Escape') {
-        hideQrModal();
-      }
-      return;
+  if (qrModal && qrModal.classList.contains('open')) {
+    if (e.key === 'Escape') {
+      hideQrModal();
     }
+    return;
+  }
 
-    if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT' || isEditable) {
-      return;
-    }
+  if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT' || isEditable) {
+    return;
+  }
 
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-      e.preventDefault();
-      scrollToSection(getCurrentSectionIndex() - 1);
-    }
+  const prevKeys = ['ArrowLeft', 'ArrowUp', 'PageUp'];
+  const nextKeys = ['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Spacebar'];
 
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-      e.preventDefault();
-      scrollToSection(getCurrentSectionIndex() + 1);
-    }
-  });
+  if (prevKeys.includes(e.key)) {
+    e.preventDefault();
+    scrollToSection(getCurrentSectionIndex() - 1);
+    return;
+  }
+
+  if (nextKeys.includes(e.key)) {
+    e.preventDefault();
+    scrollToSection(getCurrentSectionIndex() + 1);
+    return;
+  }
+});
 
   window.addEventListener('scroll', function () {
     updateDots();
