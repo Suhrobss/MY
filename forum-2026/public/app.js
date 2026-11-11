@@ -116,6 +116,24 @@
   function keynoteCard(e, layout=''){
     const m=metaFor(e);return `<button class="keynote-card ${layout}" data-event="${esc(e.id)}" aria-label="Відкрити анонс ${esc(e.title)}">${posterImage(e)}<div class="keynote-content"><div class="keynote-top"><span>${esc(m.category||'FORUM')}</span><span>${esc(formatRange(e))} / ${esc(e.date.slice(8))}.12</span></div><h3>${esc(e.title)}</h3><p>${esc(m.teaser||e.details||'Подробиці події готуються.')}</p><div class="keynote-bottom"><span>${esc(e.venue||'Локація уточнюється')}</span><span>${e.status==='confirmed'?'Підтверджено':e.status==='canceled'?'Скасовано':'Попередньо'} ↗</span></div></div></button>`;
   }
+  function speakerDirectory(events){
+    const people=new Map();
+    for(const event of events){
+      const meta=metaFor(event);
+      const names=(meta.speakerNames||'').split(' · ').filter(name=>name&&!name.includes('за робочою програмою')&&!name.startsWith('ГО «'));
+      for(const name of names){
+        if(!people.has(name))people.set(name,{name,events:[],photo:names.length===1?safeImg(meta.speakerPhotoUrl):'',credit:names.length===1?meta.speakerPhotoCredit:''});
+        people.get(name).events.push(event);
+      }
+    }
+    const cards=[...people.values()].map(person=>`<article class="edition-person"><div class="edition-portrait">${person.photo?`<img loading="lazy" src="${esc(person.photo)}" alt="${esc(person.name)}">`:`<span aria-hidden="true">${esc(person.name.split(/\s+/).slice(0,2).map(word=>word[0]).join(''))}</span>`}</div><div class="edition-person-copy"><h3>${esc(person.name)}</h3><p>${person.name==='Олег Григорюк'?'Голова ПРМТУ':'Посада уточнюється'}</p>${person.credit?`<small>${esc(person.credit)}</small>`:''}<div class="edition-person-events">${person.events.map(event=>`<button data-event="${esc(event.id)}">${esc(event.title)} ↗</button>`).join('')}</div></div></article>`).join('');
+    return `<section class="edition-people" id="speakers"><header><h2>Спікери</h2><p>Участь за попередньою програмою.</p></header><div class="speaker-directory">${cards||'<p>Склад спікерів уточнюється.</p>'}</div></section>`;
+  }
+  function gallery(){
+    const archive='https://raw.githubusercontent.com/Suhrobss/MY/main/images/';
+    const frames=['forum.jpg','FIL_1376.jpg','img-77.jpg'];
+    return `<section class="edition-gallery" aria-labelledby="gallery-title"><header><h2 id="gallery-title">Фотоархів</h2><div><button data-gallery="-1" aria-label="Попереднє фото">←</button><button data-gallery="1" aria-label="Наступне фото">→</button></div></header><div class="gallery-track">${frames.map((file,index)=>`<figure><a href="${archive+file}" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="${archive+file}" alt="Архівне фото Молодіжної ради ${index+1}"></a><figcaption>${index+1} / ${frames.length}</figcaption></figure>`).join('')}</div></section>`;
+  }
   function home(){
     const events=sorted(state.data.events).filter(e=>e.status!=='canceled');
     const nowEvent=currentEvent(), next=nextEvent(), before=kyivDay()<'2026-12-07';
@@ -123,14 +141,15 @@
     const highlightIds=['082','085','086','088','08d','093','095','097','09a'];
     const featured=highlightIds.map(id=>events.find(e=>e.id===id)).filter(Boolean);
     const urgent=(state.data.announcements||[]).find(a=>['urgent','important'].includes(a.kind));
-    return `<section class="edition-cover" aria-label="MTWTU Youth Forum 2026"><img src="https://raw.githubusercontent.com/Suhrobss/MY/main/images/forum.jpg" alt="Групове фото з архіву MTWTU Youth Forum" fetchpriority="high"><div class="edition-mast" aria-hidden="true">YOUTH<br>FORUM</div><div class="edition-title"><p>MTWTU YOUTH FORUM 2026</p><h1>Молодь <br>збирається.</h1></div></section><div class="edition-rail"><button class="edition-action" data-nav="program">Програма 7–10 грудня ↗</button><button class="edition-action secondary" data-scroll="forum-film">Відео форуму ↓</button></div>
+    return `<section class="edition-cover" aria-label="MTWTU Youth Forum 2026"><img src="https://raw.githubusercontent.com/Suhrobss/MY/main/images/forum.jpg" alt="Групове фото з архіву MTWTU Youth Forum" fetchpriority="high"><div class="edition-mast" aria-hidden="true">YOUTH<br>FORUM</div><div class="edition-title"><p>MTWTU YOUTH FORUM 2026</p><h1>Молодь <br>збирається.</h1></div></section><div class="edition-rail"><button class="edition-action" data-nav="program">Програма 7–10 грудня ↗</button><button class="edition-action secondary" data-play-film>Відео форуму ▶</button></div><dialog class="film-dialog" aria-label="Відео Молодіжної ради"><div class="film-toolbar"><a href="https://vimeo.com/1175179620" target="_blank" rel="noopener noreferrer">Відкрити у Vimeo ↗</a><form method="dialog"><button type="submit">Закрити ✕</button></form></div><div class="film-player"></div></dialog>
       <div class="poster-meta"><span class="eyebrow">${esc(dateCaption())}</span><span>07—10.12.2026 / ГК «ПЛАЙ»</span></div>${previewNotice()}${state.offline?offlineNotice():''}
       ${urgent?`<div class="live-banner broadcast-important"><span>${icon('alert')}<strong>${esc(urgent.title)}</strong></span><button data-nav="updates">Деталі ${icon('arrow','small')}</button></div>`:''}
       <section class="feature-now"><div class="feature-now-kicker"><span class="signal-dot"></span>${nowEvent?'ЗАРАЗ ВІДБУВАЄТЬСЯ':before?'НАБЛИЖАЄТЬСЯ ФОРУМ':'НАСТУПНА ПОДІЯ'}</div><div class="feature-now-row"><div><h2>${esc(nextUp?.title||'Програма форуму')}</h2><div class="feature-now-meta">${nextUp?esc(formatRange(nextUp)):'07–10 грудня'} · ${esc(nextUp?.venue||'Локація уточнюється')}</div></div><button data-event="${esc(nextUp?.id||'082')}">ПРО ПОДІЮ ↗</button></div></section>
-      <section id="forum-film" class="forum-editorial"><h2>Відео Молодіжної ради</h2><div class="edition-film"><button class="edition-action" data-play-film>Відтворити відео ▶</button></div><a href="https://vimeo.com/1175179620" target="_blank" rel="noopener noreferrer">Відкрити у Vimeo ↗</a></section>
       <section class="chapter-section"><div class="section-topline"><span>07—10 ГРУДНЯ</span></div><div class="chapter-intro"><h2>Чотири глави<br><em>форуму.</em></h2><p>Кожен день — інший ритм, нові люди й нові історії. Обери главу та відкрий її події.</p></div><div class="chapter-grid">${CHAPTERS.map(c=>`<button class="chapter-card ${c.tone}" data-jump-day="${c.id}"><span class="chapter-num">${c.idx} / 04</span><span class="chapter-date">${c.id.slice(8)}<small>DEC</small></span><span class="chapter-action">${esc(c.small)}</span><h3>${esc(c.name)}</h3><p>${esc(c.tag)}</p><span class="chapter-arrow">↗</span></button>`).join('')}</div></section>
       <section class="premieres-section" id="premieres"><div class="section-topline"><span>ПРОГРАМА</span></div><div class="premieres-head"><div><h2>Афіші подій.</h2><p>Досліджуй теми, формати та спікерів. Деякі деталі ще погоджуються.</p></div><button data-nav="program">УСІ ПОДІЇ ↗</button></div><div class="keynote-grid">${featured.map((e,i)=>keynoteCard(e,i===0?'keynote-featured':'')).join('')}</div></section>
-      <section class="forum-editorial" id="speakers"><h2>Спікери та учасники дискусій</h2><p>Імена з робочої програми. Участь і фото уточнюються.</p><div class="speaker-directory">${events.map(e=>[e,metaFor(e)]).filter(([,m])=>m.speakerNames).map(([e,m])=>`<button class="speaker-entry" data-event="${esc(e.id)}">${posterImage(e)}<span><strong>${esc(m.speakerNames)}</strong><small>${esc(e.title)} ↗</small></span></button>`).join('')}</div></section><section class="forum-editorial"><h2>Партнери</h2><p>Перелік партнерів буде опубліковано після підтвердження організаторами.</p></section><section class="forum-editorial"><h2>Галерея Молодіжної ради</h2><div class="forum-gallery"><a href="https://raw.githubusercontent.com/Suhrobss/MY/main/images/forum.jpg" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="https://raw.githubusercontent.com/Suhrobss/MY/main/images/forum.jpg" alt="Фото з архіву Молодіжної ради"></a><a href="https://raw.githubusercontent.com/Suhrobss/MY/main/images/FIL_1376.jpg" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="https://raw.githubusercontent.com/Suhrobss/MY/main/images/FIL_1376.jpg" alt="Фото з архіву Молодіжної ради"></a><a href="https://raw.githubusercontent.com/Suhrobss/MY/main/images/img-77.jpg" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="https://raw.githubusercontent.com/Suhrobss/MY/main/images/img-77.jpg" alt="Фото з архіву Молодіжної ради"></a></div></section>
+      ${speakerDirectory(events)}
+      <section class="forum-editorial edition-partners"><h2>Партнери</h2><p>Перелік партнерів буде опубліковано після підтвердження організаторами.</p></section>
+      ${gallery()}
       <section class="broadcast-section"><div class="broadcast-illustration" aria-hidden="true"><div class="broadcast-ring one"></div><div class="broadcast-ring two"></div><div class="broadcast-center">!</div></div><div class="broadcast-content"><h2>Оголошення<br><em>організаторів.</em></h2><p>Оперативні зміни програми, повідомлення організаторів і push на телефон за твоєю згодою.</p><button class="button broadcast-button" data-nav="updates">Оголошення ${icon('arrow')}</button></div></section>
       ${footer()}`;
   }
@@ -167,14 +186,24 @@
     rows.push('END:VCALENDAR');return rows.join('\r\n')+'\r\n';
   }
   function exportCalendar(events){const full=events.filter(e=>e.start&&e.end&&e.status!=='canceled');if(!full.length){notify('Немає збережених подій із точним часом');return;}exportFile(makeIcs(full),'text/calendar;charset=utf-8','MTWTU-YOUTH-FORUM-2026.ics');notify(`Завантажено подій: ${full.length}`);}
+  const departureCities=['Одеса','Львів','Київ'];
+  function travelRoute(city){
+    const odessa=city==='Одеса';
+    const url='https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(city)+ '&destination='+encodeURIComponent('Гірськолижний комплекс Плай, Плав’я');
+    return `<div class="arrival-line"><span>${esc(city)}</span><span class="arrival-path" aria-hidden="true"><i></i></span><span>ГК «Плай»</span></div><p>${odessa?'Автобус з Одеси попередньо заплановано на 6 грудня о 22:30. Точка збору уточнюється.':'Орієнтир для самостійної поїздки. Організований трансфер із цього міста не підтверджено.'}</p><a class="edition-action secondary" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Відкрити маршрут на карті ↗</a>`;
+  }
+  function travel(){
+    return `<section class="edition-travel" id="travel"><h2>Як дістатися</h2><div class="arrival-cities" aria-label="Місто виїзду">${departureCities.map((city,index)=>`<button class="edition-action secondary" data-departure="${index}" aria-pressed="${index===0}">${city}</button>`).join('')}</div><div class="arrival-result" aria-live="polite">${travelRoute(departureCities[0])}</div></section>`;
+  }
   function mapPage(){return `${pageHead('ЛОГІСТИКА','Твій Плай.','Локації з програми форуму. Точні маршрути та розташування точок ще мають бути підтверджені організаторами.')}${previewNotice()}
     <section class="map-hero"><div><span class="eyebrow">OFFICIAL LOCATION</span><h2>Гірськолижний комплекс «Плай»</h2><p>На офіційному сайті комплексу є інтерактивна карта. Поки що використовуємо саме її — без вигаданих координат і маршрутів.</p><a class="button light" href="https://play-karpaty.com/" target="_blank" rel="noopener noreferrer">Перейти на сайт комплексу ${icon('external')}</a></div><div class="map-shape" aria-hidden="true">${icon('mountain')}</div></section>
+    ${travel()}
     <div class="section-heading"><div><span class="eyebrow muted">ЗА ПРОГРАМОЮ</span><h2>Основні місця.</h2></div></div>
     <div class="map-places">${[['Великий зал','Відкриття, Unionize та загальні сесії.'],['Малий зал','Паралельні тренінги.'],['Ресторан','Основні прийоми їжі.'],['Боулінг','Вечірня активність 8 грудня.'],['Рецепція / готель','Прибуття та поселення.'],['Екоферма','Екскурсія 9 грудня; місце збору уточнюється.']].map(([name,desc])=>`<article class="place"><span class="place-icon">${icon('pin')}</span><div><strong>${esc(name)}</strong><p>${esc(desc)}</p></div></article>`).join('')}</div>
     <div class="notice-box" style="margin-top:19px">${icon('alert')}<p><strong>Маршрути та безпека:</strong> не використовуйте цю сторінку як схему евакуації або укриттів. Вказівки на випадок тривоги повідомлятимуть лише після підтвердження з організаторами й адміністрацією комплексу.</p></div>${footer()}`;}
   function updates(){const notes=state.data.announcements||[];return `${pageHead('ЗВ’ЯЗОК З ОРГАНІЗАТОРАМИ','Оголошення.','Зміни програми, організаційні деталі та важливі повідомлення — в одному місці.')}${state.offline?offlineNotice():''}
     ${notes.length?`<div class="updates-list">${notes.map(a=>`<article class="update-card ${esc(a.kind)}"><div class="update-header">${icon(a.kind==='urgent'?'alert':'bell')}<span class="update-label">${a.kind==='urgent'?'Терміново':a.kind==='important'?'Важливо':'Оголошення'}</span></div><h3>${esc(a.title)}</h3><small>${esc(fmtDate(a.createdAt))} · Київський час</small><p class="update-body">${esc(a.text)}</p></article>`).join('')}</div>`:`<div class="empty-state">${icon('bell','big')}<h3>Повідомлень поки немає</h3><p>Усі оголошення організаторів з'являться тут, навіть якщо сповіщення на телефоні вимкнені.</p></div>`}
-    <div class="light-panel" style="margin-top:20px"><strong>Хочете отримувати push на телефон?</strong><p class="muted-copy" style="margin:7px 0 13px">Увімкніть сповіщення в розділі «Корисне». На iPhone для цього спочатку потрібно додати сайт на головний екран.</p><button class="button outline" data-nav="info">Налаштування сповіщень ${icon('arrow')}</button></div>${footer()}`;}
+    <div class="light-panel" style="margin-top:20px"><strong>Хочете отримувати push на телефон?</strong><p class="muted-copy" style="margin:7px 0 13px">Увімкніть сповіщення в розділі «Корисне». На iPhone можна читати оголошення тут без встановлення сайту.</p><button class="button outline" data-nav="info">Налаштування сповіщень ${icon('arrow')}</button></div>${footer()}`;}
   function offlineNotice(){return `<div class="live-banner"><span>${icon('wifi')} <strong>Немає з'єднання</strong> · показано останню збережену версію</span><button data-action="refresh">Оновити</button></div>`;}
   function info(){let ios=/iPad|iPhone|iPod/.test(navigator.userAgent),standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
     let support='Notification' in window && 'serviceWorker' in navigator && 'PushManager' in window;
@@ -244,25 +273,64 @@
     dialog.showModal();
   }
   function urlBase64ToUint8Array(base64String){const padding='='.repeat((4-base64String.length%4)%4);const base64=(base64String+padding).replace(/-/g,'+').replace(/_/g,'/');const raw=atob(base64);return Uint8Array.from(raw,c=>c.charCodeAt(0));}
+  async function pushRegistration(){
+    if(!('serviceWorker' in navigator))throw new Error('Цей браузер не підтримує Web Push.');
+    await navigator.serviceWorker.register('/sw.js');
+    let timer;
+    try {
+      return await Promise.race([navigator.serviceWorker.ready,new Promise((_,reject)=>{
+        timer=setTimeout(()=>reject(new Error('Не вдалося запустити сповіщення. Оновіть сторінку й повторіть.')),8000);
+      })]);
+    } finally { clearTimeout(timer); }
+  }
   async function subscribePush() {
     if(!state.data.webPushAvailable){notify('Відправлення push ще не налаштоване');return;}
     if(!('Notification' in window)||!('serviceWorker' in navigator)||!('PushManager' in window)){notify('Push не підтримується в цьому браузері');return;}
     if(/iPad|iPhone|iPod/.test(navigator.userAgent)&&!matchMedia('(display-mode: standalone)').matches&&!navigator.standalone){notify('Спочатку додайте сайт на головний екран iPhone');return;}
     try {
       // Permission must be requested directly after the user's tap on iOS.
-      const permission=await Notification.requestPermission();
-      if(permission!=='granted')throw new Error('Дозвіл на сповіщення не наданий');
-      const registration=await navigator.serviceWorker.ready;
+      const permission=Notification.permission==='default'?await Notification.requestPermission():Notification.permission;
+      if(permission==='denied')throw new Error('Браузер заблокував сповіщення. Дозвольте їх у налаштуваннях цього сайту й повторіть.');
+      if(permission!=='granted')throw new Error('Дозвіл на сповіщення не наданий.');
+      const registration=await pushRegistration();
       let sub=await registration.pushManager.getSubscription();
       if(!sub)sub=await registration.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:urlBase64ToUint8Array(state.data.vapidPublicKey)});
       await api('/api/push/subscribe',{method:'POST',body:JSON.stringify(sub.toJSON())});
       notify('Сповіщення увімкнено!');checkPushStatus();
     }catch(e){notify(e.message);checkPushStatus();}
   }
-  async function unsubscribePush(){try {const registration=await navigator.serviceWorker.ready;const sub=await registration.pushManager.getSubscription();if(sub){await api('/api/push/unsubscribe',{method:'POST',body:JSON.stringify({endpoint:sub.endpoint})});await sub.unsubscribe();}notify('Підписку вимкнено');checkPushStatus();}catch(e){notify(e.message);}}
-  async function checkPushStatus(){const label=document.querySelector('#push-status');if(!label)return;try{const reg=await navigator.serviceWorker?.ready;const sub=await reg?.pushManager?.getSubscription();if(!document.querySelector('#push-status'))return;label.textContent=sub?'На цьому пристрої push-підписка активна.':'На цьому пристрої push-підписка ще не активна.';}catch{label.textContent='Не вдалося перевірити стан push-підписки.';}}
+  async function unsubscribePush(){try {const registration=await pushRegistration();const sub=await registration.pushManager.getSubscription();if(sub){await api('/api/push/unsubscribe',{method:'POST',body:JSON.stringify({endpoint:sub.endpoint})});await sub.unsubscribe();}notify('Підписку вимкнено');checkPushStatus();}catch(e){notify(e.message);}}
+  async function checkPushStatus(){
+    const label=document.querySelector('#push-status');
+    if(!label)return;
+    if(!state.data.webPushAvailable){label.textContent='Сервер поки не приймає push-підписки.';return;}
+    if(!('Notification' in window)||!('PushManager' in window)){label.textContent='Оголошення доступні тут на сайті.';return;}
+    if(Notification.permission==='denied'){label.textContent='Дозвіл заблоковано в налаштуваннях браузера.';return;}
+    try{
+      const registration=await pushRegistration();
+      const sub=await registration.pushManager.getSubscription();
+      label.textContent=sub?'Підписка є в браузері. Натисніть «Увімкнути сповіщення», щоб повторно синхронізувати її із сайтом.':'На цьому пристрої підписку ще не ввімкнено.';
+    }catch(error){label.textContent=error.message;}
+  }
   document.addEventListener('click',async ev=>{
     const evpost=ev.target.closest('[data-event]');if(evpost){state.eventId=evpost.dataset.event;state.day=state.data?.events.find(e=>e.id===state.eventId)?.date||state.day;setPage('event');return;}
+    const departure=ev.target.closest('[data-departure]');
+    if(departure){
+      const region=departure.closest('.edition-travel');
+      const city=departureCities[Number(departure.dataset.departure)];
+      region.querySelector('.arrival-result').innerHTML=travelRoute(city);
+      region.querySelectorAll('[data-departure]').forEach(button=>button.setAttribute('aria-pressed',String(button===departure)));
+      return;
+    }
+    const galleryButton=ev.target.closest('[data-gallery]');
+    if(galleryButton){
+      const track=galleryButton.closest('.edition-gallery').querySelector('.gallery-track');
+      const max=track.scrollWidth-track.clientWidth;
+      const step=Number(galleryButton.dataset.gallery);
+      const left=step>0&&track.scrollLeft>=max-2?0:step<0&&track.scrollLeft<=2?max:track.scrollLeft+step*track.clientWidth;
+      track.scrollTo({left,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+      return;
+    }
     const play=ev.target.closest('[data-play-film]');
     if(play){
       const frame=document.createElement('iframe');
@@ -271,8 +339,11 @@
       frame.allow='autoplay; fullscreen; picture-in-picture';
       frame.allowFullscreen=true;
       frame.src='https://player.vimeo.com/video/1175179620?dnt=1&autoplay=1';
-      play.parentElement.replaceWith(frame);
-      frame.focus();
+      const dialog=app.querySelector('.film-dialog');
+      const player=dialog.querySelector('.film-player');
+      player.replaceChildren(frame);
+      dialog.addEventListener('close',()=>{player.replaceChildren();play.focus();},{once:true});
+      dialog.showModal();
       return;
     }
     const scroller=ev.target.closest('[data-scroll]');if(scroller){document.getElementById(scroller.dataset.scroll)?.scrollIntoView({behavior:'smooth',block:'start'});return;}
