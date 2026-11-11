@@ -32,6 +32,15 @@ function request(url, method='GET', headers={}, body) {
   assert.equal(draft.status,201);
   assert.equal(JSON.parse(draft.body).push.skipped,true);
   assert.equal(JSON.parse((await request('/api/public')).body).announcements[0].title,'Test announcement');
-  console.log('Passed: admin login, isolated announcement publication, homepage, Vimeo CSP, 31 events, admin authorization, cross-origin POST.');
+  const event=JSON.parse((await request('/api/public')).body).events[0];
+  const route='/api/admin/events/'+event.id;
+  const updated=await request(route,'PATCH',{origin,cookie},{...event,speakerRole:'Test role',speakerLogoUrl:'https://example.com/logo.png'});
+  assert.equal(updated.status,200);
+  const published=JSON.parse((await request('/api/public')).body).events.find(item=>item.id===event.id);
+  assert.equal(published.speakerRole,'Test role');
+  assert.equal(published.speakerLogoUrl,'https://example.com/logo.png');
+  const invalid=await request(route,'PATCH',{origin,cookie},{...event,speakerLogoUrl:'http://example.com/logo.png'});
+  assert.equal(invalid.status,400);
+  console.log('Passed: admin login, isolated announcement publication, homepage, Vimeo CSP, 31 events, speaker fields, admin authorization, cross-origin POST.');
 })().catch(error=>{console.error(error);process.exitCode=1}).finally(()=>fs.rmSync(process.env.DATA_DIR,{recursive:true,force:true}));
 

@@ -46,7 +46,7 @@
    {id:'2026-12-09',idx:'03',small:'СПІЛЬНА ДІЯ',name:'Більше ніж слова',tag:'Від кейсів до власних рішень',sub:'Навчання, екскурсія, підсумки та фінальний вечір.',tone:'chapter-three'},
    {id:'2026-12-10',idx:'04',small:'ПРОДОВЖЕННЯ',name:'Що далі?',tag:'Найважливіше відбувається після',sub:'Завершальний ранок і повернення додому.',tone:'chapter-four'}
   ];
-  const metaFor = e => ({...EDITORIAL[e.id],...Object.fromEntries(['category','posterTitle','teaser','why','speakerNames','speakerPhotoUrl','speakerPhotoCredit'].filter(k=>e[k]).map(k=>[k,e[k]]))});
+  const metaFor = e => ({...EDITORIAL[e.id],...Object.fromEntries(['category','posterTitle','teaser','why','speakerNames','speakerPhotoUrl','speakerPhotoCredit','speakerRole','speakerLogoUrl'].filter(k=>e[k]).map(k=>[k,e[k]]))});
   const safeImg = url => /^https:\/\/[a-z0-9.-]+\/(?!\/)/i.test(url||'') ? url : '';
   const isFeature = e => ['082','083','085','086','088','08a','08d','092','093','095','097','099','09a','102'].includes(e.id) || e.feature === true;
   const isMajor = e => isFeature(e) || (e.category==='special');
@@ -120,13 +120,32 @@
     const people=new Map();
     for(const event of events){
       const meta=metaFor(event);
-      const names=(meta.speakerNames||'').split(' · ').filter(name=>name&&!name.includes('за робочою програмою')&&!name.startsWith('ГО «'));
+      const names=(meta.speakerNames||'').split(' · ').map(name=>name.trim())
+        .filter(name=>name&&!name.includes('за робочою програмою')&&!name.startsWith('ГО «'));
       for(const name of names){
-        if(!people.has(name))people.set(name,{name,events:[],photo:names.length===1?safeImg(meta.speakerPhotoUrl):'',credit:names.length===1?meta.speakerPhotoCredit:''});
-        people.get(name).events.push(event);
+        const person=people.get(name)||{name,events:[]};
+        if(names.length===1){
+          person.photo ||= safeImg(meta.speakerPhotoUrl);
+          person.credit ||= person.photo===safeImg(meta.speakerPhotoUrl)?meta.speakerPhotoCredit:'';
+          person.role ||= meta.speakerRole;
+          person.logo ||= safeImg(meta.speakerLogoUrl);
+        }
+        person.events.push(event);
+        people.set(name,person);
       }
     }
-    const cards=[...people.values()].map(person=>`<article class="edition-person"><div class="edition-portrait">${person.photo?`<img loading="lazy" src="${esc(person.photo)}" alt="${esc(person.name)}">`:`<span aria-hidden="true">${esc(person.name.split(/\s+/).slice(0,2).map(word=>word[0]).join(''))}</span>`}</div><div class="edition-person-copy"><h3>${esc(person.name)}</h3><p>${person.name==='Олег Григорюк'?'Голова ПРМТУ':'Посада уточнюється'}</p>${person.credit?`<small>${esc(person.credit)}</small>`:''}<div class="edition-person-events">${person.events.map(event=>`<button data-event="${esc(event.id)}">${esc(event.title)} ↗</button>`).join('')}</div></div></article>`).join('');
+    const cards=[...people.values()].map(person=>{
+      const initials=person.name.split(/\s+/).slice(0,2).map(word=>Array.from(word)[0]).join('');
+      const role=person.role||(person.name==='Олег Григорюк'?'Голова ПРМТУ':'Посада уточнюється');
+      const photo=person.photo?`<img loading="lazy" decoding="async" src="${esc(person.photo)}" alt="${esc(person.name)}">`:'';
+      const logo=person.logo?`<img class="edition-person-logo" loading="lazy" src="${esc(person.logo)}" alt="Логотип організації">`:'';
+      return `<article class="edition-person">
+        <div class="edition-portrait"><span aria-hidden="true">${esc(initials)}</span>${photo}</div>
+        <div class="edition-person-copy"><div class="edition-person-header"><div><h3>${esc(person.name)}</h3><p>${esc(role)}</p></div>${logo}</div>
+        ${person.credit?`<small class="edition-person-credit">${esc(person.credit)}</small>`:''}
+        <ul class="edition-person-events">${person.events.map(event=>`<li><button data-event="${esc(event.id)}">${esc(event.title)} <span aria-hidden="true">↗</span></button></li>`).join('')}</ul></div>
+      </article>`;
+    }).join('');
     return `<section class="edition-people" id="speakers"><header><h2>Спікери</h2><p>Участь за попередньою програмою.</p></header><div class="speaker-directory">${cards||'<p>Склад спікерів уточнюється.</p>'}</div></section>`;
   }
   function gallery(){
@@ -266,7 +285,7 @@
       <div class="inline-fields"><div class="field"><label>Початок</label><input name="start" type="time" value="${esc(original.start||'')}"></div><div class="field"><label>Кінець</label><input name="end" type="time" value="${esc(original.end||'')}"></div></div>
       <div class="field"><label>Локація</label><input name="venue" maxlength="90" value="${esc(original.venue||'')}" placeholder="Якщо підтверджена"></div>
       <div class="field"><label>Короткий опис для учасників</label><textarea name="details" maxlength="600">${esc(original.details||'')}</textarea></div>
-      <div class="editorial-admin-fields"><span class="eyebrow">АФІША ТА АНОНС / ДЛЯ УЧАСНИКІВ</span><div class="field"><label>Постерний заголовок</label><input name="posterTitle" maxlength="140" value="${esc(original.posterTitle||'')}" placeholder="Короткий сильний заголовок"></div><div class="field"><label>Анонс події</label><textarea name="teaser" maxlength="650">${esc(original.teaser||'')}</textarea></div><div class="field"><label>Чому це цікаво учаснику</label><textarea name="why" maxlength="500">${esc(original.why||'')}</textarea></div><div class="field"><label>Спікери / учасники (лише погоджені)</label><input name="speakerNames" maxlength="220" value="${esc(original.speakerNames||'')}"></div><div class="field"><label>HTTPS-адреса фото спікера</label><input name="speakerPhotoUrl" maxlength="600" value="${esc(original.speakerPhotoUrl||'')}" placeholder="https://…/foto.jpg"><small>Тільки перевірене фото з дозволом на використання. Портрети не генеруються.</small></div><div class="field"><label>Джерело / автор фото</label><input name="speakerPhotoCredit" maxlength="240" value="${esc(original.speakerPhotoCredit||'')}"></div></div>
+      <div class="editorial-admin-fields"><span class="eyebrow">АФІША ТА АНОНС / ДЛЯ УЧАСНИКІВ</span><div class="field"><label>Постерний заголовок</label><input name="posterTitle" maxlength="140" value="${esc(original.posterTitle||'')}" placeholder="Короткий сильний заголовок"></div><div class="field"><label>Анонс події</label><textarea name="teaser" maxlength="650">${esc(original.teaser||'')}</textarea></div><div class="field"><label>Чому це цікаво учаснику</label><textarea name="why" maxlength="500">${esc(original.why||'')}</textarea></div><div class="field"><label>Спікери / учасники (лише погоджені)</label><input name="speakerNames" maxlength="220" value="${esc(original.speakerNames||'')}"></div><div class="field"><label for="speaker-role">Посада спікера</label><input id="speaker-role" name="speakerRole" maxlength="160" value="${esc(original.speakerRole||'')}"></div><div class="field"><label for="speaker-logo">HTTPS-адреса логотипа організації</label><input id="speaker-logo" name="speakerLogoUrl" type="url" maxlength="600" value="${esc(original.speakerLogoUrl||'')}"><small>Посада, портрет і логотип прив’язуються до картки, якщо вказано одного спікера. Для кількох імен використовуйте роздільник « · ».</small></div><div class="field"><label>HTTPS-адреса фото спікера</label><input name="speakerPhotoUrl" maxlength="600" value="${esc(original.speakerPhotoUrl||'')}" placeholder="https://…/foto.jpg"><small>Тільки перевірене фото з дозволом на використання. Портрети не генеруються.</small></div><div class="field"><label>Джерело / автор фото</label><input name="speakerPhotoCredit" maxlength="240" value="${esc(original.speakerPhotoCredit||'')}"></div></div>
       <div class="field"><label>Тип події</label><select name="track"><option value="all" ${original.track==='all'?'selected':''}>Спільна</option><option value="parallel" ${original.track==='parallel'?'selected':''}>Паралельна сесія</option></select></div>
       <label class="checkbox-row"><input name="published" type="checkbox" ${original.published?'checked':''}>Показувати учасникам на сайті</label>
       <button class="button full" type="submit">${icon('check')} Зберегти зміни</button></form></div>`;
@@ -312,6 +331,9 @@
       label.textContent=sub?'Підписка є в браузері. Натисніть «Увімкнути сповіщення», щоб повторно синхронізувати її із сайтом.':'На цьому пристрої підписку ще не ввімкнено.';
     }catch(error){label.textContent=error.message;}
   }
+  document.addEventListener('error',event=>{
+    if(event.target instanceof HTMLImageElement && event.target.matches('.edition-portrait img,.edition-person-logo'))event.target.remove();
+  },true);
   document.addEventListener('click',async ev=>{
     const evpost=ev.target.closest('[data-event]');if(evpost){state.eventId=evpost.dataset.event;state.day=state.data?.events.find(e=>e.id===state.eventId)?.date||state.day;setPage('event');return;}
     const departure=ev.target.closest('[data-departure]');
@@ -385,7 +407,7 @@
         notify(sendPush?(p.skipped?`Опубліковано на сайті. ${p.reason}.`:`Опубліковано. Push прийнято: ${p.accepted} із ${p.subscribers}. Помилки: ${p.failed}.`):'Повідомлення опубліковано на сайті');
       }else if(form.id==='event-form'){
         const id=form.dataset.id;
-        const data={date:form.elements.date.value,start:form.elements.start.value||null,end:form.elements.end.value||null,title:form.elements.title.value,venue:form.elements.venue.value,details:form.elements.details.value,track:form.elements.track.value,status:form.elements.status.value,published:form.elements.published.checked,posterTitle:form.elements.posterTitle.value,teaser:form.elements.teaser.value,why:form.elements.why.value,speakerNames:form.elements.speakerNames.value,speakerPhotoUrl:form.elements.speakerPhotoUrl.value,speakerPhotoCredit:form.elements.speakerPhotoCredit.value};
+        const data={date:form.elements.date.value,start:form.elements.start.value||null,end:form.elements.end.value||null,title:form.elements.title.value,venue:form.elements.venue.value,details:form.elements.details.value,track:form.elements.track.value,status:form.elements.status.value,published:form.elements.published.checked,posterTitle:form.elements.posterTitle.value,teaser:form.elements.teaser.value,why:form.elements.why.value,speakerNames:form.elements.speakerNames.value,speakerPhotoUrl:form.elements.speakerPhotoUrl.value,speakerPhotoCredit:form.elements.speakerPhotoCredit.value,speakerRole:form.elements.speakerRole.value,speakerLogoUrl:form.elements.speakerLogoUrl.value};
         await api(id==='new'?'/api/admin/events':`/api/admin/events/${encodeURIComponent(id)}`,{method:id==='new'?'POST':'PATCH',body:JSON.stringify(data)});
         dialog.close();await Promise.all([loadAdmin(),refresh(true)]);notify('Подію збережено');
       }

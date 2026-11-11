@@ -420,3 +420,26 @@ body { background: var(--edition-paper); color: var(--edition-ink); }
  .page .premieres-section { margin-bottom: 3.25rem; }
  .edition-people { margin-top: 0; border-top: 2px solid var(--edition-deep); }
 }
+
+/* Speaker portraits use the same paper and typography as the event posters. */
+.edition-people .speaker-directory { grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(.65rem,2vw,1.25rem); border: 0; margin-top: 1.25rem; }
+.edition-person { display: flex; min-width: 0; flex-direction: column; gap: 0; padding: 0; border: 1px solid var(--edition-line); background: var(--edition-white); }
+.edition-portrait { isolation: isolate; position: relative; width: 100%; height: auto; aspect-ratio: 5/4; background: linear-gradient(135deg,var(--edition-accent),var(--edition-paper)); }
+.edition-portrait::after { content: ""; position: absolute; inset: .65rem; border: 1px solid color-mix(in srgb,var(--edition-deep) 22%,transparent); pointer-events: none; }
+.edition-portrait > span { font-size: clamp(2.5rem,8vw,7rem); line-height: 1; letter-spacing: -.08em; font-weight: 850; }
+.edition-portrait img { position: absolute; inset: 0; object-position: center 32%; filter: grayscale(.75); }
+.edition-person-copy { display: flex; flex: 1; flex-direction: column; gap: .55rem; padding: clamp(.75rem,2vw,1.25rem); }
+.edition-person-header { display: flex; align-items: start; justify-content: space-between; gap: .5rem; }
+.edition-person-header h3 { font-size: clamp(1rem,2.4vw,1.55rem); line-height: 1.08; }
+.edition-person-header p { margin-top: .35rem; color: var(--edition-muted); font-size: .8rem; line-height: 1.35; }
+.edition-person-logo { flex: 0 0 auto; width: 2rem; height: 2rem; object-fit: contain; }
+.edition-person-credit { color: var(--edition-muted); font-size: .7rem; line-height: 1.35; }
+.edition-person-events { display: grid; gap: 0; margin: auto 0 0; padding: 0; list-style: none; }
+.edition-person-events button { display: flex; width: 100%; min-height: 44px; align-items: center; justify-content: space-between; gap: .35rem; border: 0; border-top: 1px solid var(--edition-line); line-height: 1.25; font-size: .76rem; }
+.edition-person-events button:hover { color: var(--edition-ink); background: var(--edition-accent); }
+.edition-gallery header button,.arrival-cities button,.edition-action { transition: background-color .2s,color .2s,border-color .2s; }
+.edition-gallery header button:hover,.arrival-cities button:hover,.edition-action.secondary:hover { background: var(--edition-accent); color: var(--edition-ink); }
+.edition-action:not(.secondary):hover { background: var(--edition-deep); color: var(--edition-white); }
+.page .keynote-card:focus-visible,.page .keynote-card:hover { border-color: var(--edition-deep); }
+@media(max-width:780px){ .edition-people .speaker-directory { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width:370px){ .edition-person-copy { padding: .65rem; } .edition-person-logo { width: 1.4rem; height: 1.4rem; } }

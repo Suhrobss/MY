@@ -1,4 +1,4 @@
-const CACHE = 'pulse-shell-v11';
+const CACHE = 'pulse-shell-v12';
 const STATIC = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(STATIC)).then(() => self.skipWaiting()));
